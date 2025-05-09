@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 //Index
-Route::get('/', [HomeController::class,'index']);
+Route::get('/login', [HomeController::class,'index']);
+Route::get('/', [WelcomeController::class,'index']);

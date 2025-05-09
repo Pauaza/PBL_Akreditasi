@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>Login Page - 2 Containers</title>
   <style>
     * {
@@ -11,8 +12,8 @@
     }
 
     body {
-      /* background-image: url('{{ asset('assets/img/background-login.png') }}'); */
-      background-image: url('{{ asset('assets/img/bg.png') }}');
+      background-image: url('{{ asset('assets/img/background-login.png') }}');
+      /* background-image: url('{{ asset('assets/img/bg.png') }}'); */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -52,10 +53,10 @@
       background: #ffffff;
       color: #315287;
       border: none;
-      padding: 15px 20px 15px 18px;
-      border-radius: 
+      padding: 15px 20px 15px 15px;
       cursor: pointer;
       font-size: 14px;
+      font-weight:600;
       transition: background 0.3s, color 0.3s; /* Added color transition */
       border-top-left-radius:10px;
       border-top-right-radius:10px;
@@ -68,13 +69,13 @@
 
     .tab-content {
       display: none;
-      width: 98%;
+      width: 99%;
       height: 400px; /* Fixed height for uniformity */
       text-align: left;
       padding: 25px;
       border-radius: 10px;
-      overflow-y: auto; /* Allow scrolling if content overflows */
-      font-size:14px;
+       /* Allow scrolling if content overflows */
+      font-size:12px;
     }
 
     .tab-content.active {
@@ -111,9 +112,6 @@
       line-height: 1.6;
     }
 
-
-
-
     
     /* CONTAINER KANAN */
     .login-container2 {
@@ -143,6 +141,7 @@
 .login-desc {
   font-size: 14px;
   font-style:italic;
+  font-weight:500;
   color: #315287;
   margin-bottom: 10px;
 }
@@ -167,6 +166,7 @@
   border-radius: 50px;
   border: 2px solid #315287;
   font-size: 14px;
+  font-weight:500;
 }
 
 .login-container2 button {
@@ -176,7 +176,8 @@
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 11px;
+  font-size: 14px;
+  font-weight:600;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -198,6 +199,7 @@
   align-items: center; /* Keeps vertical alignment */
   align-self: flex-start;
   font-size: 13px;
+  font-weight:500;
   color: #315287;
   margin-bottom: 10px;
   gap: 10px;
@@ -218,20 +220,20 @@
 .top-logo {
   position: absolute;
   top: 40px;
-  left: 100px;
-  background: white;           /* latar belakang putih */
-  border-radius: 50%;          /* bentuk lingkaran */
-  padding: 20px;               /* spasi dalam lingkaran */
+  left: 50px;
+  background: white;
+  border-radius: 50%;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .top-logo img {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  border-radius: %;          /* pastikan gambar juga bulat */
 }
-
-
 
   </style>
 </head>
@@ -242,6 +244,7 @@
   </div>
   
   <div class="login-container1">
+
     <div class="tab-buttons">
       <button class="tab-button active" onclick="openTab('profile')">Profile</button>
       <button class="tab-button" onclick="openTab('vision')">Vision</button>
@@ -251,33 +254,40 @@
     </div>
 
     <div id="profile" class="tab-content active">
-      <h3>Profile</h3>
       <img src="assets/img/profile.png" alt="Long Image" />
-      <p>Politeknik Negeri Malang (Polinema) berdiri berdasarkan SK Presiden RI No. 59 Tahun 1982. Statusnya berubah menjadi institusi mandiri melalui SK Mendikbud No. 0313/O/1991. Polinema terus berkembang dalam bidang pendidikan, penelitian, dan pengabdian kepada masyarakat berkhasis teknologi terapan. Upaya memperoleh hasil, antara lain akreditasi A dari BAN-PT pada 2018 dan akreditasi internasional ASIC untuk 20 program studi pada 2020.</p>
+      <p>Politeknik Negeri Malang (Polinema) awalnya merupakan bagian dari FNGT Universitas Brawijaya berdasarkan SK Presiden No. 59/1982 dan menjadi institusi mandiri melalui SK Mendikbud No. 0313/O/1991. Fokus pada pendidikan terapan, Polinema meraih akreditasi A pada 2018 dan akreditasi internasional ASIC pada 2020.</p>
+      <p> Program Studi D4 Sistem Informasi Bisnis (SIB) didirikan tahun 2010 di bawah Jurusan Teknik Elektro, lalu bergabung ke Jurusan Teknologi Informasi pada 2015, serta memperoleh akreditasi B dari BAN-PT pada 2018.</p>
     </div>
 
     <div id="vision" class="tab-content">
-      <h3>Vision</h3>
-      <img src="assets/img/profile.png" alt="Long Image" />
-      <p>Become a leading polytechnic in Indonesia, producing graduates who are competent, innovative, and globally competitive in applied technology.</p>
+      <img src="assets/img/vision.png" alt="Long Image" />
+      <p>Becoming an excellent study program in the field of business information systems both at the national and international levels.</p>
     </div>
 
     <div id="mission" class="tab-content">
-      <h3>Mission</h3>
-      <img src="assets/img/profile.png" alt="Long Image" />
-      <p>1. Provide high-quality education in applied technology.<br>2. Conduct research that supports innovation and industry needs.<br>3. Contribute to community development through technology transfer and collaboration.</p>
+      <img src="assets/img/mission.png" alt="Long Image" />
+      <p>1. Delivering innovative vocational education using technology to produce competent Business Information Systems graduates ready to compete nationally and globally.
+      <br>2. Conducting applied research focused on products and services in Business Information Systems.
+      <br>3. Engaging in community service through the use of Business Information Systems technology to improve welfare.
+      <br>4. Establishing strategic partnerships domestically and internationally in the field of Business Information Systems.</p>
     </div>
 
     <div id="goals" class="tab-content">
-      <h3>Goals</h3>
-      <img src="assets/img/profile.png" alt="Long Image" />
-      <p>- Achieve international recognition in applied technology education.<br>- Produce graduates with entrepreneurial skills and global perspectives.<br>- Strengthen partnerships with industries and global institutions.</p>
+      <img src="assets/img/goals.png" alt="Long Image" />
+      <p>1. Producing competent Business Information Systems graduates for work or entrepreneurship at national and global levels.
+        <br>2. Producing applied research that supports industry, generates IPR/patents, and enhances societal welfare.
+        <br>3. Conducting community service through Business Information Systems technology with real welfare impact.
+        <br>4. Implementing education management based on good governance principles in Business Information Systems.
+        <br>5. Building strategic cooperation, both domestic and international, to boost competitiveness in Business Information Systems.</p>        
     </div>
 
     <div id="objectives" class="tab-content">
-      <h3>Objectives</h3>
-      <img src="assets/img/profile.png" alt="Long Image" />
-      <p>- Enhance curriculum to meet industry standards.<br>- Increase research output and publications.<br>- Expand international collaborations and student exchange programs.</p>
+      <img src="assets/img/objective.png" alt="Long Image" />
+      <p>1. Increased access to relevance, quantity, and quality of D4 - SIB Study Program Education.
+      <br>2. Increasing the relevance and quality of learning activities in the D4 - SIB Study Program.
+      <br>3. Increasing the quality of the results of D4 - SIB student activities and the initiation of career coaching to equip graduates.
+      <br>4. Increasing the relevance, quantity, quality, and usefulness of research results of all academicians.
+      <br>5. Increasing the relevance, quantity, quality, and usefulness of community service results for the welfare of society.</p>
     </div>
   </div>
 
@@ -295,6 +305,7 @@
       <button type="submit">Login</button>
     </form>
   </div>
+
 </body>
 </html>
 <script>
