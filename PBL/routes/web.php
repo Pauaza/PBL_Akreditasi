@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PhotoController;
@@ -20,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Index
-Route::get('/login', [HomeController::class,'index']);
 Route::get('/', [WelcomeController::class,'index']);
+Route::get('/login', [HomeController::class,'index']);
+Route::get('/dashboard', [DashboardController::class,'index']);

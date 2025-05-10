@@ -293,7 +293,7 @@
 
   <div class="login-container2">
     <div class="login-header">
-      <img src="assets/img/user.png" alt="Login Icon" class="login-icon" />
+      <img src="assets/icon/user.png" alt="Login Icon" class="login-icon" />
       <p class="login-desc">Please input registered username and password</p>
     </div>
     <form>
