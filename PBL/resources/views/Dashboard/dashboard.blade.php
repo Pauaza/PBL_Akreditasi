@@ -100,13 +100,48 @@
         }
 
         /* NEWS */
-        .news img {
-            width: 97%;
+        .news {
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .news .section-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            width: 100%;
+            max-width: 87%;
+        }
+
+        .news-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .news-item {
+            flex: 0 0 100%;
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .news-item img {
+            width: 96.5%;
             max-width: 100%;
             border-radius: 10px;
             object-fit: cover;
             margin: 10px auto;
             max-height: 500px;
+        }
+
+        .news-item p {
+            margin: 10px 0;
+            padding: 0 20px;
+            font-size: 16px;
+            text-align: justify;
+            color: #315287;
         }
 
         .news h2 {
@@ -115,12 +150,30 @@
             font-weight: 600;
         }
 
-        .news p {
-            margin: 10px 0;
-            padding: 0 20px;
-            font-size: 16px;
-            text-align: justify;
-            color: #315287;
+        .news-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(49, 82, 135, 0.8);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-nav-left {
+            left: -20px;
+        }
+
+        .news-nav-right {
+            right: -20px;
         }
 
         /* CONTACT SECTION */
@@ -185,6 +238,7 @@
             .section-container {
                 width: 95%;
             }
+
             .news img {
                 max-height: 300px;
             }
@@ -227,8 +281,6 @@
             padding: 15px 0;
             text-align: center;
             position: relative;
-            z-index: 1;
-            font-style: italic;
         }
     </style>
 </head>
@@ -249,9 +301,22 @@
     <div class="section news">
         <h2>Berita Terbaru</h2>
         <div class="section-container">
-            <img src="{{ asset('assets/img/news.png') }}">
-            <p><strong>Selasa, 29 April 2025:</strong> 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus tortor id elit placerat cursus. Nunc at lectus id enim tristique tincidunt. Nam at pellentesque tellus. Phasellus interdum leo non auctor iaculis. Nunc feugiat dolor nec lectus laoreet posuere. Cras ac porttitor massa. Maecenas ligula orci, egestas id orci nec, lacinia facilisis mauris. Mauris sed interdum felis, in rhoncus mauris. Donec non tincidunt tellus. Suspendisse tempor leo rutrum, rutrum dolor sit amet, viverra risus. Nulla fringilla maximus imperdiet. In hac habitasse platea dictumst. Proin egestas auctor interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</p>
+            <button class="news-nav news-nav-left" onclick="scrollNews(-1)">◀</button>
+            <div class="news-carousel" id="newsCarousel">
+                <div class="news-item">
+                    <img src="{{ asset('assets/img/news.png') }}" alt="News 1">
+                    <p><strong>Selasa, 29 April 2025:</strong> Politeknik Negeri Malang sukses mengadakan acara akreditasi untuk program D4 Sistem Informasi Bisnis. Acara ini dihadiri oleh berbagai pihak terkait dan berjalan dengan lancar.</p>
+                </div>
+                <div class="news-item">
+                    <img src="{{ asset('assets/img/news.png') }}" alt="News 2">
+                    <p><strong>Kamis, 1 Mei 2025:</strong> Workshop teknologi terbaru diadakan di kampus, menghadirkan narasumber ternama dari industri teknologi.</p>
+                </div>
+                <div class="news-item">
+                    <img src="{{ asset('assets/img/news.png') }}" alt="News 3">
+                    <p><strong>Senin, 5 Mei 2025:</strong> Mahasiswa jurusan TI memenangkan kompetisi nasional dengan proyek inovatif mereka.</p>
+                </div>
+            </div>
+            <button class="news-nav news-nav-right" onclick="scrollNews(1)">▶</button>
         </div>
     </div>
 
@@ -300,5 +365,20 @@
     <footer>
         ©Copyright Kelompok 4 - King Paudra, 2025
     </footer>
+
+    <script>
+        let currentIndex = 0;
+        const newsItems = document.querySelectorAll('.news-item');
+        const totalItems = newsItems.length;
+
+        function scrollNews(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = totalItems - 1;
+            if (currentIndex >= totalItems) currentIndex = 0;
+
+            const carousel = document.getElementById('newsCarousel');
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
 </body>
 </html>
