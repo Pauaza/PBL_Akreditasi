@@ -112,128 +112,128 @@
       line-height: 1.6;
     }
 
-    
-    /* CONTAINER KANAN */
-    .login-container2 {
-  width: 550px;
-  height: 600px;
-  background: #fff;
-  border-radius: 50px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 40px 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+      
+      /* CONTAINER KANAN */
+      .login-container2 {
+    width: 550px;
+    height: 600px;
+    background: #fff;
+    border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
-.login-header {
-  margin-bottom: 20px;
-}
+  .login-header {
+    margin-bottom: 20px;
+  }
 
-.login-icon {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 2px;
-}
+  .login-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2px;
+  }
 
-.login-desc {
-  font-size: 14px;
-  font-style:italic;
-  font-weight:500;
-  color: #315287;
-  margin-bottom: 10px;
-}
+  .login-desc {
+    font-size: 14px;
+    font-style:italic;
+    font-weight:500;
+    color: #315287;
+    margin-bottom: 10px;
+  }
 
-.login-container2 h2 {
-  margin-bottom: 20px;
-  color: #315287;
-}
+  .login-container2 h2 {
+    margin-bottom: 20px;
+    color: #315287;
+  }
 
-.login-container2 form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size:15px;
-}
+  .login-container2 form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:15px;
+  }
 
-.login-container2 input {
-  width: 100%;
-  padding: 17px;
-  margin-bottom: 20px;
-  border-radius: 50px;
-  border: 2px solid #315287;
-  font-size: 14px;
-  font-weight:500;
-}
+  .login-container2 input {
+    width: 100%;
+    padding: 17px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    border: 2px solid #315287;
+    font-size: 14px;
+    font-weight:500;
+  }
 
-.login-container2 button {
-  width: 100%;
-  padding: 17px;
-  background: #315287;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight:600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+  .login-container2 button {
+    width: 100%;
+    padding: 17px;
+    background: #315287;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight:600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-.login-container2 button:hover {
-  background: #243c65;
-}
+  .login-container2 button:hover {
+    background: #243c65;
+  }
 
-/* Placeholder styling */
-.login-container2 input::placeholder {
-  color: #315287;          /* Warna placeholder */
-  font-style: italic;   /* Gaya huruf */
-  font-size: 13px;      /* Ukuran font */
-  opacity:70%;
-}
+  /* Placeholder styling */
+  .login-container2 input::placeholder {
+    color: #315287;          /* Warna placeholder */
+    font-style: italic;   /* Gaya huruf */
+    font-size: 13px;      /* Ukuran font */
+    opacity:70%;
+  }
 
-.checkbox-label {
-  display: flex;
-  align-items: center; /* Keeps vertical alignment */
-  align-self: flex-start;
-  font-size: 13px;
-  font-weight:500;
-  color: #315287;
-  margin-bottom: 10px;
-  gap: 10px;
-  font-style: italic;
-  line-height: 1; /* Ensures text doesn't add extra height */
-}
+  .checkbox-label {
+    display: flex;
+    align-items: center; /* Keeps vertical alignment */
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight:500;
+    color: #315287;
+    margin-bottom: 10px;
+    gap: 10px;
+    font-style: italic;
+    line-height: 1; /* Ensures text doesn't add extra height */
+  }
 
-.checkbox-label input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #315287;
-  margin: 0; /* Removes any default margins that might offset alignment */
-  vertical-align: middle; /* Fallback for older browsers */
-  flex-shrink: 0; /* Prevents checkbox from shrinking and misaligning */
-}
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #315287;
+    margin: 0; /* Removes any default margins that might offset alignment */
+    vertical-align: middle; /* Fallback for older browsers */
+    flex-shrink: 0; /* Prevents checkbox from shrinking and misaligning */
+  }
 
-/* LOGO JTI */
-.top-logo {
-  position: absolute;
-  top: 40px;
-  left: 50px;
-  background: white;
-  border-radius: 50%;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  /* LOGO JTI */
+  .top-logo {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    background: white;
+    border-radius: 50%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.top-logo img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
+  .top-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
 
   </style>
 </head>
