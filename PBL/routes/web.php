@@ -10,6 +10,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 //Index
 Route::get('/', [WelcomeController::class,'index']);
 Route::get('/login', [HomeController::class,'index']);
-Route::get('/dashboard', [DashboardController::class,'index']);
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware('auth');
 Route::get('/kriteria_admin', [KriteriaAdminController::class,'index']);
 Route::get('/kriteria_validator', [KriteriaValidatorController::class,'index']);
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
