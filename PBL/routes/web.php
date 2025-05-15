@@ -24,11 +24,14 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-//Index
 Route::get('/', [WelcomeController::class,'index']);
-Route::get('/login', [HomeController::class,'index']);
+Route::get('/login', [AuthController::class, 'login'])->name('login'); 
+Route::post('/login', [AuthController::class, 'postlogin'])->name('login.post'); 
 Route::get('/dashboard', [DashboardController::class,'index'])->middleware('auth');
 Route::get('/kriteria_admin', [KriteriaAdminController::class,'index']);
 Route::get('/kriteria_validator', [KriteriaValidatorController::class,'index']);
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware(['auth'])->group(function () {
+    // masukkan semua route yang perlu autentikasi di sini
+});
