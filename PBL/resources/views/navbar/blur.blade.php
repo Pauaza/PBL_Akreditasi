@@ -150,6 +150,8 @@
                         <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
                         <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
                         <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
+                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
+                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
                     </ul>
                 </li>
 
