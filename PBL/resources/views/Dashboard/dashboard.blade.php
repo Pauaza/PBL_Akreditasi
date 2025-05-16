@@ -324,7 +324,7 @@
         <h2>Denah Gedung JTI</h2>
         <div class="section-container">
             <img src="{{ asset('assets/img/map.png') }}">
-            <button type="submit">Selengkapnya</button>
+            {{-- <button type="submit">Selengkapnya</button> --}}
         </div>
     </div>
 
