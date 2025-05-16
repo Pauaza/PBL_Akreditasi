@@ -96,7 +96,11 @@
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Website Polinema</a></li>
+                <li class="nav-item">
+                    <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
+                        Website Polinema
+                    </a>
+                </li>
                 <li class="nav-item"><a href="#" class="nav-link">Kriteria</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Denah Gedung</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
