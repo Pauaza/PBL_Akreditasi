@@ -50,4 +50,8 @@ class UserModel extends Authenticatable
     {
         return $this->level->level_kode;
     }
+
+    public function getAuthIdentifierName(){
+        return 'username';
+    }
 }

@@ -9,29 +9,36 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) { // jika sudah login, maka redirect ke halaman home             
-            return redirect('/Dashboard');
+            return redirect('/dashboard');
         }
         return view('auth.login');
     }
     public function postlogin(Request $request)
-    {
-        if ($request->ajax() || $request->wantsJson()) {
-            $credentials = $request->only('username', 'password');
-            if (Auth::attempt($credentials)) {
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Login Berhasil',
-                    'redirect' => url('/')
-                ]);
-            }
-            return response()->json([
-                'status' => false,
-                'message' => 'Login Gagal'
-            ]);
-        }
+{
+    $credentials = $request->only('username', 'password');
 
-        return redirect('login');
+    if (Auth::attempt($credentials)) {
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Login Berhasil',
+                'redirect' => url('/dashboard')
+            ]);
+        } else {
+            return redirect()->intended('/dashboard');
+        }
     }
+
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Login Gagal'
+        ]);
+    } else {
+        return redirect()->back()->withErrors(['login' => 'Username atau password salah']);
+    }
+}
+
     public function logout(Request $request)
     {
         Auth::logout();
