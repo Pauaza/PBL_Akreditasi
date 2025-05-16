@@ -131,7 +131,7 @@
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Beranda</a></li>
 
                 <li class="nav-item">
                     <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
