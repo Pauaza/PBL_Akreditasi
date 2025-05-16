@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #f4f4f4; /* Ganti dengan background gambar jika diperlukan */
+            background: #f4f4f4;
+            /* Ganti dengan background gambar jika diperlukan */
         }
 
         /* Custom Navabar */
@@ -84,6 +86,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="custom-navbar">
         <div class="container">
@@ -97,9 +100,18 @@
                 <li class="nav-item"><a href="#" class="nav-link">Kriteria</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Denah Gedung</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
-                <li class="nav-item"><a href="#" class="button-logout">Logout</a></li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                        @csrf
+                        <button type="submit" class="button-logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
 </body>
+
 </html>

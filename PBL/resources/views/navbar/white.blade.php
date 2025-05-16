@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar dengan Logout</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,12 +16,11 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: ; /* Ganti dengan background gambar jika diperlukan */
+            background: #f5f5f5;
         }
 
-        /* Custom Navabar */
         .custom-navbar {
-            background : #fff;
+            background: #fff;
             position: fixed;
             top: 0;
             width: 100%;
@@ -35,7 +37,6 @@
             align-items: center;
         }
 
-        /* Nama dan Logo kiri */
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -57,6 +58,12 @@
             list-style: none;
             display: flex;
             gap: 25px;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
         }
 
         .nav-link {
@@ -72,11 +79,13 @@
         .button-logout {
             background: #993A36;
             color: white;
-            padding: 10px 50px;
+            padding: 10px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 12px;
             font-weight: 100;
+            border: none;
+            cursor: pointer;
         }
 
         .button-logout:hover {
@@ -84,6 +93,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="custom-navbar">
         <div class="container">
@@ -97,9 +107,17 @@
                 <li class="nav-item"><a href="#" class="nav-link">Kriteria</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Denah Gedung</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
-                <li class="nav-item"><a href="#" class="button-logout">Logout</a></li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                        @csrf
+                        <button type="submit" class="button-logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
 </body>
+
 </html>
