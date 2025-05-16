@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -17,6 +18,7 @@
             background: #f4f4f4;
         }
 
+        /* Navbar */
         .custom-navbar {
             background: rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -33,7 +35,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .navbar-brand {
@@ -57,11 +58,6 @@
             list-style: none;
             display: flex;
             gap: 25px;
-            align-items: center;
-        }
-
-        .nav-item {
-            position: relative;
         }
 
         .nav-link {
@@ -78,7 +74,7 @@
         .button-logout {
             background: #993a36;
             color: white;
-            padding: 10px 30px;
+            padding: 10px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 12px;
@@ -89,6 +85,11 @@
 
         .button-logout:hover {
             background: #7a2e2a;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
         }
 
         .dropdown-menu {
@@ -119,34 +120,6 @@
         .dropdown-menu li a:hover {
             background-color: #f0f0f0;
         }
-
-        /* Hamburger menu (responsive) */
-        .hamburger {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .navbar-nav {
-                flex-direction: column;
-                width: 100%;
-                display: none;
-                margin-top: 15px;
-                background: rgba(0, 0, 0, 0.3);
-                padding: 10px;
-                border-radius: 8px;
-            }
-
-            .navbar-nav.show {
-                display: flex;
-            }
-
-            .hamburger {
-                display: block;
-            }
-        }
     </style>
 </head>
 
@@ -157,32 +130,53 @@
                 <img src="{{ asset('assets/img/logo-polinema.png') }}" alt="Logo" />
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
-
-            <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
-
-            <ul class="navbar-nav" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
+
                 <li class="nav-item">
                     <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
                         Website Polinema
                     </a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Kriteria</a></li>
+
+                <!-- Kriteria Dropdown -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event)" aria-haspopup="true"
-                        aria-expanded="false">
-                        Denah Gedung ▾
-                    </a>
-                    <ul class="dropdown-menu" id="dropdownMenu">
-                        <li><a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
-                                rel="noopener noreferrer">Gedung Lantai 5</a></li>
-                        <li><a href="https://my.matterport.com/show/?m=Fj8fbnjLjQq" target="_blank"
-                                rel="noopener noreferrer">Gedung Lantai 6</a></li>
-                        <li><a href="https://my.matterport.com/show/?m=fAgiViGeZaB" target="_blank"
-                                rel="noopener noreferrer">Gedung Lantai 7</a></li>
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
+                    <ul class="dropdown-menu" id="dropdownKriteria">
+                        <li><a href="/kriteria/1" target="_blank" rel="noopener noreferrer">Kriteria 1</a></li>
+                        <li><a href="/kriteria/2" target="_blank" rel="noopener noreferrer">Kriteria 2</a></li>
+                        <li><a href="/kriteria/3" target="_blank" rel="noopener noreferrer">Kriteria 3</a></li>
+                        <li><a href="/kriteria/4" target="_blank" rel="noopener noreferrer">Kriteria 4</a></li>
+                        <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
+                        <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
+                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
                     </ul>
                 </li>
+
+                <!-- Denah Gedung Dropdown -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
+                    <ul class="dropdown-menu" id="dropdownDenah">
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 5</a>
+                        </li>
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=Fj8fbnjLjQq" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 6</a>
+                        </li>
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=fAgiViGeZaB" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 7</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
+
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
@@ -197,22 +191,39 @@
     </nav>
 
     <script>
-        function toggleDropdown(event) {
+        function toggleDropdown(event, menuId) {
             event.preventDefault();
-            const menu = document.getElementById('dropdownMenu');
+
+            // Hide all dropdown menus first
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            dropdowns.forEach((dd) => {
+                if (dd.id !== menuId) {
+                    dd.style.display = 'none';
+                }
+            });
+
+            // Toggle clicked menu
+            const menu = document.getElementById(menuId);
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
-        function toggleMobileMenu() {
-            const nav = document.getElementById('navbarNav');
-            nav.classList.toggle('show');
-        }
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            const dropdownContainers = document.querySelectorAll('.dropdown');
 
-        document.addEventListener('click', function(event) {
-            const dropdown = document.querySelector('.dropdown');
-            const menu = document.getElementById('dropdownMenu');
-            if (!dropdown.contains(event.target)) {
-                menu.style.display = 'none';
+            let clickedInsideDropdown = false;
+
+            dropdownContainers.forEach((container) => {
+                if (container.contains(event.target)) {
+                    clickedInsideDropdown = true;
+                }
+            });
+
+            if (!clickedInsideDropdown) {
+                dropdowns.forEach((dd) => {
+                    dd.style.display = 'none';
+                });
             }
         });
     </script>
