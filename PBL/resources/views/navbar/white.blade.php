@@ -91,6 +91,40 @@
         .button-logout:hover {
             background: #7a2e2a;
         }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            top: 35px;
+            z-index: 999;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 
@@ -102,13 +136,57 @@
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Website Polinema</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Kriteria</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Denah Gedung</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Beranda</a></li>
+
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                    <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
+                        Website Polinema
+                    </a>
+                </li>
+
+                <!-- Kriteria Dropdown -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
+                    <ul class="dropdown-menu" id="dropdownKriteria">
+                        <li><a href="/kriteria/1" target="_blank" rel="noopener noreferrer">Kriteria 1</a></li>
+                        <li><a href="/kriteria/2" target="_blank" rel="noopener noreferrer">Kriteria 2</a></li>
+                        <li><a href="/kriteria/3" target="_blank" rel="noopener noreferrer">Kriteria 3</a></li>
+                        <li><a href="/kriteria/4" target="_blank" rel="noopener noreferrer">Kriteria 4</a></li>
+                        <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
+                        <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
+                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
+                        <li><a href="/kriteria/8" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
+                        <li><a href="/kriteria/9" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
+                    </ul>
+
+
+                    <!-- Denah Gedung Dropdown -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
+                    <ul class="dropdown-menu" id="dropdownDenah">
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 5</a>
+                        </li>
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=Fj8fbnjLjQq" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 6</a>
+                        </li>
+                        <li>
+                            <a href="https://my.matterport.com/show/?m=fAgiViGeZaB" target="_blank"
+                                rel="noopener noreferrer">Gedung
+                                Lantai 7</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
+
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
                         @csrf
                         <button type="submit" class="button-logout">
                             <i class="fas fa-sign-out-alt"></i> Logout
@@ -118,6 +196,44 @@
             </ul>
         </div>
     </nav>
+
+    <script>
+        function toggleDropdown(event, menuId) {
+            event.preventDefault();
+
+            // Hide all dropdown menus first
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            dropdowns.forEach((dd) => {
+                if (dd.id !== menuId) {
+                    dd.style.display = 'none';
+                }
+            });
+
+            // Toggle clicked menu
+            const menu = document.getElementById(menuId);
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            const dropdownContainers = document.querySelectorAll('.dropdown');
+
+            let clickedInsideDropdown = false;
+
+            dropdownContainers.forEach((container) => {
+                if (container.contains(event.target)) {
+                    clickedInsideDropdown = true;
+                }
+            });
+
+            if (!clickedInsideDropdown) {
+                dropdowns.forEach((dd) => {
+                    dd.style.display = 'none';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

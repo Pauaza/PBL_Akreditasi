@@ -150,12 +150,12 @@
                         <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
                         <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
                         <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
-                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
-                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
+                        <li><a href="/kriteria/8" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
+                        <li><a href="/kriteria/9" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
                     </ul>
-                </li>
 
-                <!-- Denah Gedung Dropdown -->
+
+                    <!-- Denah Gedung Dropdown -->
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
                     <ul class="dropdown-menu" id="dropdownDenah">
