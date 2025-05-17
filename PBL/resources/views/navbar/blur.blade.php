@@ -120,6 +120,11 @@
         .dropdown-menu li a:hover {
             background-color: #f0f0f0;
         }
+
+        #contact {
+            scroll-margin-top: 80px;
+            /* offset untuk scroll supaya tidak tertutup navbar */
+        }
     </style>
 </head>
 
@@ -177,7 +182,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="/#contact" class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"

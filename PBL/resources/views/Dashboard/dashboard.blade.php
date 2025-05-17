@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -284,6 +285,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="background"></div>
 
@@ -305,15 +307,19 @@
             <div class="news-carousel" id="newsCarousel">
                 <div class="news-item">
                     <img src="{{ asset('assets/img/news.png') }}" alt="News 1">
-                    <p><strong>Selasa, 29 April 2025:</strong> Politeknik Negeri Malang sukses mengadakan acara akreditasi untuk program D4 Sistem Informasi Bisnis. Acara ini dihadiri oleh berbagai pihak terkait dan berjalan dengan lancar.</p>
+                    <p><strong>Selasa, 29 April 2025:</strong> Politeknik Negeri Malang sukses mengadakan acara
+                        akreditasi untuk program D4 Sistem Informasi Bisnis. Acara ini dihadiri oleh berbagai pihak
+                        terkait dan berjalan dengan lancar.</p>
                 </div>
                 <div class="news-item">
                     <img src="{{ asset('assets/img/news.png') }}" alt="News 2">
-                    <p><strong>Kamis, 1 Mei 2025:</strong> Workshop teknologi terbaru diadakan di kampus, menghadirkan narasumber ternama dari industri teknologi.</p>
+                    <p><strong>Kamis, 1 Mei 2025:</strong> Workshop teknologi terbaru diadakan di kampus, menghadirkan
+                        narasumber ternama dari industri teknologi.</p>
                 </div>
                 <div class="news-item">
                     <img src="{{ asset('assets/img/news.png') }}" alt="News 3">
-                    <p><strong>Senin, 5 Mei 2025:</strong> Mahasiswa jurusan TI memenangkan kompetisi nasional dengan proyek inovatif mereka.</p>
+                    <p><strong>Senin, 5 Mei 2025:</strong> Mahasiswa jurusan TI memenangkan kompetisi nasional dengan
+                        proyek inovatif mereka.</p>
                 </div>
             </div>
             <button class="news-nav news-nav-right" onclick="scrollNews(1)">▶</button>
@@ -328,7 +334,7 @@
         </div>
     </div>
 
-    <div class="section contact">
+    <div class="section contact" id="contact">
         <h2>Contact</h2>
         <div class="section-container">
             <div class="contact-item">
@@ -381,4 +387,5 @@
         }
     </script>
 </body>
+
 </html>

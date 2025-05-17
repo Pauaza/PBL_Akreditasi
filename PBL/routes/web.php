@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaAdminController;
 use App\Http\Controllers\KriteriaValidatorController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WelcomeController;
@@ -36,6 +37,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 // Group route yang hanya bisa diakses setelah login
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
     // Kriteria khusus admin dan validator
     Route::get('/kriteria_admin', [KriteriaAdminController::class, 'index']);
@@ -45,4 +47,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kriteria/{id}', [KriteriaController::class, 'show'])
         ->where('id', '[1-9]')
         ->name('kriteria.show');
+
 });
