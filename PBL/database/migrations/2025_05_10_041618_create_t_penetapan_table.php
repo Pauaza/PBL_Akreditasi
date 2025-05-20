@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('penetapan');
             $table->string('pendukung', 255);
             $table->string('link', 255);
+            $table->unsignedInteger('id_kriteria');
+            $table->foreign('id_kriteria')->references('id_kriteria')->on('t_kriteria')->onDelete('cascade');
         });
     }
 
