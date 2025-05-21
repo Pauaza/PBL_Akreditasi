@@ -58,7 +58,6 @@
             list-style: none;
             display: flex;
             gap: 25px;
-            align-items: center;
         }
 
         .nav-link {
@@ -183,7 +182,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="/#contact" class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"
