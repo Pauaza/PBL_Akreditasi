@@ -36,29 +36,24 @@ Route::post('/login', [AuthController::class, 'postlogin'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // Group route yang hanya bisa diakses setelah login
-<<<<<<< HEAD
 Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
     Route::get('/kriteria/admin/kriteria1', [KriteriaAdminController::class, 'index'])->name('kriteria.admin.kriteria1');
+
+    // Kriteria 1 - Store per bagian
+    Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');
+    Route::post('/admin/kriteria1/pelaksanaan', [KriteriaAdminController::class, 'storePelaksaan'])->name('kriteria1.pelaksanaan.store');
+    Route::post('/admin/kriteria1/evaluasi', [KriteriaAdminController::class, 'storeEvaluasi'])->name('kriteria1.evaluasi.store');
+    Route::post('/admin/kriteria1/pengendalian', [KriteriaAdminController::class, 'storePengendalian'])->name('kriteria1.pengendalian.store');
+    Route::post('/admin/kriteria1/peningkatan', [KriteriaAdminController::class, 'storePeningkatan'])->name('kriteria1.peningkatan.store');
+
+    // Tambahan route untuk tombol Submit, Save, Edit (aksi gabungan)
+    Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
     Route::get('/dashboard_validator', [ValidatorDashboardController::class, 'index'])->name('dashboard_validator');
     Route::get('/kriteria/validator/kriteria1', [KriteriaValidatorController::class, 'index'])->name('kriteria.validator.kriteria1');
-=======
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
-    // Kriteria khusus admin dan validator
-    Route::get('/kriteria_admin', [KriteriaAdminController::class, 'index']);
-    Route::get('/kriteria_validator', [KriteriaValidatorController::class, 'index']);
-    Route::post('/penetapan/store', [KriteriaAdminController::class, 'storePenetapan'])->name('penetapan.store'); //Route untuk create penetapan pada kriteria 1
-
-    // Kriteria dinamis 1 sampai 9
-    Route::get('/kriteria/{id}', [KriteriaController::class, 'show'])
-        ->where('id', '[1-9]')
-        ->name('kriteria.show');
-
->>>>>>> 412aeb59e9335a29224029fd5dc576bc57ac8682
 });
+
+
