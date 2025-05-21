@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     // Kriteria khusus admin dan validator
     Route::get('/kriteria_admin', [KriteriaAdminController::class, 'index']);
     Route::get('/kriteria_validator', [KriteriaValidatorController::class, 'index']);
+    Route::post('/penetapan/store', [KriteriaAdminController::class, 'storePenetapan'])->name('penetapan.store'); //Route untuk create penetapan pada kriteria 1
 
     // Kriteria dinamis 1 sampai 9
     Route::get('/kriteria/{id}', [KriteriaController::class, 'show'])
