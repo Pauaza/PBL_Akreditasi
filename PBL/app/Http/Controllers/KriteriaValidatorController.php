@@ -8,6 +8,6 @@ class KriteriaValidatorController extends Controller
 {
     public function index()
     {
-        return view('kriteria.kriteria_validator');
+        return view('kriteria.validator.kriteria1');
     }
 }

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KriteriaAdminController extends Controller
+class ValidatorDashboardController extends Controller
 {
     public function index()
     {
-        return view('kriteria.admin.kriteria1');
+        return view('dashboard.dashboard_validator');
     }
 }

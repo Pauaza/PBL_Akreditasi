@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar dengan Logout</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -16,17 +15,18 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #f5f5f5;
+            background: #f4f4f4;
         }
 
+        /* Navbar */
         .custom-navbar {
-            background: #fff;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             padding: 20px 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .container {
@@ -49,7 +49,7 @@
         }
 
         .navbar-brand span {
-            color: #315287;
+            color: #fff;
             font-weight: 500;
             font-size: 16px;
         }
@@ -61,15 +61,11 @@
             align-items: center;
         }
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-        }
-
         .nav-link {
-            color: #315287;
+            color: #fff;
             text-decoration: none;
             font-size: 16px;
+            cursor: pointer;
         }
 
         .nav-link:hover {
@@ -77,13 +73,13 @@
         }
 
         .button-logout {
-            background: #993A36;
+            background: #993a36;
             color: white;
-            padding: 10px 30px;
+            padding: 10px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 12px;
-            font-weight: 100;
+            font-weight: 700;
             border: none;
             cursor: pointer;
         }
@@ -125,6 +121,11 @@
         .dropdown-menu li a:hover {
             background-color: #f0f0f0;
         }
+
+        #contact {
+            scroll-margin-top: 80px;
+            /* offset untuk scroll supaya tidak tertutup navbar */
+        }
     </style>
 </head>
 
@@ -132,11 +133,11 @@
     <nav class="custom-navbar">
         <div class="container">
             <a href="#" class="navbar-brand">
-                <img src="{{ asset('assets/img/logo-polinema.png') }}" alt="Logo">
+                <img src="{{ asset('assets/img/logo-polinema.png') }}" alt="Logo" />
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="{{ route('dashboard_admin') }}" class="nav-link">Beranda</a></li>
 
                 <li class="nav-item">
                     <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
@@ -148,15 +149,15 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
                     <ul class="dropdown-menu" id="dropdownKriteria">
-                        <li><a href="/kriteria/1" target="_blank" rel="noopener noreferrer">Kriteria 1</a></li>
-                        <li><a href="/kriteria/2" target="_blank" rel="noopener noreferrer">Kriteria 2</a></li>
-                        <li><a href="/kriteria/3" target="_blank" rel="noopener noreferrer">Kriteria 3</a></li>
-                        <li><a href="/kriteria/4" target="_blank" rel="noopener noreferrer">Kriteria 4</a></li>
-                        <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
-                        <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
-                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
-                        <li><a href="/kriteria/8" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
-                        <li><a href="/kriteria/9" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
+                        <li><a href="/kriteria/admin/kriteria1" rel="noopener noreferrer">Kriteria 1</a></li>
+                        <li><a href="/kriteria/admin/kriteria2" rel="noopener noreferrer">Kriteria 2</a></li>
+                        <li><a href="/kriteria/admin/kriteria3" rel="noopener noreferrer">Kriteria 3</a></li>
+                        <li><a href="/kriteria/admin/kriteria4" rel="noopener noreferrer">Kriteria 4</a></li>
+                        <li><a href="/kriteria/admin/kriteria5" rel="noopener noreferrer">Kriteria 5</a></li>
+                        <li><a href="/kriteria/admin/kriteria6" rel="noopener noreferrer">Kriteria 6</a></li>
+                        <li><a href="/kriteria/admin/kriteria7" rel="noopener noreferrer">Kriteria 7</a></li>
+                        <li><a href="/kriteria/admin/kriteria8" rel="noopener noreferrer">Kriteria 8</a></li>
+                        <li><a href="/kriteria/admin/kriteria9" rel="noopener noreferrer">Kriteria 9</a></li>
                     </ul>
 
 
@@ -182,7 +183,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"

@@ -140,7 +140,7 @@
 </head>
 <body>
     <!-- Include Navbar -->
-    @include('navbar.white')
+    @include('navbar.white_validator')
 
     <!-- Include Sidebar -->
     @include('sidebar.sidebar_validator')
