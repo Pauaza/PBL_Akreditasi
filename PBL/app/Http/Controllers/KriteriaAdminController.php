@@ -20,28 +20,27 @@ class KriteriaAdminController extends Controller
         $request->validate([
             'penetapan' => 'required|string',
             'link' => 'nullable|string',
-            'pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
+            'pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048'
         ]);
 
         // Handle file upload
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('penetapan_kriteria1', $fileName, 'public');
-            //dd($filePath);
+            $fileName = time() . '_' . Str::random(255) . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs( 'penetapan_kriteria1', $fileName, 'public');
         }
 
         // Simpan ke DB
-        $result = PenetapanModel::create([
+        PenetapanModel::create([
             'penetapan' => $request->penetapan,
             'link' => $request->link,
             'pendukung' => $filePath,
             'id_kriteria' => 1
         ]);
 
-        //dd($result);
 
         return redirect()->back()->with('success', 'Data Penetapan berhasil disimpan!');
     }
+
 }

@@ -33,4 +33,11 @@ class PenetapanModel extends Model
     {
         return $this->belongsTo(KriteriaModel::class, 'id_kriteria', 'id_kriteria');
     }
+
+    public function getPendukungUrlAttribute()
+    {
+        return $this->pendukung 
+            ? asset('storage/' . $this->pendukung)
+            : null;
+    }
 }
