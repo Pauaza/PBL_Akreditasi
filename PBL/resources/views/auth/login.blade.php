@@ -215,10 +215,9 @@
       opacity: 70%;
     }
 
-    .checkbox-label {
+      .checkbox-label {
       display: flex;
       align-items: center;
-      /* Keeps vertical alignment */
       align-self: flex-start;
       font-size: 13px;
       font-weight: 500;
@@ -227,7 +226,6 @@
       gap: 10px;
       font-style: italic;
       line-height: 1;
-      /* Ensures text doesn't add extra height */
     }
 
     .checkbox-label input[type="checkbox"] {
@@ -235,11 +233,8 @@
       height: 16px;
       accent-color: #315287;
       margin: 0;
-      /* Removes any default margins that might offset alignment */
       vertical-align: middle;
-      /* Fallback for older browsers */
       flex-shrink: 0;
-      /* Prevents checkbox from shrinking and misaligning */
     }
 
     /* LOGO JTI */
@@ -339,7 +334,11 @@
     <form method="POST" action="{{ route('login.post') }}">
       @csrf
       <input type="text" name="username" placeholder="username" required>
-      <input type="password" name="password" placeholder="password" required>
+      <input type="password" name="password" id="passwordInput" placeholder="password" required>
+      <label class="checkbox-label">
+        <input type="checkbox" id="togglePassword">
+        Tampilkan Password
+      </label>
       <button type="submit">Login</button>
     </form>
   </div>
@@ -365,4 +364,9 @@
     document.getElementById(tabName).classList.add("active");
     event.currentTarget.classList.add("active");
   }
+
+  document.getElementById("togglePassword").addEventListener("change", function () {
+    const passwordInput = document.getElementById("passwordInput");
+    passwordInput.type = this.checked ? "text" : "password";
+  });
 </script>
