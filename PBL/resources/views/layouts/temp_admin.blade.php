@@ -171,7 +171,7 @@
 </head>
 <body>
     <!-- Include Navbar -->
-    @include('navbar.white')
+    @include('navbar.white_admin')
 
     <!-- Include Sidebar -->
     @include('sidebar.sidebar_admin')

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -13,7 +14,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\ValidatorDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,16 @@ Route::post('/login', [AuthController::class, 'postlogin'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // Group route yang hanya bisa diakses setelah login
+<<<<<<< HEAD
+Route::middleware(['auth', 'authorize:ADM'])->group(function () {
+    Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
+    Route::get('/kriteria/admin/kriteria1', [KriteriaAdminController::class, 'index'])->name('kriteria.admin.kriteria1');
+});
+
+Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
+    Route::get('/dashboard_validator', [ValidatorDashboardController::class, 'index'])->name('dashboard_validator');
+    Route::get('/kriteria/validator/kriteria1', [KriteriaValidatorController::class, 'index'])->name('kriteria.validator.kriteria1');
+=======
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -49,4 +60,5 @@ Route::middleware(['auth'])->group(function () {
         ->where('id', '[1-9]')
         ->name('kriteria.show');
 
+>>>>>>> 412aeb59e9335a29224029fd5dc576bc57ac8682
 });

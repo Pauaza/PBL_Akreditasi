@@ -136,27 +136,26 @@
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="{{ route('dashboard_validator') }}" class="nav-link">Beranda</a></li>
 
                 <li class="nav-item">
                     <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
                         Website Polinema
                     </a>
                 </li>
-
                 <!-- Kriteria Dropdown -->
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
                     <ul class="dropdown-menu" id="dropdownKriteria">
-                        <li><a href="/kriteria/1" target="_blank" rel="noopener noreferrer">Kriteria 1</a></li>
-                        <li><a href="/kriteria/2" target="_blank" rel="noopener noreferrer">Kriteria 2</a></li>
-                        <li><a href="/kriteria/3" target="_blank" rel="noopener noreferrer">Kriteria 3</a></li>
-                        <li><a href="/kriteria/4" target="_blank" rel="noopener noreferrer">Kriteria 4</a></li>
-                        <li><a href="/kriteria/5" target="_blank" rel="noopener noreferrer">Kriteria 5</a></li>
-                        <li><a href="/kriteria/6" target="_blank" rel="noopener noreferrer">Kriteria 6</a></li>
-                        <li><a href="/kriteria/7" target="_blank" rel="noopener noreferrer">Kriteria 7</a></li>
-                        <li><a href="/kriteria/8" target="_blank" rel="noopener noreferrer">Kriteria 8</a></li>
-                        <li><a href="/kriteria/9" target="_blank" rel="noopener noreferrer">Kriteria 9</a></li>
+                        <li><a href="/kriteria/validator/kriteria1" rel="noopener noreferrer">Kriteria 1</a></li>
+                        <li><a href="/kriteria/validator/kriteria2" rel="noopener noreferrer">Kriteria 2</a></li>
+                        <li><a href="/kriteria/validator/kriteria3" rel="noopener noreferrer">Kriteria 3</a></li>
+                        <li><a href="/kriteria/validator/kriteria4" rel="noopener noreferrer">Kriteria 4</a></li>
+                        <li><a href="/kriteria/validator/kriteria5" rel="noopener noreferrer">Kriteria 5</a></li>
+                        <li><a href="/kriteria/validator/kriteria6" rel="noopener noreferrer">Kriteria 6</a></li>
+                        <li><a href="/kriteria/validator/kriteria7" rel="noopener noreferrer">Kriteria 7</a></li>
+                        <li><a href="/kriteria/validator/kriteria8" rel="noopener noreferrer">Kriteria 8</a></li>
+                        <li><a href="/kriteria/validator/kriteria9" rel="noopener noreferrer">Kriteria 9</a></li>
                     </ul>
 
 
@@ -182,7 +181,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"

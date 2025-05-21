@@ -12,8 +12,8 @@ class UserModel extends Authenticatable
     use HasFactory;
 
     protected $table = 'm_user';
-    protected $primaryKey = 'user_id';
-    protected $fillable = ['username', 'password', 'nama', 'level_id', 'created_at', 'updated_at'];
+    protected $primaryKey = 'id_user';
+    protected $fillable = ['username', 'password', 'nama', 'id_level'];
 
     protected $hidden = ['password']; // jangan ditampilkan saat select
 
@@ -24,7 +24,7 @@ class UserModel extends Authenticatable
      */
     public function level(): BelongsTo
     {
-        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
+        return $this->belongsTo(LevelModel::class, 'id_level', 'id_level');
     }
 
     /**

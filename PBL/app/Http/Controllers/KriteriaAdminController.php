@@ -11,7 +11,7 @@ class KriteriaAdminController extends Controller
 {
     public function index()
     {
-        return view('kriteria.kriteria_admin');
+        return view('kriteria.admin.kriteria1');
     }
 
     public function storePenetapan(Request $request)

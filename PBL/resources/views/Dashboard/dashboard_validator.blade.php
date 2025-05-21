@@ -289,7 +289,7 @@
 <body>
     <div class="background"></div>
 
-    @include('navbar.blur')
+    @include('navbar.blur_validator')
 
     <div class="welcome">
         <div class="welcome-text">
