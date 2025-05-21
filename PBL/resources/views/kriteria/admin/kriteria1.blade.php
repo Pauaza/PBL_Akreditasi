@@ -14,13 +14,15 @@
         $sections = ['Penetapan', 'Pelaksanaan', 'Evaluasi', 'Pengendalian', 'Peningkatan'];
     @endphp
 
-    @foreach ($sections as $index => $section)
-        <div class="card">
-            <div class="card-header">
-                <h5>{{ $section }}</h5>
-            </div>
-            <div class="card-body">
-                <form>
+    <form method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
+        @csrf
+
+        @foreach ($sections as $index => $section)
+            <div class="card">
+                <div class="card-header">
+                    <h5>{{ $section }}</h5>
+                </div>
+                <div class="card-body">
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <div class="form-container">
                             <div class="form-group">
@@ -34,21 +36,23 @@
                         </div>
                         <div class="upload-photo">
                             <span class="upload-text">+ Upload</span>
-                            <input type="file" class="file-input" style="display: none;" accept="image/*">
+                            <input type="file" name="pendukung{{ $index + 1 }}" class="file-input" style="display: none;"
+                                accept="image/*">
                             <img src="" alt="Preview" class="preview-image" />
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
 
-    <!-- Buttons -->
-    <div class="button-group">
-        <button type="submit" class="btn-blue">Submit</button>
-        <button type="button" class="btn-green">Save</button>
-        <button type="button" class="btn-yellow">Edit</button>
-    </div>
+        <!-- Tombol Submit/Save/Edit -->
+        <div class="button-group" style="margin-top: 20px;">
+            <button type="submit" name="action" value="submit" class="btn-blue">Submit</button>
+            <button type="submit" name="action" value="save" class="btn-green">Save</button>
+            <button type="submit" name="action" value="edit" class="btn-yellow">Edit</button>
+        </div>
+    </form>
+
 
     <!-- Comments Section -->
     <div class="card">
@@ -59,8 +63,8 @@
             <div class="form-group">
                 <label for="comment">Direktur:</label>
                 <textarea name="comment" id="comment" readonly>
-                    Pada Bab penetapan ada yang salah di point ke-1 yaitu dokumen tidak ada tangan dari Ketua Jurusan
-                </textarea>
+                                Pada Bab penetapan ada yang salah di point ke-1 yaitu dokumen tidak ada tangan dari Ketua Jurusan
+                            </textarea>
             </div>
         </div>
     </div>

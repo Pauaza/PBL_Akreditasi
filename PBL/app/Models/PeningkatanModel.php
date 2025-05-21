@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PenetapanModel extends Model
+class PeningkatanModel extends Model
 {
     use HasFactory;
 
     // Mendefinisikan nama tabel
-    protected $table = 't_penetapan';
+    protected $table = 't_peningkatan';
 
     // Mendefinisikan primary key
-    protected $primaryKey = 'id_penetapan';
+    protected $primaryKey = 'id_peningkatan';
 
     // Menentukan bahwa primary key adalah auto-incrementing
     public $incrementing = true;
