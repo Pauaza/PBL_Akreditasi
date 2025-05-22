@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PenetapanModel extends Model
+class KomentarModel extends Model
 {
     use HasFactory;
 
     // Mendefinisikan nama tabel
-    protected $table = 't_penetapan';
+    protected $table = 't_komentar';
 
     // Mendefinisikan primary key
-    protected $primaryKey = 'id_penetapan';
+    protected $primaryKey = 'id_komentar';
 
     // Menentukan bahwa primary key adalah auto-incrementing
     public $incrementing = true;
@@ -28,7 +28,7 @@ class PenetapanModel extends Model
         'id_detail_kriteria',
     ];
 
-    // Relasi ke DetailKriteriaModel
+    // Relasi ke KriteriaModel
     public function kriteria(): BelongsTo
     {
         return $this->belongsTo(DetailKriteriaModel::class, 'id_detail_kriteria', 'id_detail_kriteria');
