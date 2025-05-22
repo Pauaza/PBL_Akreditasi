@@ -6,13 +6,27 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        if (Auth::check()) { // jika sudah login, maka redirect ke halaman home             
+public function login()
+{
+    if (Auth::check()) {
+        $username = Auth::user()->username;
+
+        // Jika username berupa angka 1 sampai 9, anggap admin
+        if (in_array($username, ['admin1','admin2','admin3','admin4','admin5','admin6','admin7','admin8','admin9'])) {
+            return redirect('/dashboard_admin');
+        }
+
+        // Jika username adalah salah satu validator
+        if (in_array($username, ['kps', 'kajur', 'direktur', 'kjm'])) {
             return redirect('/dashboard_validator');
         }
-        return view('auth.login');
+
+        // Jika bukan keduanya, bisa abort atau redirect default
+        return abort(403, 'Unauthorized');
     }
+
+    return view('auth.login');
+}
 
     public function postlogin(Request $request)
     {
