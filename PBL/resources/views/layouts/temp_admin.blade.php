@@ -95,7 +95,13 @@
     .form-group label {
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
+        font-weight: 200;
+    }
+
+    .form-label{
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
     }
 
     .form-group textarea {
@@ -150,7 +156,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 20px;
+        margin-left: 10px;
         max-width: 1000px;
         position: relative;
     }

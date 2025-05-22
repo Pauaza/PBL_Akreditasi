@@ -38,7 +38,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 // Group route yang hanya bisa diakses setelah login
 Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
-    Route::get('/kriteria/admin/kriteria1', [KriteriaAdminController::class, 'index'])->name('kriteria.admin.kriteria1');
+    Route::get('/kriteria/admin/kriteria1/', [KriteriaAdminController::class, 'index'])->name('kriteria.admin.kriteria1');
 
     // Kriteria 1 - Store per bagian
     Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');
