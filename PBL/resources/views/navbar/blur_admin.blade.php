@@ -148,7 +148,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
                     <ul class="dropdown-menu" id="dropdownKriteria">
-                        <li><a href="/kriteria/admin/kriteria1" rel="noopener noreferrer">Kriteria 1</a></li>
+                        <li><a href="/kriteria/admin/kriteria1/" rel="noopener noreferrer">Kriteria 1</a></li>
                         <li><a href="/kriteria/admin/kriteria2" rel="noopener noreferrer">Kriteria 2</a></li>
                         <li><a href="/kriteria/admin/kriteria3" rel="noopener noreferrer">Kriteria 3</a></li>
                         <li><a href="/kriteria/admin/kriteria4" rel="noopener noreferrer">Kriteria 4</a></li>

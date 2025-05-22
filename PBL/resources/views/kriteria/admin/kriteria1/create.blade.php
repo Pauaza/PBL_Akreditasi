@@ -33,9 +33,9 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung1" class="file-input" style="display: none;" accept="image/*">
-                        <img src="{{ session('pendukung1') ?? '' }}" alt="Preview" class="preview-image"
-                            style="{{ session('pendukung1') ? 'display:block' : 'display:none' }}" />
+                        <input type="file" name="penetapan" class="file-input" style="display: none;" accept="image/*">
+                        <img src="{{ session('penetapan') ?? '' }}" alt="Preview" class="preview-image"
+                            style="{{ session('penetapan') ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung2" class="file-input" style="display: none;" accept="image/*">
-                        <img src="{{ session('pendukung2') ?? '' }}" alt="Preview" class="preview-image"
-                            style="{{ session('pendukung2') ? 'display:block' : 'display:none' }}" />
+                        <input type="file" name="pelaksanaan" class="file-input" style="display: none;" accept="image/*">
+                        <img src="{{ session('pelaksanaan') ?? '' }}" alt="Preview" class="preview-image"
+                            style="{{ session('pelaksanaan') ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
             </div>
@@ -89,9 +89,9 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung3" class="file-input" style="display: none;" accept="image/*">
-                        <img src="{{ session('pendukung3') ?? '' }}" alt="Preview" class="preview-image"
-                            style="{{ session('pendukung3') ? 'display:block' : 'display:none' }}" />
+                        <input type="file" name="evaluasi" class="file-input" style="display: none;" accept="image/*">
+                        <img src="{{ session('evaluasi') ?? '' }}" alt="Preview" class="preview-image"
+                            style="{{ session('evaluasi') ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
             </div>
@@ -117,9 +117,9 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung4" class="file-input" style="display: none;" accept="image/*">
-                        <img src="{{ session('pendukung4') ?? '' }}" alt="Preview" class="preview-image"
-                            style="{{ session('pendukung4') ? 'display:block' : 'display:none' }}" />
+                        <input type="file" name="pengendalian" class="file-input" style="display: none;" accept="image/*">
+                        <img src="{{ session('pengendalian') ?? '' }}" alt="Preview" class="preview-image"
+                            style="{{ session('pengendalian') ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
             </div>
@@ -174,9 +174,9 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung4" class="file-input" style="display: none;" accept="image/*">
-                        <img src="{{ session('pendukung4') ?? '' }}" alt="Preview" class="preview-image"
-                            style="{{ session('pendukung4') ? 'display:block' : 'display:none' }}" />
+                        <input type="file" name="peningkatan" class="file-input" style="display: none;" accept="image/*">
+                        <img src="{{ session('peningkatan') ?? '' }}" alt="Preview" class="preview-image"
+                            style="{{ session('peningkatan') ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
             </div>
