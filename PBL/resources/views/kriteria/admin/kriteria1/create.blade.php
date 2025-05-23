@@ -13,6 +13,8 @@
     <form method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
         @csrf
 
+        <input type="hidden" name="id_kriteria" value="1">
+
         <!-- Bagian 1: Penetapan -->
         <div class="card">
             <div class="card-header">
@@ -33,7 +35,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="penetapan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('penetapan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('penetapan') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -61,7 +63,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pelaksanaan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('pelaksanaan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('pelaksanaan') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -89,7 +91,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="evaluasi" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_evaluasi" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('evaluasi') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('evaluasi') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -117,7 +119,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pengendalian" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_pengendalian" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('pengendalian') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('pengendalian') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -174,7 +176,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="peningkatan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_peningkatan" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('peningkatan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('peningkatan') ? 'display:block' : 'display:none' }}" />
                     </div>
