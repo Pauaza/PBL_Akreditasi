@@ -145,20 +145,35 @@
                 </li>
 
                 <!-- Kriteria Dropdown -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
-                    <ul class="dropdown-menu" id="dropdownKriteria">
-                        <li><a href="/kriteria/admin/kriteria1/" rel="noopener noreferrer">Kriteria 1</a></li>
-                        <li><a href="/kriteria/admin/kriteria2" rel="noopener noreferrer">Kriteria 2</a></li>
-                        <li><a href="/kriteria/admin/kriteria3" rel="noopener noreferrer">Kriteria 3</a></li>
-                        <li><a href="/kriteria/admin/kriteria4" rel="noopener noreferrer">Kriteria 4</a></li>
-                        <li><a href="/kriteria/admin/kriteria5" rel="noopener noreferrer">Kriteria 5</a></li>
-                        <li><a href="/kriteria/admin/kriteria6" rel="noopener noreferrer">Kriteria 6</a></li>
-                        <li><a href="/kriteria/admin/kriteria7" rel="noopener noreferrer">Kriteria 7</a></li>
-                        <li><a href="/kriteria/admin/kriteria8" rel="noopener noreferrer">Kriteria 8</a></li>
-                        <li><a href="/kriteria/admin/kriteria9" rel="noopener noreferrer">Kriteria 9</a></li>
-                    </ul>
+                @php
+                    $username = Auth::user()->username;
+                    $akses = [
+                        'admin1' => 1,
+                        'admin2' => 2,
+                        'admin3' => 3,
+                        'admin4' => 4,
+                        'admin5' => 5,
+                        'admin6' => 6,
+                        'admin7' => 7,
+                        'admin8' => 8,
+                        'admin9' => 9,
+                    ];
+                    $kriteriaId = $akses[$username] ?? null;
+                @endphp
 
+                @if ($kriteriaId)
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria
+                            ▾</a>
+                        <ul class="dropdown-menu" id="dropdownKriteria">
+                            <li>
+                                <a href="/kriteria/admin/kriteria{{ $kriteriaId }}" rel="noopener noreferrer">
+                                    Kriteria {{ $kriteriaId }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
                     <!-- Denah Gedung Dropdown -->
                 <li class="nav-item dropdown">
