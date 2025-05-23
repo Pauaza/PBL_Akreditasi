@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('id_pengendalian');
             $table->unsignedInteger('id_peningkatan');
             $table->unsignedInteger('id_kriteria');
-            $table->unsignedInteger('id_komentar');
-            $table->enum('status_validator', ['acc', 'rev']);
+            $table->unsignedInteger('id_komentar')->nullable();
+            $table->enum('status_validator', ['acc', 'rev'])->nullable();
             $table->enum('status_selesai', ['save', 'submit'])->default('save');
 
             // Foreign Key Constraints
