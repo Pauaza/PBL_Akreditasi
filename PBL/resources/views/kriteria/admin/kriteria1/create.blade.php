@@ -127,35 +127,6 @@
             </div>
         </div>
 
-        <!-- Bagian 5: Peningkatan -->
-        {{-- <div class="card">
-            <div class="card-header">
-                <h5>Peningkatan</h5>
-            </div>
-            <div class="card-body">
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <div class="form-container">
-                        <div class="col-md-9 mb-3">
-                            <label for="peningkatan" class="form-label"
-                                style="font-size: large; color: #1e293b">Penetapan :</label>
-                            <textarea name="peningkatan" id="peningkatan" class="form-control @error('peningkatan') is-invalid @enderror"
-                                placeholder="Masukkan penetapan">{{ old('peningkatan') }}</textarea>
-                            @error('peningkatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="upload-photo">
-                    <span class="upload-text">+ Upload</span>
-                    <input type="file" name="pendukung5" class="file-input" style="display: none;" accept="image/*">
-                    <img src="{{ session('pendukung5') ?? '' }}" alt="Preview" class="preview-image"
-                        style="{{ session('pendukung5') ? 'display:block' : 'display:none' }}" />
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <!-- Bagian 5: Peningkatan -->
         <div class="card">
             <div class="card-header">

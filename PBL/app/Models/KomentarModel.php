@@ -25,13 +25,13 @@ class KomentarModel extends Model
         'penetapan',
         'pendukung',
         'link',
-        'id_detail_kriteria',
+        'id_kriteria',
     ];
 
     // Relasi ke KriteriaModel
     public function kriteria(): BelongsTo
     {
-        return $this->belongsTo(DetailKriteriaModel::class, 'id_detail_kriteria', 'id_detail_kriteria');
+        return $this->belongsTo(DetailKriteriaModel::class, 'id_kriteria', 'id_kriteria');
     }
 
     public function getPendukungUrlAttribute()
