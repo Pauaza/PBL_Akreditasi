@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_pengendalian', function (Blueprint $table) {
-            $table->increments('id_pengendalian');
+        Schema::create('t_penetapan', function (Blueprint $table) {
+            $table->increments('id_penetapan');
             $table->text('penetapan');
-            $table->string('pendukung', 255);
-            $table->string('link', 255);
+            $table->string('pendukung', 255)->nullable();
+            $table->string('link', 255)->nullable();
             $table->unsignedInteger('id_kriteria');
             $table->foreign('id_kriteria')->references('id_kriteria')->on('t_kriteria')->onDelete('cascade');
         });
