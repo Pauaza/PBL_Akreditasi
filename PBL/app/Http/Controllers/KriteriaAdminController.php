@@ -15,6 +15,11 @@ class KriteriaAdminController extends Controller
 {
     public function index()
     {
+        return view('kriteria.admin.kriteria1.index');
+    }
+
+    public function create()
+    {
         return view('kriteria.admin.kriteria1.create');
     }
 
