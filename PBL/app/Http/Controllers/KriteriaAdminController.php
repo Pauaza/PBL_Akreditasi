@@ -15,7 +15,8 @@ class KriteriaAdminController extends Controller
 {
     public function index()
     {
-        return view('kriteria.admin.kriteria1.index');
+        $data = DetailKriteriaModel::with('kriteria')->get();
+        return view('kriteria.admin.kriteria1.index', compact('data'));
     }
 
     public function create()
@@ -158,133 +159,92 @@ class KriteriaAdminController extends Controller
         return redirect()->back()->with('success', 'Data Peningkatan berhasil disimpan!');
     }
 
-    // Fungsi submit/edit/save berdasarkan id_detail_kriteria
-public function submitKriteria(Request $request)
-{
-    $action = $request->input('action'); // 'save' atau 'submit'
-    $userId = auth()->user()->id ?? null;
+    // Fungsi submit berdasarkan id_detail_kriteria
+    public function submitKriteria(Request $request)
+    {
+        $request->validate([
+            'penetapan'         => 'nullable|string',
+            'pelaksanaan'       => 'nullable|string',
+            'evaluasi'          => 'nullable|string',
+            'pengendalian'      => 'nullable|string',
+            'peningkatan'       => 'nullable|string',
+            'file_penetapan'    => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'file_pelaksanaan'  => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'file_evaluasi'     => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'file_pengendalian' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'file_peningkatan'  => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+        ]);
 
-    if (!$userId) {
-        return redirect()->back()->with('error', 'User tidak ditemukan');
-    }
+        $kriteria = (int) $request->input('id_kriteria');
 
-    // Simpan/update status di m_detail_kriteria
-    $detail = DetailKriteriaModel::firstOrNew([
-        'id_kriteria' => 1,
-        'id_user' => $userId,
-    ]);
+        $id_penetapan = null;
+        $id_pelaksanaan = null;
+        $id_evaluasi = null;
+        $id_pengendalian = null;
+        $id_peningkatan = null;
 
-    $detail->status_selesai = ($action === 'submit') ? DetailKriteriaModel::STATUS_SUBMIT : DetailKriteriaModel::STATUS_SAVE;
-    $detail->save();
-
-    $idDetail = $detail->id_detail_kriteria;
-
-    // Bagian 1: Penetapan
-    $deskripsi1 = $request->input('description1');
-    $link1 = $request->input('link1');
-    $file1 = $request->file('pendukung1');
-
-    if ($deskripsi1 || $link1 || $file1) {
-        $filePath1 = null;
-        if ($file1) {
-            $fileName1 = time() . '_' . Str::random(10) . '.' . $file1->getClientOriginalExtension();
-            $filePath1 = $file1->storeAs('penetapan_kriteria1', $fileName1, 'public');
-            session()->flash('pendukung1', $filePath1); // Simpan path untuk preview
+        if ($request->penetapan || $request->hasFile('file_penetapan')) {
+            $path = $request->file('file_penetapan')?->store('pendukung/penetapan');
+            $penetapan = PenetapanModel::create([
+                'id_kriteria' => $kriteria,
+                'penetapan'   => $request->penetapan,
+                'pendukung'   => $path,
+            ]);
+            $id_penetapan = $penetapan->id_penetapan;
         }
 
-        PenetapanModel::create([
-            'id_detail_kriteria' => $idDetail,
-            'penetapan' => $deskripsi1,
-            'link' => $link1,
-            'pendukung' => $filePath1,
-        ]);
-    }
-
-    // Bagian 2: Pelaksanaan
-    $deskripsi2 = $request->input('description2');
-    $link2 = $request->input('link2');
-    $file2 = $request->file('pendukung2');
-
-    if ($deskripsi2 || $link2 || $file2) {
-        $filePath2 = null;
-        if ($file2) {
-            $fileName2 = time() . '_' . Str::random(10) . '.' . $file2->getClientOriginalExtension();
-            $filePath2 = $file2->storeAs('pelaksanaan_kriteria1', $fileName2, 'public');
-            session()->flash('pendukung2', $filePath2); // Simpan path untuk preview
+        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan')) {
+            $path = $request->file('file_pelaksanaan')?->store('pendukung/pelaksanaan');
+            $pelaksanaan = PelaksanaanModel::create([
+                'id_kriteria' => $kriteria,
+                'penetapan'   => $request->pelaksanaan,
+                'pendukung'   => $path,
+            ]);
+            $id_pelaksanaan = $pelaksanaan->id_pelaksanaan;
         }
 
-        PelaksanaanModel::create([
-            'id_detail_kriteria' => $idDetail,
-            'pelaksanaan' => $deskripsi2,
-            'link' => $link2,
-            'pendukung' => $filePath2,
-        ]);
-    }
-
-    // Bagian 3: Evaluasi
-    $deskripsi3 = $request->input('description3');
-    $link3 = $request->input('link3');
-    $file3 = $request->file('pendukung3');
-
-    if ($deskripsi3 || $link3 || $file3) {
-        $filePath3 = null;
-        if ($file3) {
-            $fileName3 = time() . '_' . Str::random(10) . '.' . $file3->getClientOriginalExtension();
-            $filePath3 = $file3->storeAs('evaluasi_kriteria1', $fileName3, 'public');
-            session()->flash('pendukung3', $filePath3); // Simpan path untuk preview
+        if ($request->evaluasi || $request->hasFile('file_evaluasi')) {
+            $path = $request->file('file_evaluasi')?->store('pendukung/evaluasi');
+            $evaluasi = EvaluasiModel::create([
+                'id_kriteria' => $kriteria,
+                'penetapan'   => $request->evaluasi,
+                'pendukung'   => $path,
+            ]);
+            $id_evaluasi = $evaluasi->id_evaluasi;
         }
 
-        EvaluasiModel::create([
-            'id_detail_kriteria' => $idDetail,
-            'evaluasi' => $deskripsi3,
-            'link' => $link3,
-            'pendukung' => $filePath3,
-        ]);
-    }
-
-    // Bagian 4: Pengendalian
-    $deskripsi4 = $request->input('description4');
-    $link4 = $request->input('link4');
-    $file4 = $request->file('pendukung4');
-
-    if ($deskripsi4 || $link4 || $file4) {
-        $filePath4 = null;
-        if ($file4) {
-            $fileName4 = time() . '_' . Str::random(10) . '.' . $file4->getClientOriginalExtension();
-            $filePath4 = $file4->storeAs('pengendalian_kriteria1', $fileName4, 'public');
-            session()->flash('pendukung4', $filePath4); // Simpan path untuk preview
+        if ($request->pengendalian || $request->hasFile('file_pengendalian')) {
+            $path = $request->file('file_pengendalian')?->store('pendukung/pengendalian');
+            $pengendalian = PengendalianModel::create([
+                'id_kriteria' => $kriteria,
+                'penetapan'   => $request->pengendalian,
+                'pendukung'   => $path,
+            ]);
+            $id_pengendalian = $pengendalian->id_pengendalian;
         }
 
-        PengendalianModel::create([
-            'id_detail_kriteria' => $idDetail,
-            'pengendalian' => $deskripsi4,
-            'link' => $link4,
-            'pendukung' => $filePath4,
-        ]);
-    }
-
-    // Bagian 5: Peningkatan
-    $deskripsi5 = $request->input('description5');
-    $link5 = $request->input('link5');
-    $file5 = $request->file('pendukung5');
-
-    if ($deskripsi5 || $link5 || $file5) {
-        $filePath5 = null;
-        if ($file5) {
-            $fileName5 = time() . '_' . Str::random(10) . '.' . $file5->getClientOriginalExtension();
-            $filePath5 = $file5->storeAs('peningkatan_kriteria1', $fileName5, 'public');
-            session()->flash('pendukung5', $filePath5); // Simpan path untuk preview
+        if ($request->peningkatan || $request->hasFile('file_peningkatan')) {
+            $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan');
+            $peningkatan = PeningkatanModel::create([
+                'id_kriteria' => $kriteria,
+                'penetapan'   => $request->peningkatan,
+                'pendukung'   => $path,
+            ]);
+            $id_peningkatan = $peningkatan->id_peningkatan;
         }
 
-        PeningkatanModel::create([
-            'id_detail_kriteria' => $idDetail,
-            'peningkatan' => $deskripsi5,
-            'link' => $link5,
-            'pendukung' => $filePath5,
+        // Simpan ke m_detail_kriteria
+        DetailKriteriaModel::create([
+            'id_user'         => auth()->user()->id_user,
+            'id_penetapan'    => $id_penetapan,
+            'id_pelaksanaan'  => $id_pelaksanaan,
+            'id_evaluasi'     => $id_evaluasi,
+            'id_pengendalian' => $id_pengendalian,
+            'id_peningkatan'  => $id_peningkatan,
+            'id_kriteria'     => $kriteria,
+            'status_selesai'  => 'save',
         ]);
+
+        return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil disimpan.');
     }
-
-    return redirect()->back()->with('success', "Data berhasil di-{$action}!");
-}
-
 }

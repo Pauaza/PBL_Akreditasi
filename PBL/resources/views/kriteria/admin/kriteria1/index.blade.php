@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-header">
             <h5>Status Validasi</h5>
-            <button class="add-button"><a href="/kriteria/admin/kriteria1/create">Tambah Data</button>
+            <button class="add-button"><a href="/kriteria/admin/kriteria1/create">Tambah Data</a></button>
         </div>
         <div class="card-body">
             <div class="form-container">
@@ -27,83 +27,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn acc">Acc</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn on-progress">On Progress</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn selesai">Selesai</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn acc">Acc</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn ditolak">Ditolak</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn ditolak">Ditolak</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <span class="status-btn on-progress">On Progress</span>
-                            </td>
-                            <td class="action-icons">
-                                <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
-                                <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                            </td>
-                        </tr>
+                        @foreach ($data as $item)
+                            <tr>
+                                <td>{{ $item->kriteria->nama_kriteria ?? '-' }}</td>
+                                <td>
+                                    @if ($item->status_validator === 'acc')
+                                        <span class="status-btn acc">Acc</span>
+                                    @elseif ($item->status_validator === 'rev')
+                                        <span class="status-btn ditolak">Ditolak</span>
+                                    @else
+                                        <span class="status-btn on-progress">On Progress</span>
+                                    @endif
+                                </td>
+                                <td class="action-icons">
+                                    <a href="{{ url('/kriteria/admin/kriteria1/view/' . $item->id_detail_kriteria) }}">
+                                        <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
+                                    </a>
+                                    <a href="{{ url('/kriteria/admin/kriteria1/edit/' . $item->id_detail_kriteria) }}">
+                                        <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
+                                    </a>
+                                    <a href="{{ url('/kriteria/admin/kriteria1/print/' . $item->id_detail_kriteria) }}">
+                                        <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
