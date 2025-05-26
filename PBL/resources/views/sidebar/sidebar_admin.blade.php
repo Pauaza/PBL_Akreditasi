@@ -28,19 +28,20 @@
             padding: 10px 0;
             cursor: pointer;
         }
-        .menu-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
         .sidebar .menu-item h5 {
             color: #315287;
             margin: 0;
             font-size: 18px;
             font-weight: 500;
         }
-        .sidebar .dropdown-icon {
-            scale: 65%;
+        .sidebar .menu-item.active {
+            background-color: #315287;
+            padding-left: 15px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .sidebar .menu-item.active h5 {
+            color: #fff;
         }
         .sidebar .version {
             text-align: center;
@@ -65,89 +66,46 @@
             height: 40px;
             object-fit: contain;
         }
-        .add-button {
-            display: none;
-            width: 100%;
-            padding: 5px 10px;
-            background: none;
-            border: 1px solid #315287;
-            border-radius: 4px;
-            text-align: left;
-            cursor: pointer;
-            margin-top: 5px;
-            color: #315287;
-        }
-        .add-button.show {
-            display: block;
-        }
-        .add-button:hover {
-            background-color: #e9ecef;
-        }
-
         .back-button {
-        background: #315287;
-        border: none;
-        border-radius: 50px;
-        padding: 10px 10px;
-        font-weight: 500;
-        cursor: pointer;
-        font-size: 14px;
-        box-sizing: border-box;
-        text-align: center;
+            background: #315287;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 10px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            box-sizing: border-box;
+            text-align: center;
         }
-        
-        .back-button a{
+        .back-button a {
             text-decoration: none;
             color: #fff;
         }
-    
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="top-logo">
-            <img src="assets/img/jti.png" alt="Logo" class="logo-img" />
+            <img src="{{ asset('assets/img/jti.png') }}" alt="Logo" class="logo-img" />
         </div>
         <div class="menu">
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>I Penetapan</h5>
-                    <img src="/assets/icon/arrdown.png" alt="Dropdown" class="dropdown-icon" />
-                </div>
-                <button class="add-button">+ Tambah Data Baru</button>
+            <div class="menu-item" data-section="penetapan-section">
+                <h5>I Penetapan</h5>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>II Pelaksanaan</h5>
-                    <img src="/assets/icon/arrdown.png" alt="Dropdown" class="dropdown-icon" />
-                </div>
-                <button class="add-button">+ Tambah Data Baru</button>
+            <div class="menu-item" data-section="pelaksanaan-section">
+                <h5>II Pelaksanaan</h5>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>III Evaluasi</h5>
-                    <img src="/assets/icon/arrdown.png" alt="Dropdown" class="dropdown-icon" />
-                </div>
-                <button class="add-button">+ Tambah Data Baru</button>
+            <div class="menu-item" data-section="evaluasi-section">
+                <h5>III Evaluasi</h5>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>IV Pengendalian</h5>
-                    <img src="/assets/icon/arrdown.png" alt="Dropdown" class="dropdown-icon" />
-                </div>
-                <button class="add-button">+ Tambah Data Baru</button>
+            <div class="menu-item" data-section="pengendalian-section">
+                <h5>IV Pengendalian</h5>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>V Peningkatan</h5>
-                    <img src="/assets/icon/arrdown.png" alt="Dropdown" class="dropdown-icon" />
-                </div>
-                <button class="add-button">+ Tambah Data Baru</button>
+            <div class="menu-item" data-section="peningkatan-section">
+                <h5>V Peningkatan</h5>
             </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <h5>Comments</h5>
-                </div>
+            <div class="menu-item" data-section="comments-section">
+                <h5>Comments</h5>
             </div>
         </div>
         <div class="back-button">
@@ -157,17 +115,12 @@
     <script>
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
-                const button = this.querySelector('.add-button');
-                const icon = this.querySelector('.dropdown-icon');
-                
-                // Toggle button visibility
-                if (button.classList.contains('show')) {
-                    button.classList.remove('show');
-                    icon.src = '/assets/icon/arrdown.png';
-                } else {
-                    button.classList.add('show');
-                    icon.src = '/assets/icon/arrup.png';
-                }
+                // Remove active class from all menu items
+                document.querySelectorAll('.menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                // Add active class to clicked item
+                this.classList.add('active');
             });
         });
     </script>

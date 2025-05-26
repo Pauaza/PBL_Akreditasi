@@ -247,4 +247,14 @@ class KriteriaAdminController extends Controller
 
         return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil disimpan.');
     }
+
+    public function show( string $id)
+    {
+        $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
+        return view('kriteria.admin.kriteria1.view', [
+            'kriteria' => $kriteria
+        ]);
+    }
+
+    
 }
