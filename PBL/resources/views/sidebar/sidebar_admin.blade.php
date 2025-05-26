@@ -83,6 +83,24 @@
         .add-button:hover {
             background-color: #e9ecef;
         }
+
+        .back-button {
+        background: #315287;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 10px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 14px;
+        box-sizing: border-box;
+        text-align: center;
+        }
+        
+        .back-button a{
+            text-decoration: none;
+            color: #fff;
+        }
+    
     </style>
 </head>
 <body>
@@ -132,8 +150,8 @@
                 </div>
             </div>
         </div>
-        <div class="version">
-            <p>v.1.0.0.0.1</p>
+        <div class="back-button">
+            <a href="/kriteria/admin/kriteria1">Back to Table</a>
         </div>
     </div>
     <script>

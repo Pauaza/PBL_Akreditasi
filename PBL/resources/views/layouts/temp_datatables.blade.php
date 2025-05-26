@@ -88,7 +88,6 @@
 
     .add-button {
         background: #315287;
-        color: white;
         border: none;
         border-radius: 50px;
         padding: 8px 20px;
@@ -97,7 +96,11 @@
         font-size: 14px;
         height: 40px;
         box-sizing: border-box;
-        margin-top: 25px; /* Menambahkan jarak ke atas agar tombol sedikit ke bawah */
+        margin-top: 25px;
+    }
+    .add-button a {
+        color: white; /* warna font */
+        text-decoration: none;
     }
 
     /* Form Elements */
