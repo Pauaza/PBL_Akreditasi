@@ -9,6 +9,7 @@ use App\Models\PengendalianModel;
 use App\Models\EvaluasiModel;
 use App\Models\PeningkatanModel;
 use App\Models\DetailKriteriaModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 
 class KriteriaAdminController extends Controller
@@ -389,5 +390,12 @@ class KriteriaAdminController extends Controller
     {
         $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
         return view('kriteria.admin.kriteria1.view', compact('kriteria'));
+    }
+
+    public function print($id){
+        $item = DetailKriteriaModel::with('kriteria')->findOrFail($id);
+        $pdf = Pdf::loadView('kriteria.admin.kriteria1.printPdf', compact('item'));
+
+        return $pdf->download('Laporan_Kriteria1_' . $item->id_detail_kriteria . '.pdf');
     }
 }

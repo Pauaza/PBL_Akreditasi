@@ -50,10 +50,10 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/admin/kriteria1/pengendalian', [KriteriaAdminController::class, 'storePengendalian'])->name('kriteria1.pengendalian.store');
     Route::post('/admin/kriteria1/peningkatan', [KriteriaAdminController::class, 'storePeningkatan'])->name('kriteria1.peningkatan.store');
 
-    // Tambahan route untuk tombol Submit, Save, Edit (aksi gabungan)
+    // Tambahan route untuk tombol Submit, (aksi gabungan)
     Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
-
     Route::get('/kriteria/admin/kriteria1/view/{id}', [KriteriaAdminController::class, 'show'])->name('kriteria1.show');
+    Route::get('/kriteria/admin/kriteria1/print/{id}', [KriteriaAdminController::class, 'print']);
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
