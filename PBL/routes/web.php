@@ -50,6 +50,8 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
 
     // Tambahan route untuk tombol Submit, Save, Edit (aksi gabungan)
     Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
+
+    Route::get('/kriteria/admin/kriteria1/view/{id}', [KriteriaAdminController::class, 'show'])->name('kriteria1.show');
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {

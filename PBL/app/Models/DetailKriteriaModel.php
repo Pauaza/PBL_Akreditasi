@@ -43,4 +43,28 @@ class DetailKriteriaModel extends Model
     {
         return $this->belongsTo(KriteriaModel::class, 'id_kriteria');
     }
+
+    public function penetapan(){
+        return $this->hasOne(PenetapanModel::class, 'id_penetapan', 'id_penetapan');
+    }
+
+    public function pelaksanaan(){
+        return $this->hasOne(PelaksanaanModel::class, 'id_pelaksanaan', 'id_pelaksanaan');
+    }
+
+    public function evaluasi(){
+        return $this->hasOne(EvaluasiModel::class, 'id_evaluasi', 'id_evaluasi');
+    }
+
+    public function pengendalian(){
+        return $this->hasOne(PengendalianModel::class, 'id_pengendalian', 'id_pengendalian');
+    }
+
+    public function peningkatan(){
+        return $this->hasOne(PeningkatanModel::class, 'id_peningkatan', 'id_peningkatan');
+    }
+
+    public function komentar(){
+        return $this->hasOne(KomentarModel::class, 'id_komentar', 'id_komentar');
+    }
 }
