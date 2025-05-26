@@ -196,6 +196,7 @@
             toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });
     </script>
+    
     <!-- Upload Button Handler with Preview -->
     <script>
         document.querySelectorAll('.upload-photo').forEach((container) => {
