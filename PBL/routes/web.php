@@ -42,11 +42,11 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/kriteria/admin/kriteria1/', [KriteriaAdminController::class, 'index'])->name('index.admin.kriteria1');
 
     // Kriteria 1 - Store per bagian
-    // Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');
-    // Route::post('/admin/kriteria1/pelaksanaan', [KriteriaAdminController::class, 'storePelaksaan'])->name('kriteria1.pelaksanaan.store');
-    // Route::post('/admin/kriteria1/evaluasi', [KriteriaAdminController::class, 'storeEvaluasi'])->name('kriteria1.evaluasi.store');
-    // Route::post('/admin/kriteria1/pengendalian', [KriteriaAdminController::class, 'storePengendalian'])->name('kriteria1.pengendalian.store');
-    // Route::post('/admin/kriteria1/peningkatan', [KriteriaAdminController::class, 'storePeningkatan'])->name('kriteria1.peningkatan.store');
+    Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');
+    Route::post('/admin/kriteria1/pelaksanaan', [KriteriaAdminController::class, 'storePelaksaan'])->name('kriteria1.pelaksanaan.store');
+    Route::post('/admin/kriteria1/evaluasi', [KriteriaAdminController::class, 'storeEvaluasi'])->name('kriteria1.evaluasi.store');
+    Route::post('/admin/kriteria1/pengendalian', [KriteriaAdminController::class, 'storePengendalian'])->name('kriteria1.pengendalian.store');
+    Route::post('/admin/kriteria1/peningkatan', [KriteriaAdminController::class, 'storePeningkatan'])->name('kriteria1.peningkatan.store');
 
     // Tambahan route untuk tombol Submit, Save, Edit (aksi gabungan)
     Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
