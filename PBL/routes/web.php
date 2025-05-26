@@ -40,6 +40,8 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
     Route::get('/kriteria/admin/kriteria1/create', [KriteriaAdminController::class, 'create'])->name('kriteria.admin.kriteria1');
     Route::get('/kriteria/admin/kriteria1/', [KriteriaAdminController::class, 'index'])->name('index.admin.kriteria1');
+    Route::get('/kriteria/admin/kriteria1/edit/{id}', [KriteriaAdminController::class, 'edit'])->name('kriteria.edit');
+    Route::put('/kriteria/admin/kriteria1/update/{id}', [KriteriaAdminController::class, 'update'])->name('kriteria.update');
 
     // Kriteria 1 - Store per bagian
     Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');

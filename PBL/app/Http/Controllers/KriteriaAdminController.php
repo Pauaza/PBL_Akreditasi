@@ -24,6 +24,142 @@ class KriteriaAdminController extends Controller
         return view('kriteria.admin.kriteria1.create');
     }
 
+    public function edit(string $id)
+    {
+        $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->findOrFail($id);
+        return view('kriteria.admin.kriteria1.edit', [
+            'kriteria' => $kriteria
+        ]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'penetapan'         => 'nullable|string',
+            'pelaksanaan'       => 'nullable|string',
+            'evaluasi'          => 'nullable|string',
+            'pengendalian'      => 'nullable|string',
+            'peningkatan'       => 'nullable|string',
+            'file_penetapan'    => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'file_pelaksanaan'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'file_evaluasi'     => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'file_pengendalian' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'file_peningkatan'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ]);
+
+        $kriteria = DetailKriteriaModel::findOrFail($id);
+        $id_kriteria = (int) $request->input('id_kriteria');
+
+        // Update Penetapan
+        if ($request->penetapan || $request->hasFile('file_penetapan')) {
+            $penetapan = PenetapanModel::where('id_penetapan', $kriteria->id_penetapan)->first();
+            if ($penetapan) {
+                $penetapan->penetapan = $request->penetapan ?? $penetapan->penetapan;
+                if ($request->hasFile('file_penetapan')) {
+                    $path = $request->file('file_penetapan')->store('pendukung/penetapan');
+                    $penetapan->pendukung = $path;
+                }
+                $penetapan->save();
+            } else {
+                $path = $request->file('file_penetapan')?->store('pendukung/penetapan');
+                $penetapan = PenetapanModel::create([
+                    'id_kriteria' => $id_kriteria,
+                    'penetapan'   => $request->penetapan,
+                    'pendukung'   => $path,
+                ]);
+                $kriteria->id_penetapan = $penetapan->id_penetapan;
+            }
+        }
+
+        // Update Pelaksanaan
+        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan')) {
+            $pelaksanaan = PelaksanaanModel::where('id_pelaksanaan', $kriteria->id_pelaksanaan)->first();
+            if ($pelaksanaan) {
+                $pelaksanaan->penetapan = $request->pelaksanaan ?? $pelaksanaan->penetapan;
+                if ($request->hasFile('file_pelaksanaan')) {
+                    $path = $request->file('file_pelaksanaan')->store('pendukung/pelaksanaan');
+                    $pelaksanaan->pendukung = $path;
+                }
+                $pelaksanaan->save();
+            } else {
+                $path = $request->file('file_pelaksanaan')?->store('pendukung/pelaksanaan');
+                $pelaksanaan = PelaksanaanModel::create([
+                    'id_kriteria' => $id_kriteria,
+                    'penetapan'   => $request->pelaksanaan,
+                    'pendukung'   => $path,
+                ]);
+                $kriteria->id_pelaksanaan = $pelaksanaan->id_pelaksanaan;
+            }
+        }
+
+        // Update Evaluasi
+        if ($request->evaluasi || $request->hasFile('file_evaluasi')) {
+            $evaluasi = EvaluasiModel::where('id_evaluasi', $kriteria->id_evaluasi)->first();
+            if ($evaluasi) {
+                $evaluasi->penetapan = $request->evaluasi ?? $evaluasi->penetapan;
+                if ($request->hasFile('file_evaluasi')) {
+                    $path = $request->file('file_evaluasi')->store('pendukung/evaluasi');
+                    $evaluasi->pendukung = $path;
+                }
+                $evaluasi->save();
+            } else {
+                $path = $request->file('file_evaluasi')?->store('pendukung/evaluasi');
+                $evaluasi = EvaluasiModel::create([
+                    'id_kriteria' => $id_kriteria,
+                    'penetapan'   => $request->evaluasi,
+                    'pendukung'   => $path,
+                ]);
+                $kriteria->id_evaluasi = $evaluasi->id_evaluasi;
+            }
+        }
+
+        // Update Pengendalian
+        if ($request->pengendalian || $request->hasFile('file_pengendalian')) {
+            $pengendalian = PengendalianModel::where('id_pengendalian', $kriteria->id_pengendalian)->first();
+            if ($pengendalian) {
+                $pengendalian->penetapan = $request->pengendalian ?? $pengendalian->penetapan;
+                if ($request->hasFile('file_pengendalian')) {
+                    $path = $request->file('file_pengendalian')->store('pendukung/pengendalian');
+                    $pengendalian->pendukung = $path;
+                }
+                $pengendalian->save();
+            } else {
+                $path = $request->file('file_pengendalian')?->store('pendukung/pengendalian');
+                $pengendalian = PengendalianModel::create([
+                    'id_kriteria' => $id_kriteria,
+                    'penetapan'   => $request->pengendalian,
+                    'pendukung'   => $path,
+                ]);
+                $kriteria->id_pengendalian = $pengendalian->id_pengendalian;
+            }
+        }
+
+        // Update Peningkatan
+        if ($request->peningkatan || $request->hasFile('file_peningkatan')) {
+            $peningkatan = PeningkatanModel::where('id_peningkatan', $kriteria->id_peningkatan)->first();
+            if ($peningkatan) {
+                $peningkatan->penetapan = $request->peningkatan ?? $peningkatan->penetapan; // Perbaikan: gunakan penetapan
+                if ($request->hasFile('file_peningkatan')) {
+                    $path = $request->file('file_peningkatan')->store('pendukung/peningkatan');
+                    $peningkatan->pendukung = $path;
+                }
+                $peningkatan->save();
+            } else {
+                $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan');
+                $peningkatan = PeningkatanModel::create([
+                    'id_kriteria' => $id_kriteria,
+                    'penetapan'   => $request->peningkatan, // Perbaikan: gunakan penetapan
+                    'pendukung'   => $path,
+                ]);
+                $kriteria->id_peningkatan = $peningkatan->id_peningkatan;
+            }
+        }
+
+        $kriteria->save();
+
+        return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil diperbarui.');
+    }
+
     // PENETAPAN
     public function storePenetapan(Request $request)
     {
@@ -133,6 +269,7 @@ class KriteriaAdminController extends Controller
     }
 
     // PENINGKATAN
+    // Perbaiki fungsi storePeningkatan
     public function storePeningkatan(Request $request)
     {
         $request->validate([
@@ -151,7 +288,7 @@ class KriteriaAdminController extends Controller
 
         PeningkatanModel::create([
             'id_detail_kriteria' => $request->id_detail_kriteria,
-            'peningkatan' => $request->peningkatan,
+            'penetapan' => $request->peningkatan, // Perbaikan: gunakan penetapan
             'link' => $request->link,
             'pendukung' => $filePath,
         ]);
@@ -227,7 +364,7 @@ class KriteriaAdminController extends Controller
             $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan');
             $peningkatan = PeningkatanModel::create([
                 'id_kriteria' => $kriteria,
-                'penetapan'   => $request->peningkatan,
+                'peningkatan' => $request->peningkatan,
                 'pendukung'   => $path,
             ]);
             $id_peningkatan = $peningkatan->id_peningkatan;
@@ -248,13 +385,11 @@ class KriteriaAdminController extends Controller
         return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil disimpan.');
     }
 
-    public function show( string $id)
+    public function show(string $id)
     {
         $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
         return view('kriteria.admin.kriteria1.view', [
             'kriteria' => $kriteria
         ]);
     }
-
-    
 }
