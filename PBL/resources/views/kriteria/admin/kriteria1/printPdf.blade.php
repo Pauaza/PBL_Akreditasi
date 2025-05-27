@@ -40,6 +40,20 @@
             margin-top: 50px;
             text-align: right;
         }
+
+        .link {
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .link a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -69,6 +83,12 @@
         <tr>
             <td colspan="2">
                 {!! $item->penetapan->penetapan ?? '-' !!}
+                @if (!empty($item->penetapan->link))
+                    <div class="link">
+                        <strong>Link Pendukung: </strong><a href="{{ $item->penetapan->link }}" target="_blank"
+                            rel="noopener">{{ $item->penetapan->link }}</a>
+                    </div>
+                @endif
             </td>
         </tr>
 
@@ -78,6 +98,12 @@
         <tr>
             <td colspan="2">
                 {!! $item->pelaksanaan->penetapan ?? '-' !!}
+                @if (!empty($item->pelaksanaan->link))
+                    <div class="link">
+                        <strong>Link Pendukung: </strong><a href="{{ $item->pelaksanaan->link }}" target="_blank"
+                            rel="noopener">{{ $item->pelaksanaan->link }}</a>
+                    </div>
+                @endif
             </td>
         </tr>
 
@@ -87,6 +113,12 @@
         <tr>
             <td colspan="2">
                 {!! $item->evaluasi->penetapan ?? '-' !!}
+                @if (!empty($item->evaluasi->link))
+                    <div class="link">
+                        <strong>Link Pendukung: </strong><a href="{{ $item->evaluasi->link }}" target="_blank"
+                            rel="noopener">{{ $item->evaluasi->link }}</a>
+                    </div>
+                @endif
             </td>
         </tr>
 
@@ -96,6 +128,12 @@
         <tr>
             <td colspan="2">
                 {!! $item->pengendalian->penetapan ?? '-' !!}
+                @if (!empty($item->pengendalian->link))
+                    <div class="link">
+                        <strong>Link Pendukung: </strong><a href="{{ $item->pengendalian->link }}" target="_blank"
+                            rel="noopener">{{ $item->pengendalian->link }}</a>
+                    </div>
+                @endif
             </td>
         </tr>
 
@@ -105,6 +143,12 @@
         <tr>
             <td colspan="2">
                 {!! $item->peningkatan->penetapan ?? '-' !!}
+                @if (!empty($item->peningkatan->link))
+                    <div class="link">
+                        <strong>Link Pendukung: </strong><a href="{{ $item->peningkatan->link }}" target="_blank"
+                            rel="noopener">{{ $item->peningkatan->link }}</a>
+                    </div>
+                @endif
             </td>
         </tr>
 

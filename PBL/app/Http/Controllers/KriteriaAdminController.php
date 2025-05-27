@@ -302,10 +302,15 @@ class KriteriaAdminController extends Controller
     {
         $request->validate([
             'penetapan' => 'nullable|string',
+            'link_penetapan' => 'nullable|url',
             'pelaksanaan' => 'nullable|string',
+            'link_pelaksanaan' => 'nullable|url',
             'evaluasi' => 'nullable|string',
+            'link_evaluasi' => 'nullable|url',
             'pengendalian' => 'nullable|string',
+            'link_pengendalian' => 'nullable|url',
             'peningkatan' => 'nullable|string',
+            'link_peningkatan' => 'nullable|url',
             'file_penetapan' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_pelaksanaan' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_evaluasi' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
@@ -321,57 +326,61 @@ class KriteriaAdminController extends Controller
         $id_pengendalian = null;
         $id_peningkatan = null;
 
-        if ($request->penetapan || $request->hasFile('file_penetapan')) {
+        if ($request->penetapan || $request->hasFile('file_penetapan') || $request->link_penetapan) {
             $path = $request->file('file_penetapan')?->store('pendukung/penetapan', 'public');
             $penetapan = PenetapanModel::create([
                 'id_kriteria' => $kriteria,
                 'penetapan' => $request->penetapan,
                 'pendukung' => $path,
+                'link' => $request->link_penetapan,
             ]);
             $id_penetapan = $penetapan->id_penetapan;
         }
 
-        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan')) {
+        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan') || $request->link_pelaksanaan) {
             $path = $request->file('file_pelaksanaan')?->store('pendukung/pelaksanaan', 'public');
             $pelaksanaan = PelaksanaanModel::create([
                 'id_kriteria' => $kriteria,
                 'penetapan' => $request->pelaksanaan,
                 'pendukung' => $path,
+                'link' => $request->link_pelaksanaan,
             ]);
             $id_pelaksanaan = $pelaksanaan->id_pelaksanaan;
         }
 
-        if ($request->evaluasi || $request->hasFile('file_evaluasi')) {
+        if ($request->evaluasi || $request->hasFile('file_evaluasi') || $request->link_evaluasi) {
             $path = $request->file('file_evaluasi')?->store('pendukung/evaluasi', 'public');
             $evaluasi = EvaluasiModel::create([
                 'id_kriteria' => $kriteria,
                 'penetapan' => $request->evaluasi,
                 'pendukung' => $path,
+                'link' => $request->link_evaluasi,
             ]);
             $id_evaluasi = $evaluasi->id_evaluasi;
         }
 
-        if ($request->pengendalian || $request->hasFile('file_pengendalian')) {
+        if ($request->pengendalian || $request->hasFile('file_pengendalian') || $request->link_pengendalian) {
             $path = $request->file('file_pengendalian')?->store('pendukung/pengendalian', 'public');
             $pengendalian = PengendalianModel::create([
                 'id_kriteria' => $kriteria,
                 'penetapan' => $request->pengendalian,
                 'pendukung' => $path,
+                'link' => $request->link_pengendalian,
             ]);
             $id_pengendalian = $pengendalian->id_pengendalian;
         }
 
-        if ($request->peningkatan || $request->hasFile('file_peningkatan')) {
+        if ($request->peningkatan || $request->hasFile('file_peningkatan') || $request->link_peningkatan) {
             $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan', 'public');
             $peningkatan = PeningkatanModel::create([
                 'id_kriteria' => $kriteria,
                 'penetapan' => $request->peningkatan,
                 'pendukung' => $path,
+                'link' => $request->link_peningkatan,
             ]);
             $id_peningkatan = $peningkatan->id_peningkatan;
         }
 
-        // Simpan ke m_detail_kriteria
         DetailKriteriaModel::create([
             'id_user' => auth()->user()->id_user,
             'id_penetapan' => $id_penetapan,
@@ -392,7 +401,8 @@ class KriteriaAdminController extends Controller
         return view('kriteria.admin.kriteria1.view', compact('kriteria'));
     }
 
-    public function print($id){
+    public function print($id)
+    {
         $item = DetailKriteriaModel::with('kriteria')->findOrFail($id);
         $pdf = Pdf::loadView('kriteria.admin.kriteria1.printPdf', compact('item'));
 
