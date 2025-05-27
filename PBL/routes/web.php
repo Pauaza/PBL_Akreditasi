@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaAdminController;
+use App\Http\Controllers\Kriteria2AdminController;
 use App\Http\Controllers\KriteriaValidatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ContactController;
@@ -38,10 +39,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 // Group route yang hanya bisa diakses setelah login
 Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
+    // Kriteria 1
     Route::get('/kriteria/admin/kriteria1/create', [KriteriaAdminController::class, 'create'])->name('kriteria.admin.kriteria1');
     Route::get('/kriteria/admin/kriteria1/', [KriteriaAdminController::class, 'index'])->name('index.admin.kriteria1');
     Route::get('/kriteria/admin/kriteria1/edit/{id}', [KriteriaAdminController::class, 'edit'])->name('kriteria.edit');
     Route::put('/kriteria/admin/kriteria1/update/{id}', [KriteriaAdminController::class, 'update'])->name('kriteria.update');
+    Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
+    Route::get('/kriteria/admin/kriteria1/view/{id}', [KriteriaAdminController::class, 'show'])->name('kriteria1.show');
+    Route::get('/kriteria/admin/kriteria1/print/{id}', [KriteriaAdminController::class, 'print']);
 
     // Kriteria 1 - Store per bagian
     Route::post('/admin/kriteria1/penetapan', [KriteriaAdminController::class, 'storePenetapan'])->name('kriteria1.penetapan.store');
@@ -50,10 +55,22 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/admin/kriteria1/pengendalian', [KriteriaAdminController::class, 'storePengendalian'])->name('kriteria1.pengendalian.store');
     Route::post('/admin/kriteria1/peningkatan', [KriteriaAdminController::class, 'storePeningkatan'])->name('kriteria1.peningkatan.store');
 
-    // Tambahan route untuk tombol Submit, (aksi gabungan)
-    Route::post('/kriteria/submit', [KriteriaAdminController::class, 'submitKriteria'])->name('kriteria.submit');
-    Route::get('/kriteria/admin/kriteria1/view/{id}', [KriteriaAdminController::class, 'show'])->name('kriteria1.show');
-    Route::get('/kriteria/admin/kriteria1/print/{id}', [KriteriaAdminController::class, 'print']);
+    // Kriteria 2
+    Route::get('/kriteria/admin/kriteria2/create', [Kriteria2AdminController::class, 'create'])->name('kriteria.admin.kriteria2');
+    Route::get('/kriteria/admin/kriteria2/', [Kriteria2AdminController::class, 'index'])->name('index.admin.kriteria2');
+    Route::get('/kriteria/admin/kriteria2/edit/{id}', [Kriteria2AdminController::class, 'edit'])->name('kriteria2.edit');
+    Route::put('/kriteria/admin/kriteria2/update/{id}', [Kriteria2AdminController::class, 'update'])->name('kriteria2.update');
+    Route::post('/kriteria/submit', [Kriteria2AdminController::class, 'submitKriteria'])->name('kriteria2.submit');
+    Route::get('/kriteria/admin/kriteria2/view/{id}', [Kriteria2AdminController::class, 'show'])->name('kriteria2.show');
+    Route::get('/kriteria/admin/kriteria2/print/{id}', [Kriteria2AdminController::class, 'print']);
+    
+    // Kriteria 2 - Store per bagian
+    Route::post('/admin/kriteria2/penetapan', [Kriteria2AdminController::class, 'storePenetapan'])->name('kriteria2.penetapan.store');
+    Route::post('/admin/kriteria2/pelaksanaan', [Kriteria2AdminController::class, 'storePelaksaan'])->name('kriteria2.pelaksanaan.store');
+    Route::post('/admin/kriteria2/evaluasi', [Kriteria2AdminController::class, 'storeEvaluasi'])->name('kriteria2.evaluasi.store');
+    Route::post('/admin/kriteria2/pengendalian', [Kriteria2AdminController::class, 'storePengendalian'])->name('kriteria2.pengendalian.store');
+    Route::post('/admin/kriteria2/peningkatan', [Kriteria2AdminController::class, 'storePeningkatan'])->name('kriteria2.peningkatan.store');
+
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
