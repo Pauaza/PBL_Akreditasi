@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,39 +22,47 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
         .sidebar .menu {
             flex-grow: 1;
         }
+
         .sidebar .menu-item {
             padding: 10px 0;
             cursor: pointer;
         }
+
         .sidebar .menu-item h5 {
             color: #315287;
             margin: 0;
             font-size: 18px;
             font-weight: 500;
         }
+
         .sidebar .menu-item.active {
             background-color: #315287;
             padding-left: 15px;
             border-top-right-radius: 50px;
             border-bottom-right-radius: 50px;
         }
+
         .sidebar .menu-item.active h5 {
             color: #fff;
         }
+
         .sidebar .version {
             text-align: center;
             padding: 10px 0;
             border-top: 1px solid #315287;
         }
+
         .sidebar .version p {
             margin: 0;
             font-size: 12px;
             color: #666;
             font-weight: 400;
         }
+
         .top-logo {
             display: flex;
             justify-content: left;
@@ -61,11 +70,13 @@
             padding: 10px 0;
             margin-bottom: 15px;
         }
+
         .logo-img {
             width: 40px;
             height: 40px;
             object-fit: contain;
         }
+
         .back-button {
             background: #315287;
             border: none;
@@ -77,12 +88,14 @@
             box-sizing: border-box;
             text-align: center;
         }
+
         .back-button a {
             text-decoration: none;
             color: #fff;
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="top-logo">
@@ -108,13 +121,30 @@
                 <h5>Comments</h5>
             </div>
         </div>
+
+        @php
+            $username = Auth::user()->username;
+            $akses = [
+                'admin1' => 1,
+                'admin2' => 2,
+                'admin3' => 3,
+                'admin4' => 4,
+                'admin5' => 5,
+                'admin6' => 6,
+                'admin7' => 7,
+                'admin8' => 8,
+                'admin9' => 9,
+            ];
+            $kriteriaId = $akses[$username] ?? null;
+        @endphp
+
         <div class="back-button">
-            <a href="/kriteria/admin/kriteria1">Back to Table</a>
+            <a href="/kriteria/admin/kriteria{{ $kriteriaId }}">Back to Table</a>
         </div>
     </div>
     <script>
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 // Remove active class from all menu items
                 document.querySelectorAll('.menu-item').forEach(i => {
                     i.classList.remove('active');
@@ -125,4 +155,5 @@
         });
     </script>
 </body>
+
 </html>
