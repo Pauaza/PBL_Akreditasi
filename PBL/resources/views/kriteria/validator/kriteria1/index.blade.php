@@ -44,31 +44,47 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        const textarea = document.querySelector('.comment-form textarea');
-        const radioDiterma = document.getElementById('diterma');
-        const radioDitolak = document.getElementById('ditolak');
+            const textarea = document.querySelector('.comment-form textarea');
+            const radioDiterma = document.getElementById('diterma');
+            const radioDitolak = document.getElementById('ditolak');
 
-        function toggleTextarea() {
-            textarea.disabled = radioDiterma.checked; // nonaktif jika 'diterma' dipilih
-        }
+            function toggleTextarea() {
+                textarea.disabled = radioDiterma.checked;
+            }
 
-        // Panggil fungsi saat halaman pertama kali dimuat
-        toggleTextarea();
+            toggleTextarea();
 
-        // Tambahkan event listener ke radio buttons
-        radioDiterma.addEventListener('change', toggleTextarea);
-        radioDitolak.addEventListener('change', toggleTextarea);
+            radioDiterma.addEventListener('change', toggleTextarea);
+            radioDitolak.addEventListener('change', toggleTextarea);
 
-        window.addComment = function () {
-            const commentText = textarea.value.trim();
-                if (commentText) {
-                    const commentsSection = document.querySelector('.comments-section');
-                    const newComment = document.createElement('div');
-                    newComment.className = 'detail-revisi-item';
-                    newComment.innerHTML = `<p><strong>KJM:</strong> ${commentText}</p>`;
-                    commentsSection.insertBefore(newComment, document.querySelector('.comment-form').parentElement);
-                    textarea.value = '';
-                }
+            window.addComment = function () {
+                const komentar = textarea.value.trim();
+                const status = radioDiterma.checked ? 'acc' : 'rev';
+
+                fetch("{{ route('kriteria1.kirimKomentar') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ komentar, status })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (status === 'rev' && komentar) {
+                        const commentsSection = document.querySelector('.comments-section');
+                        const newComment = document.createElement('div');
+                        newComment.className = 'detail-revisi-item';
+                        newComment.innerHTML = `<p><strong>KJM:</strong> ${komentar}</p>`;
+                        commentsSection.insertBefore(newComment, document.querySelector('.comment-form').parentElement);
+                        textarea.value = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Gagal mengirim komentar.');
+                });
             };
         });
     </script>

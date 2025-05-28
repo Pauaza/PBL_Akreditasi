@@ -197,6 +197,7 @@ Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
     Route::get('/kriteria/validator/kriteria1/', [KriteriaValidatorController::class, 'index'])->name('kriteria.validator.kriteria1.index');
     Route::get('/kriteria/validator/1/overview', [KriteriaValidatorController::class, 'generateOverview']);
     Route::get('/kriteria/validator/1/stream', [KriteriaValidatorController::class, 'streamOverview'])->name('kriteria.stream');
+    Route::post('/kriteria1/kirim-komentar', [KriteriaAdminController::class, 'kirimKomentar'])->name('kriteria1.kirimKomentar'); //Route untuk mengirim komentar dan status validasi kriteria1
 });
 
 
