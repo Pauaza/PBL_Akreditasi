@@ -10,6 +10,7 @@ use App\Http\Controllers\Kriteria2AdminController;
 use App\Http\Controllers\Kriteria3AdminController;
 use App\Http\Controllers\Kriteria4AdminController;
 use App\Http\Controllers\Kriteria5AdminController;
+use App\Http\Controllers\Kriteria6AdminController;
 use App\Http\Controllers\KriteriaValidatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ContactController;
@@ -122,6 +123,22 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/admin/kriteria5/evaluasi', [Kriteria5AdminController::class, 'storeEvaluasi'])->name('kriteria5.evaluasi.store');
     Route::post('/admin/kriteria5/pengendalian', [Kriteria5AdminController::class, 'storePengendalian'])->name('kriteria5.pengendalian.store');
     Route::post('/admin/kriteria5/peningkatan', [Kriteria5AdminController::class, 'storePeningkatan'])->name('kriteria5.peningkatan.store');
+
+     // Kriteria 6
+    Route::get('/kriteria/admin/kriteria6/create', [Kriteria6AdminController::class, 'create'])->name('kriteria.admin.kriteria6');
+    Route::get('/kriteria/admin/kriteria6/', [Kriteria6AdminController::class, 'index'])->name('index.admin.kriteria6');
+    Route::get('/kriteria/admin/kriteria6/edit/{id}', [Kriteria6AdminController::class, 'edit'])->name('kriteria6.edit');
+    Route::put('/kriteria/admin/kriteria6/update/{id}', [Kriteria6AdminController::class, 'update'])->name('kriteria6.update');
+    Route::post('/kriteria/submit', [Kriteria6AdminController::class, 'submitKriteria'])->name('kriteria6.submit');
+    Route::get('/kriteria/admin/kriteria6/view/{id}', [Kriteria6AdminController::class, 'show'])->name('kriteria6.show');
+    Route::get('/kriteria/admin/kriteria6/print/{id}', [Kriteria6AdminController::class, 'print']);
+    
+    // Kriteria 6 - Store per bagian
+    Route::post('/admin/kriteria6/penetapan', [Kriteria6AdminController::class, 'storePenetapan'])->name('kriteria6.penetapan.store');
+    Route::post('/admin/kriteria6/pelaksanaan', [Kriteria6AdminController::class, 'storePelaksaan'])->name('kriteria6.pelaksanaan.store');
+    Route::post('/admin/kriteria6/evaluasi', [Kriteria6AdminController::class, 'storeEvaluasi'])->name('kriteria6.evaluasi.store');
+    Route::post('/admin/kriteria6/pengendalian', [Kriteria6AdminController::class, 'storePengendalian'])->name('kriteria6.pengendalian.store');
+    Route::post('/admin/kriteria6/peningkatan', [Kriteria6AdminController::class, 'storePeningkatan'])->name('kriteria6.peningkatan.store');
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
