@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaAdminController;
 use App\Http\Controllers\Kriteria2AdminController;
 use App\Http\Controllers\Kriteria3AdminController;
+use App\Http\Controllers\Kriteria4AdminController;
 use App\Http\Controllers\KriteriaValidatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ContactController;
@@ -87,6 +88,23 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/admin/kriteria3/evaluasi', [Kriteria3AdminController::class, 'storeEvaluasi'])->name('kriteria3.evaluasi.store');
     Route::post('/admin/kriteria3/pengendalian', [Kriteria3AdminController::class, 'storePengendalian'])->name('kriteria3.pengendalian.store');
     Route::post('/admin/kriteria3/peningkatan', [Kriteria3AdminController::class, 'storePeningkatan'])->name('kriteria3.peningkatan.store');
+
+        // Kriteria 4
+    Route::get('/kriteria/admin/kriteria4/create', [Kriteria4AdminController::class, 'create'])->name('kriteria.admin.kriteria4');
+    Route::get('/kriteria/admin/kriteria4/', [Kriteria4AdminController::class, 'index'])->name('index.admin.kriteria4');
+    Route::get('/kriteria/admin/kriteria4/edit/{id}', [Kriteria4AdminController::class, 'edit'])->name('kriteria4.edit');
+    Route::put('/kriteria/admin/kriteria4/update/{id}', [Kriteria4AdminController::class, 'update'])->name('kriteria4.update');
+    Route::post('/kriteria/submit', [Kriteria4AdminController::class, 'submitKriteria'])->name('kriteria4.submit');
+    Route::get('/kriteria/admin/kriteria4/view/{id}', [Kriteria4AdminController::class, 'show'])->name('kriteria4.show');
+    Route::get('/kriteria/admin/kriteria4/print/{id}', [Kriteria4AdminController::class, 'print']);
+    
+    // Kriteria 4 - Store per bagian
+    Route::post('/admin/kriteria4/penetapan', [Kriteria4AdminController::class, 'storePenetapan'])->name('kriteria4.penetapan.store');
+    Route::post('/admin/kriteria4/pelaksanaan', [Kriteria4AdminController::class, 'storePelaksaan'])->name('kriteria4.pelaksanaan.store');
+    Route::post('/admin/kriteria4/evaluasi', [Kriteria4AdminController::class, 'storeEvaluasi'])->name('kriteria4.evaluasi.store');
+    Route::post('/admin/kriteria4/pengendalian', [Kriteria4AdminController::class, 'storePengendalian'])->name('kriteria4.pengendalian.store');
+    Route::post('/admin/kriteria4/peningkatan', [Kriteria4AdminController::class, 'storePeningkatan'])->name('kriteria4.peningkatan.store');
+
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
