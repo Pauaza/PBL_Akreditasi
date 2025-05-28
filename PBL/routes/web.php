@@ -13,6 +13,7 @@ use App\Http\Controllers\Kriteria5AdminController;
 use App\Http\Controllers\Kriteria6AdminController;
 use App\Http\Controllers\Kriteria7AdminController;
 use App\Http\Controllers\Kriteria8AdminController;
+use App\Http\Controllers\Kriteria9AdminController;
 use App\Http\Controllers\KriteriaValidatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ContactController;
@@ -172,6 +173,23 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/admin/kriteria8/evaluasi', [Kriteria8AdminController::class, 'storeEvaluasi'])->name('kriteria8.evaluasi.store');
     Route::post('/admin/kriteria8/pengendalian', [Kriteria8AdminController::class, 'storePengendalian'])->name('kriteria8.pengendalian.store');
     Route::post('/admin/kriteria8/peningkatan', [Kriteria8AdminController::class, 'storePeningkatan'])->name('kriteria8.peningkatan.store');
+
+    // Kriteria 9
+    Route::get('/kriteria/admin/kriteria9/create', [Kriteria9AdminController::class, 'create'])->name('kriteria.admin.kriteria9');
+    Route::get('/kriteria/admin/kriteria9/', [Kriteria9AdminController::class, 'index'])->name('index.admin.kriteria9');
+    Route::get('/kriteria/admin/kriteria9/edit/{id}', [Kriteria9AdminController::class, 'edit'])->name('kriteria9.edit');
+    Route::put('/kriteria/admin/kriteria9/update/{id}', [Kriteria9AdminController::class, 'update'])->name('kriteria9.update');
+    Route::post('/kriteria/submit', [Kriteria9AdminController::class, 'submitKriteria'])->name('kriteria9.submit');
+    Route::get('/kriteria/admin/kriteria9/view/{id}', [Kriteria9AdminController::class, 'show'])->name('kriteria9.show');
+    Route::get('/kriteria/admin/kriteria9/print/{id}', [Kriteria9AdminController::class, 'print']);
+
+    // Kriteria 9 - Store per bagian
+    Route::post('/admin/kriteria9/penetapan', [Kriteria9AdminController::class, 'storePenetapan'])->name('kriteria9.penetapan.store');
+    Route::post('/admin/kriteria9/pelaksanaan', [Kriteria9AdminController::class, 'storePelaksaan'])->name('kriteria9.pelaksanaan.store');
+    Route::post('/admin/kriteria9/evaluasi', [Kriteria9AdminController::class, 'storeEvaluasi'])->name('kriteria9.evaluasi.store');
+    Route::post('/admin/kriteria9/pengendalian', [Kriteria9AdminController::class, 'storePengendalian'])->name('kriteria9.pengendalian.store');
+    Route::post('/admin/kriteria9/peningkatan', [Kriteria9AdminController::class, 'storePeningkatan'])->name('kriteria9.peningkatan.store');
+
 });
 
 Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
