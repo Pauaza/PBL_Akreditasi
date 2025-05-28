@@ -43,10 +43,24 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function addComment() {
-                const textarea = document.querySelector('.comment-form textarea');
-                const commentText = textarea.value.trim();
+        document.addEventListener('DOMContentLoaded', function () {
+        const textarea = document.querySelector('.comment-form textarea');
+        const radioDiterma = document.getElementById('diterma');
+        const radioDitolak = document.getElementById('ditolak');
+
+        function toggleTextarea() {
+            textarea.disabled = radioDiterma.checked; // nonaktif jika 'diterma' dipilih
+        }
+
+        // Panggil fungsi saat halaman pertama kali dimuat
+        toggleTextarea();
+
+        // Tambahkan event listener ke radio buttons
+        radioDiterma.addEventListener('change', toggleTextarea);
+        radioDitolak.addEventListener('change', toggleTextarea);
+
+        window.addComment = function () {
+            const commentText = textarea.value.trim();
                 if (commentText) {
                     const commentsSection = document.querySelector('.comments-section');
                     const newComment = document.createElement('div');
@@ -55,7 +69,7 @@
                     commentsSection.insertBefore(newComment, document.querySelector('.comment-form').parentElement);
                     textarea.value = '';
                 }
-            }
+            };
         });
     </script>
 @endsection
