@@ -10,8 +10,7 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <form method="POST" action="{{ route('kriteria7.update', $kriteria->id_detail_kriteria) }}"
-        enctype="multipart/form-data">
+    <form method="POST" action="{{ route('kriteria7.update', $kriteria->id_detail_kriteria) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -45,12 +44,8 @@
                             </div>
                         </div>
                         <div class="upload-photo">
-                            <span class="upload-text">+ Upload</span>
-                            <input type="file" name="file_penetapan" class="file-input" style="display: none;"
-                                accept="image/*,application/pdf">
-                            <img src="{{ $kriteria->penetapan->pendukung ? asset('storage/' . $kriteria->penetapan->pendukung) : '' }}"
-                                alt="Preview" class="preview-image"
-                                style="{{ $kriteria->penetapan->pendukung ? 'display:block' : 'display:none' }}" />
+                            <label for="file_penetapan" class="upload-text" style="cursor: pointer;">+ Upload</label>
+                            <input type="file" name="file_penetapan" id="file_penetapan" class="file-input" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -84,12 +79,8 @@
                             </div>
                         </div>
                         <div class="upload-photo">
-                            <span class="upload-text">+ Upload</span>
-                            <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;"
-                                accept="image/*,application/pdf">
-                            <img src="{{ $kriteria->pelaksanaan->pendukung ? asset('storage/' . $kriteria->pelaksanaan->pendukung) : '' }}"
-                                alt="Preview" class="preview-image"
-                                style="{{ $kriteria->pelaksanaan->pendukung ? 'display:block' : 'display:none' }}" />
+                            <label for="file_pelaksanaan" class="upload-text" style="cursor: pointer;">+ Upload</label>
+                            <input type="file" name="file_pelaksanaan" id="file_pelaksanaan" class="file-input"style="display: none;" accept=".pdf,.jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -123,12 +114,8 @@
                             </div>
                         </div>
                         <div class="upload-photo">
-                            <span class="upload-text">+ Upload</span>
-                            <input type="file" name="file_evaluasi" class="file-input" style="display: none;"
-                                accept="image/*,application/pdf">
-                            <img src="{{ $kriteria->evaluasi->pendukung ? asset('storage/' . $kriteria->evaluasi->pendukung) : '' }}"
-                                alt="Preview" class="preview-image"
-                                style="{{ $kriteria->evaluasi->pendukung ? 'display:block' : 'display:none' }}" />
+                            <label for="file_evaluasi" class="upload-text" style="cursor: pointer;">+ Upload</label>
+                            <input type="file" name="file_evaluasi" id="file_evaluasi" class="file-input" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -162,12 +149,8 @@
                             </div>
                         </div>
                         <div class="upload-photo">
-                            <span class="upload-text">+ Upload</span>
-                            <input type="file" name="file_pengendalian" class="file-input" style="display: none;"
-                                accept="image/*,application/pdf">
-                            <img src="{{ $kriteria->pengendalian->pendukung ? asset('storage/' . $kriteria->pengendalian->pendukung) : '' }}"
-                                alt="Preview" class="preview-image"
-                                style="{{ $kriteria->pengendalian->pendukung ? 'display:block' : 'display:none' }}" />
+                            <label for="file_pengendalian" class="upload-text" style="cursor: pointer;">+ Upload</label>
+                            <input type="file" name="file_pengendalian" id="file_pengendalian" class="file-input" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -201,12 +184,8 @@
                             </div>
                         </div>
                         <div class="upload-photo">
-                            <span class="upload-text">+ Upload</span>
-                            <input type="file" name="file_peningkatan" class="file-input" style="display: none;"
-                                accept="image/*,application/pdf">
-                            <img src="{{ $kriteria->peningkatan->pendukung ? asset('storage/' . $kriteria->peningkatan->pendukung) : '' }}"
-                                alt="Preview" class="preview-image"
-                                style="{{ $kriteria->peningkatan->pendukung ? 'display:block' : 'display:none' }}" />
+                            <label for="file_peningkatan" class="upload-text" style="cursor: pointer;">+ Upload</label>
+                            <input type="file" name="file_peningkatan" id="file_peningkatan" class="file-input" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" />
                         </div>
                     </div>
                 </div>
@@ -214,4 +193,19 @@
 
             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </form>
+<script>
+document.querySelectorAll('.upload-text').forEach(label => {
+    label.addEventListener('click', () => {
+        label.nextElementSibling.click();
+    });
+
+    label.nextElementSibling.addEventListener('change', e => {
+        if (e.target.files.length > 0) {
+            label.textContent = '+ ' + e.target.files[0].name;
+        } else {
+            label.textContent = '+ Upload';
+        }
+    });
+});
+</script>
 @endsection
