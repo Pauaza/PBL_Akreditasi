@@ -16,7 +16,9 @@ class Kriteria2AdminController extends Controller
 {
     public function index()
     {
-        $data = DetailKriteriaModel::with('kriteria')->get();
+        $data = DetailKriteriaModel::with('kriteria')
+            ->where('id_kriteria', 2)
+            ->get();
         return view('kriteria.admin.kriteria2.index', compact('data'));
     }
 

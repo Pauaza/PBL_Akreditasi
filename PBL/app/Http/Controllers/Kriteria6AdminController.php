@@ -16,7 +16,9 @@ class Kriteria6AdminController extends Controller
 {
     public function index()
     {
-        $data = DetailKriteriaModel::with('kriteria')->get();
+        $data = DetailKriteriaModel::with('kriteria')
+            ->where('id_kriteria', 6)
+            ->get();
         return view('kriteria.admin.kriteria6.index', compact('data'));
     }
 
