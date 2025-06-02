@@ -209,9 +209,6 @@
         <div class="button-group" style="margin-top: 20px;">
             <button type="submit" name="action" value="submit" class="btn-blue">Submit</button>
         </div>
-        <div class="button-group" style="margin-top: 20px;">
-            <button type="submit" name="action" value="submit" class="btn-blue">Save</button>
-        </div>
     </form>
 
     <!-- Comments Section -->
