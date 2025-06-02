@@ -181,7 +181,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard_validator') }}#contact">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"

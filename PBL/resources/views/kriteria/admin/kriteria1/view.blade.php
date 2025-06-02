@@ -174,7 +174,7 @@
             <div class="form-group">
                 <label for="comment">Direktur:</label>
                 <div class="form-control" style="min-height: 100px; background-color: #f8f9fa; white-space: pre-wrap;">
-                    {!! $kriteria->comment ?? 'Tidak ada komentar' !!}
+                    {!! $kriteria->komentar->komentar ?? 'Tidak ada komentar' !!}
                 </div>
             </div>
         </div>

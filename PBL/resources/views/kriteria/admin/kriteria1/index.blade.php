@@ -31,14 +31,36 @@
                             <tr>
                                 <td>{{ $item->kriteria->nama_kriteria ?? '-' }}</td>
                                 <td>
-                                    @if ($item->status_validator === 'acc')
+                                    @php
+                                        $accKpsKajur = $item->status_kps === 'acc' || $item->status_kajur === 'acc';
+                                        $accKjmDirektur =
+                                            $item->status_kjm === 'acc' || $item->status_direktur === 'acc';
+
+                                        if ($accKpsKajur && $accKjmDirektur) {
+                                            $status = 'acc';
+                                        } elseif (
+                                            in_array('rev', [
+                                                $item->status_kps,
+                                                $item->status_kajur,
+                                                $item->status_kjm,
+                                                $item->status_direktur,
+                                            ])
+                                        ) {
+                                            $status = 'rev';
+                                        } else {
+                                            $status = 'progress';
+                                        }
+                                    @endphp
+
+                                    @if ($status === 'acc')
                                         <span class="status-btn acc">Acc</span>
-                                    @elseif ($item->status_validator === 'rev')
+                                    @elseif ($status === 'rev')
                                         <span class="status-btn ditolak">Ditolak</span>
                                     @else
                                         <span class="status-btn on-progress">On Progress</span>
                                     @endif
                                 </td>
+
                                 <td class="action-icons">
                                     <a href="{{ url('/kriteria/admin/kriteria1/view/' . $item->id_detail_kriteria) }}">
                                         <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>

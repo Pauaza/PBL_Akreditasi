@@ -67,7 +67,7 @@
     </style>
 </head>
 <body>
-    <h1>LAPORAN DATA KRITERIA 1</h1>
+    <h1>LAPORAN DATA KRITERIA {{ $kriteria->id_kriteria }}</h1>
     <h2>Nama Kriteria: {{ $kriteria->nama_kriteria }}</h2>
 
     <div class="meta">
@@ -78,14 +78,30 @@
         <h3>Detail Kriteria ID: {{ $detail->id_detail_kriteria }}</h3>
         <div class="meta">
             <strong>Status Validasi:</strong>
-            @if ($detail->status_validator === 'acc')
-                ACC
-            @elseif ($detail->status_validator === 'rev')
-                Ditolak
-            @else
-                On Progress
-            @endif
-            <br>
+            @php
+                // Tampilkan status validasi terakhir yang aktif berdasarkan hierarki direktur > kjm > kajur > kps
+                if ($detail->status_direktur === 'acc') {
+                    $statusValidasi = 'Direktur: ACC';
+                } elseif ($detail->status_direktur === 'rev') {
+                    $statusValidasi = 'Direktur: Ditolak';
+                } elseif ($detail->status_kjm === 'acc') {
+                    $statusValidasi = 'KJM: ACC';
+                } elseif ($detail->status_kjm === 'rev') {
+                    $statusValidasi = 'KJM: Ditolak';
+                } elseif ($detail->status_kajur === 'acc') {
+                    $statusValidasi = 'Kajur: ACC';
+                } elseif ($detail->status_kajur === 'rev') {
+                    $statusValidasi = 'Kajur: Ditolak';
+                } elseif ($detail->status_kps === 'acc') {
+                    $statusValidasi = 'KPS: ACC';
+                } elseif ($detail->status_kps === 'rev') {
+                    $statusValidasi = 'KPS: Ditolak';
+                } else {
+                    $statusValidasi = 'On Progress';
+                }
+            @endphp
+            {{ $statusValidasi }}<br>
+
             <strong>Status Selesai:</strong> {{ ucfirst($detail->status_selesai) }}<br>
             <strong>Pengisi:</strong> {{ $detail->user->name ?? '-' }}<br>
         </div>
@@ -178,4 +194,5 @@
         <p><em>Dokumen dicetak secara otomatis oleh sistem pada tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}.</em></p>
     </div>
 </body>
+
 </html>

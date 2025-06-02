@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,7 +20,12 @@ return new class extends Migration
             $table->unsignedInteger('id_peningkatan');
             $table->unsignedInteger('id_kriteria');
             $table->unsignedInteger('id_komentar')->nullable();
-            $table->enum('status_validator', ['acc', 'rev'])->nullable();
+
+            $table->enum('status_kps', ['acc', 'rev'])->nullable();
+            $table->enum('status_kajur', ['acc', 'rev'])->nullable();
+            $table->enum('status_kjm', ['acc', 'rev'])->nullable();
+            $table->enum('status_direktur', ['acc', 'rev'])->nullable();
+
             $table->enum('status_selesai', ['save', 'submit'])->default('save');
 
             // Foreign Key Constraints

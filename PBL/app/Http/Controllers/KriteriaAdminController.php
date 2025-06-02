@@ -15,40 +15,9 @@ use Illuminate\Support\Facades\DB;
 
 class KriteriaAdminController extends Controller
 {
-    public function kirimKomentar(Request $request)
-    {
-        $request->validate([
-            'komentar' => 'nullable|string',
-            'status' => 'required|in:acc,rev',
-        ]);
-
-        // Simpan di tabel t_komentar
-        if ($request->status === 'rev' && $request->komentar) {
-            DB::table('t_komentar')->insert([
-                'komentar' => $request->komentar,
-            ]);
-        }
-
-        // Simpan status di tabel m_detail_kriteria
-        DB::table('m_detail_kriteria')->updateOrInsert(
-            ['id_user' => 12],
-            ['id_penetapan' => 1],
-            ['id_pelaksanaan' => 1],
-            ['id_evaluasi' => 1],
-            ['id_pengendalian' => 1],
-            ['id_peningkatan' => 1],
-            ['id_kriteria' => 1],
-            ['status_validator' => $request->status]
-        );
-
-        return response()->json(['message' => 'Data berhasil disimpan']);
-    }
-
     public function index()
     {
-        $data = DetailKriteriaModel::with('kriteria')
-            ->where('id_kriteria', 1)
-            ->get();
+        $data = DetailKriteriaModel::with('kriteria')->where('id_kriteria', 1)->get();
         return view('kriteria.admin.kriteria1.index', compact('data'));
     }
 
@@ -430,6 +399,7 @@ class KriteriaAdminController extends Controller
     public function show($id)
     {
         $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
+
         return view('kriteria.admin.kriteria1.view', compact('kriteria'));
     }
 

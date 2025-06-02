@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -143,7 +142,6 @@
                         Website Polinema
                     </a>
                 </li>
-
                 <!-- Kriteria Dropdown -->
                 @php
                     $username = Auth::user()->username;
@@ -175,9 +173,10 @@
                     </li>
                 @endif
 
-                    <!-- Denah Gedung Dropdown -->
+                <!-- Denah Gedung Dropdown -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung
+                        ▾</a>
                     <ul class="dropdown-menu" id="dropdownDenah">
                         <li>
                             <a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
@@ -197,7 +196,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a href="/#contact" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"
@@ -230,7 +229,7 @@
         }
 
         // Close dropdown if clicked outside
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function(event) {
             const dropdowns = document.querySelectorAll('.dropdown-menu');
             const dropdownContainers = document.querySelectorAll('.dropdown');
 

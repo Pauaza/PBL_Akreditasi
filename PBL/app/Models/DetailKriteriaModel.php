@@ -19,7 +19,10 @@ class DetailKriteriaModel extends Model
         'id_peningkatan',
         'id_kriteria',
         'id_komentar',
-        'status_validator',
+        'status_kps',
+        'status_kajur',
+        'status_kjm',
+        'status_direktur',
         'status_selesai'
     ];
 
