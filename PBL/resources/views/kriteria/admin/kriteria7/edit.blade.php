@@ -195,10 +195,6 @@
         </form>
 <script>
 document.querySelectorAll('.upload-text').forEach(label => {
-    label.addEventListener('click', () => {
-        label.nextElementSibling.click();
-    });
-
     label.nextElementSibling.addEventListener('change', e => {
         if (e.target.files.length > 0) {
             label.textContent = '+ ' + e.target.files[0].name;
