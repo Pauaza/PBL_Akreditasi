@@ -10,7 +10,7 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
     
-    <form method="POST" action="{{ route('kriteria6.submit') }}" enctype="multipart/form-data">
+    <form id="kriteria6" method="POST" action="{{ route('kriteria6.submit') }}" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name="id_kriteria" value="6">
@@ -260,6 +260,19 @@
                     reader.readAsDataURL(file);
                 }
             });
+        });
+
+        document.querySelector('#kriteria6').addEventListener('submit', function(e) {
+            const penetapan    = document.getElementById('penetapan').value.trim();
+            const pelaksanaan  = document.getElementById('pelaksanaan').value.trim();
+            const evaluasi     = document.getElementById('evaluasi').value.trim();
+            const pengendalian = document.getElementById('pengendalian').value.trim();
+            const peningkatan  = document.getElementById('peningkatan').value.trim();
+
+            if (!penetapan || !pelaksanaan || !evaluasi || !pengendalian || !peningkatan) {
+                e.preventDefault(); // stop submit
+                alert('Semua form (Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan) wajib diisi!');
+            }
         });
     </script>
 @endsection
