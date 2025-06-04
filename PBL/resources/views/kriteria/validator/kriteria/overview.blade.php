@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Laporan Data Kriteria</title>
     <style>
@@ -66,6 +67,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>LAPORAN DATA KRITERIA {{ $kriteria->id_kriteria }}</h1>
     <h2>Nama Kriteria: {{ $kriteria->nama_kriteria }}</h2>
@@ -74,33 +76,40 @@
         <strong>Tanggal Cetak:</strong> {{ \Carbon\Carbon::now()->format('d-m-Y') }}
     </div>
 
-    @foreach($details as $detail)
+    @foreach ($details as $detail)
         <h3>Detail Kriteria ID: {{ $detail->id_detail_kriteria }}</h3>
         <div class="meta">
             <strong>Status Validasi:</strong>
             @php
-                // Tampilkan status validasi terakhir yang aktif berdasarkan hierarki direktur > kjm > kajur > kps
-                if ($detail->status_direktur === 'acc') {
-                    $statusValidasi = 'Direktur: ACC';
-                } elseif ($detail->status_direktur === 'rev') {
-                    $statusValidasi = 'Direktur: Ditolak';
-                } elseif ($detail->status_kjm === 'acc') {
-                    $statusValidasi = 'KJM: ACC';
-                } elseif ($detail->status_kjm === 'rev') {
-                    $statusValidasi = 'KJM: Ditolak';
-                } elseif ($detail->status_kajur === 'acc') {
-                    $statusValidasi = 'Kajur: ACC';
-                } elseif ($detail->status_kajur === 'rev') {
-                    $statusValidasi = 'Kajur: Ditolak';
-                } elseif ($detail->status_kps === 'acc') {
-                    $statusValidasi = 'KPS: ACC';
+                $statusValidasiList = [];
+
+                if ($detail->status_kps === 'acc') {
+                    $statusValidasiList[] = 'KPS: ACC';
                 } elseif ($detail->status_kps === 'rev') {
-                    $statusValidasi = 'KPS: Ditolak';
-                } else {
-                    $statusValidasi = 'On Progress';
+                    $statusValidasiList[] = 'KPS: Ditolak';
                 }
+
+                if ($detail->status_kajur === 'acc') {
+                    $statusValidasiList[] = 'Kajur: ACC';
+                } elseif ($detail->status_kajur === 'rev') {
+                    $statusValidasiList[] = 'Kajur: Ditolak';
+                }
+
+                if ($detail->status_kjm === 'acc') {
+                    $statusValidasiList[] = 'KJM: ACC';
+                } elseif ($detail->status_kjm === 'rev') {
+                    $statusValidasiList[] = 'KJM: Ditolak';
+                }
+
+                if ($detail->status_direktur === 'acc') {
+                    $statusValidasiList[] = 'Direktur: ACC';
+                } elseif ($detail->status_direktur === 'rev') {
+                    $statusValidasiList[] = 'Direktur: Ditolak';
+                }
+
+                echo count($statusValidasiList) > 0 ? implode(' | ', $statusValidasiList) : 'On Progress';
             @endphp
-            {{ $statusValidasi }}<br>
+            <br>
 
             <strong>Status Selesai:</strong> {{ ucfirst($detail->status_selesai) }}<br>
             <strong>Pengisi:</strong> {{ $detail->user->name ?? '-' }}<br>
@@ -115,7 +124,8 @@
                     {!! $detail->penetapan->penetapan ?? '-' !!}
                     @if (!empty($detail->penetapan->link))
                         <div class="link">
-                            <strong>Link Pendukung: </strong><a href="{{ $detail->penetapan->link }}" target="_blank" rel="noopener">{{ $detail->penetapan->link }}</a>
+                            <strong>Link Pendukung: </strong><a href="{{ $detail->penetapan->link }}" target="_blank"
+                                rel="noopener">{{ $detail->penetapan->link }}</a>
                         </div>
                     @endif
                 </td>
@@ -129,7 +139,8 @@
                     {!! $detail->pelaksanaan->penetapan ?? '-' !!}
                     @if (!empty($detail->pelaksanaan->link))
                         <div class="link">
-                            <strong>Link Pendukung: </strong><a href="{{ $detail->pelaksanaan->link }}" target="_blank" rel="noopener">{{ $detail->pelaksanaan->link }}</a>
+                            <strong>Link Pendukung: </strong><a href="{{ $detail->pelaksanaan->link }}" target="_blank"
+                                rel="noopener">{{ $detail->pelaksanaan->link }}</a>
                         </div>
                     @endif
                 </td>
@@ -143,7 +154,8 @@
                     {!! $detail->evaluasi->penetapan ?? '-' !!}
                     @if (!empty($detail->evaluasi->link))
                         <div class="link">
-                            <strong>Link Pendukung: </strong><a href="{{ $detail->evaluasi->link }}" target="_blank" rel="noopener">{{ $detail->evaluasi->link }}</a>
+                            <strong>Link Pendukung: </strong><a href="{{ $detail->evaluasi->link }}" target="_blank"
+                                rel="noopener">{{ $detail->evaluasi->link }}</a>
                         </div>
                     @endif
                 </td>
@@ -157,7 +169,8 @@
                     {!! $detail->pengendalian->penetapan ?? '-' !!}
                     @if (!empty($detail->pengendalian->link))
                         <div class="link">
-                            <strong>Link Pendukung: </strong><a href="{{ $detail->pengendalian->link }}" target="_blank" rel="noopener">{{ $detail->pengendalian->link }}</a>
+                            <strong>Link Pendukung: </strong><a href="{{ $detail->pengendalian->link }}" target="_blank"
+                                rel="noopener">{{ $detail->pengendalian->link }}</a>
                         </div>
                     @endif
                 </td>
@@ -171,7 +184,8 @@
                     {!! $detail->peningkatan->penetapan ?? '-' !!}
                     @if (!empty($detail->peningkatan->link))
                         <div class="link">
-                            <strong>Link Pendukung: </strong><a href="{{ $detail->peningkatan->link }}" target="_blank" rel="noopener">{{ $detail->peningkatan->link }}</a>
+                            <strong>Link Pendukung: </strong><a href="{{ $detail->peningkatan->link }}" target="_blank"
+                                rel="noopener">{{ $detail->peningkatan->link }}</a>
                         </div>
                     @endif
                 </td>
@@ -191,7 +205,8 @@
     @endforeach
 
     <div class="footer">
-        <p><em>Dokumen dicetak secara otomatis oleh sistem pada tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}.</em></p>
+        <p><em>Dokumen dicetak secara otomatis oleh sistem pada tanggal
+                {{ \Carbon\Carbon::now()->format('d-m-Y') }}.</em></p>
     </div>
 </body>
 

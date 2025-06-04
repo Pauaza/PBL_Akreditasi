@@ -54,7 +54,7 @@ class KriteriaValidatorController extends Controller
 
     public function validation(Request $request)
     {
-        // 1) Validasi request
+        // Validasi request
         $request->validate([
             'status_validator' => 'required|in:acc,rev',
         ]);
@@ -73,19 +73,19 @@ class KriteriaValidatorController extends Controller
         $komentarId = null;
         if ($request->status_validator === 'rev' && trim($request->komentar) !== '') {
             $komentar = KomentarModel::create([
+                'id_user' => $user->id_user,
                 'komentar' => $request->komentar,
             ]);
             $komentarId = $komentar->id_komentar;
         }
 
-        // 2) Jika user adalah KPS (2) atau Kajur (3) → kelompok level 1
+        // Jika user adalah KPS (2) atau Kajur (3) → level 1
         if (in_array($level, [2, 3])) {
             foreach ($details as $detail) {
                 // Set status_kps dan status_kajur sesuai pilihan
                 $detail->status_kps = $request->status_validator;
                 $detail->status_kajur = $request->status_validator;
 
-                // Jika ada komentar, simpan id_komentar
                 if ($komentarId) {
                     $detail->id_komentar = $komentarId;
                 }
@@ -99,18 +99,16 @@ class KriteriaValidatorController extends Controller
                 $detail->save();
             }
 
-            // Jika 'acc', tidak perlu ubah status_kjm/direktur—tunggu proses selanjutnya
             return redirect()->route('dashboard_validator')
                 ->with('success', 'Validasi KPS/Kajur berhasil diperbarui.');
         }
 
-        // 3) Jika user adalah KJM (4) atau Direktur (5) → kelompok level 2
-        if (in_array($level, [4, 4]) || in_array($level, [5, 5])) {
+        // Jika user adalah KJM (4) atau Direktur (5) → level 2
+        if (in_array($level, [4, 5])) {
             // Pastikan KPS & Kajur sudah acc dulu
-            $alreadyAccLevel1 = $details->every(
-                fn($d) =>
-                $d->status_kps === 'acc' && $d->status_kajur === 'acc'
-            );
+            $alreadyAccLevel1 = $details->every(function ($d) {
+                return $d->status_kps === 'acc' && $d->status_kajur === 'acc';
+            });
             if (!$alreadyAccLevel1) {
                 return redirect()->back()->with('error', 'Proses level 1 (KPS/Kajur) harus selesai terlebih dahulu.');
             }
@@ -124,7 +122,7 @@ class KriteriaValidatorController extends Controller
                     $detail->id_komentar = $komentarId;
                 }
 
-                // Jika menolak, reset semua status level 1 (KPS & Kajur)
+                // Jika menolak, reset semua status level 1 (KPS & Kajur) supaya bisa diulang
                 if ($request->status_validator === 'rev') {
                     $detail->status_kps = null;
                     $detail->status_kajur = null;
@@ -137,7 +135,6 @@ class KriteriaValidatorController extends Controller
                 ->with('success', 'Validasi KJM/Direktur berhasil diperbarui.');
         }
 
-        // Level user tidak termasuk: kirim error
         return redirect()->back()->with('error', 'Level user tidak dikenali.');
     }
 

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('t_komentar', function (Blueprint $table) {
             $table->increments('id_komentar');
             $table->text('komentar');
+            $table->unsignedInteger('id_user');
+
+            $table->foreign('id_user')->references('id_user')->on('m_user')->onDelete('cascade');
         });
     }
 

@@ -7,29 +7,27 @@
         $user = Auth::user();
         $level = $user->id_level; // 2=KPS, 3=Kajur, 4=KJM, 5=Direktur
 
-        // Cek status KPS dan Kajur pada semua item
+        // Cek status masing-masing validator
         $adaRevKps = $details->contains(fn($item) => $item->status_kps === 'rev');
         $adaRevKajur = $details->contains(fn($item) => $item->status_kajur === 'rev');
-
         $semuaAccKps = $details->every(fn($item) => $item->status_kps === 'acc');
         $semuaAccKajur = $details->every(fn($item) => $item->status_kajur === 'acc');
 
-        // Jika ada revisi (rev) di KPS atau Kajur, pesan muncul
-        // Jika ada item yang belum acc (status selain acc) di KPS atau Kajur, pesan muncul
-        // Jika KPS dan Kajur sudah semua acc, tampil form validasi
+        $adaAccKps = $details->contains(fn($item) => $item->status_kps === 'acc');
+        $adaAccKajur = $details->contains(fn($item) => $item->status_kajur === 'acc');
 
-        $validasiBelumTersedia = $adaRevKps || $adaRevKajur || !$semuaAccKps || !$semuaAccKajur;
+        // True jika tidak ada satupun acc (semua kosong atau rev)
+        $semuaKosongAtauRev = !$adaAccKps && !$adaAccKajur;
 
-        // Logika tampil untuk masing-masing level
-        // Untuk KPS dan Kajur (2,3) tampilkan selalu form validasi
-        // Untuk KJM dan Direktur (4,5) tampilkan form validasi hanya jika validasi Belum Tersedia false (alias sudah acc)
-        if (in_array($level, [2, 3])) {
-            $bolehTampil = true;
+        // Logika tampilkan form
+        if ($level === 2) {
+            $bolehTampilForm = !$semuaAccKps;
+        } elseif ($level === 3) {
+            $bolehTampilForm = !$semuaAccKajur;
         } elseif (in_array($level, [4, 5])) {
-            $bolehTampil = !$validasiBelumTersedia;
+            $bolehTampilForm = !$adaRevKps && !$adaRevKajur && $semuaAccKps && $semuaAccKajur;
         } else {
-            // Level lain, tampilkan sesuai kebutuhan
-            $bolehTampil = true;
+            $bolehTampilForm = true;
         }
     @endphp
 
@@ -48,17 +46,16 @@
 
     <div style="height: 50px;"></div>
 
-    {{-- Konten utama --}}
-    @if ($bolehTampil)
-        <div class="main-content">
-            {{-- PDF Preview --}}
-            <div class="pdf-preview-container">
-                <h3>Pratinjau Laporan Data Kriteria {{ $kriteria->id_kriteria }}</h3>
-                <embed src="{{ route('kriteria.stream', ['id_kriteria' => $kriteria->id_kriteria]) }}" type="application/pdf"
-                    width="100%" height="500px">
-            </div>
+    {{-- PDF Preview selalu tampil --}}
+    <div class="main-content">
+        <div class="pdf-preview-container">
+            <h3>Pratinjau Laporan Data Kriteria {{ $kriteria->id_kriteria }}</h3>
+            <embed src="{{ route('kriteria.stream', ['id_kriteria' => $kriteria->id_kriteria]) }}" type="application/pdf"
+                width="100%" height="500px">
+        </div>
 
-            {{-- Form Validasi --}}
+        {{-- Form Validasi hanya untuk yang boleh --}}
+        @if ($bolehTampilForm)
             <div class="comments-section">
                 <h3>Detail Revisi:</h3>
 
@@ -87,12 +84,13 @@
                     </div>
                 </form>
             </div>
-        </div>
-    @else
-        <div class="alert alert-warning mt-4">
-            <strong>Validasi belum tersedia.</strong> Menunggu persetujuan dari KPS atau Kajur.
-        </div>
-    @endif
+        @elseif (in_array($level, [4, 5]) && $semuaKosongAtauRev)
+            {{-- Pesan hanya untuk KJM & Direktur dan jika tidak ada satu pun acc --}}
+            <div class="alert alert-warning mt-4">
+                <strong>Validasi belum tersedia.</strong> Menunggu persetujuan dari KPS atau Kajur.
+            </div>
+        @endif
+    </div>
 
     {{-- Script toggle komentar --}}
     <script>

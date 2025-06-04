@@ -23,5 +23,11 @@ class KomentarModel extends Model
     // Kolom yang dapat diisi melalui mass assignment
     protected $fillable = [
         'komentar',
+        'id_user',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(UserModel::class, 'id_user', 'id_user');
+    }
 }
