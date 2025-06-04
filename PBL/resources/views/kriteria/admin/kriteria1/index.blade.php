@@ -65,13 +65,21 @@
                                     <a href="{{ url('/kriteria/admin/kriteria1/view/' . $item->id_detail_kriteria) }}">
                                         <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
                                     </a>
-                                    <a href="{{ url('/kriteria/admin/kriteria1/edit/' . $item->id_detail_kriteria) }}">
-                                        <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                    </a>
-                                    <a href="{{ url('/kriteria/admin/kriteria1/print/' . $item->id_detail_kriteria) }}">
-                                        <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                                    </a>
+
+                                    @if ($status === 'progress' || $status === 'rev')
+                                        <a href="{{ url('/kriteria/admin/kriteria1/edit/' . $item->id_detail_kriteria) }}">
+                                            <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
+                                        </a>
+                                    @endif
+
+                                    @if ($status === 'acc')
+                                        <a href="{{ url('/kriteria/admin/kriteria1/print/' . $item->id_detail_kriteria) }}">
+                                            <button><img src="{{ asset('assets/icon/print.png') }}"
+                                                    alt="Print Icon"></button>
+                                        </a>
+                                    @endif
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

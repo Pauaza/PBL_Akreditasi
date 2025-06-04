@@ -22,22 +22,6 @@ class KomentarModel extends Model
 
     // Kolom yang dapat diisi melalui mass assignment
     protected $fillable = [
-        'penetapan',
-        'pendukung',
-        'link',
-        'id_kriteria',
+        'komentar',
     ];
-
-    // Relasi ke KriteriaModel
-    public function kriteria(): BelongsTo
-    {
-        return $this->belongsTo(DetailKriteriaModel::class, 'id_kriteria', 'id_kriteria');
-    }
-
-    public function getPendukungUrlAttribute()
-    {
-        return $this->pendukung 
-            ? asset('storage/' . $this->pendukung)
-            : null;
-    }
 }
