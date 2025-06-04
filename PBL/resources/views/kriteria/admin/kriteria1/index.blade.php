@@ -32,25 +32,24 @@
                                 <td>{{ $item->kriteria->nama_kriteria ?? '-' }}</td>
                                 <td>
                                     @php
-                                        $accKpsKajur = $item->status_kps === 'acc' || $item->status_kajur === 'acc';
-                                        $accKjmDirektur =
-                                            $item->status_kjm === 'acc' || $item->status_direktur === 'acc';
-
-                                        if ($accKpsKajur && $accKjmDirektur) {
-                                            $status = 'acc';
-                                        } elseif (
-                                            in_array('rev', [
-                                                $item->status_kps,
-                                                $item->status_kajur,
-                                                $item->status_kjm,
-                                                $item->status_direktur,
-                                            ])
-                                        ) {
-                                            $status = 'rev';
+                                        // Jika status_kps atau status_kajur 'rev', maka langsung status = ditolak
+                                        if ($item->status_kps === 'rev' || $item->status_kajur === 'rev') {
+                                            $status = 'rev'; // di sini 'rev' tetap untuk label 'ditolak'
                                         } else {
-                                            $status = 'progress';
+                                            $accKpsKajur = $item->status_kps === 'acc' && $item->status_kajur === 'acc';
+                                            $accKjmDirektur =
+                                                $item->status_kjm === 'acc' && $item->status_direktur === 'acc';
+
+                                            if ($accKpsKajur && $accKjmDirektur) {
+                                                $status = 'acc';
+                                            } elseif (in_array('rev', [$item->status_kjm, $item->status_direktur])) {
+                                                $status = 'rev'; // jika rev dari kjm/direktur juga dianggap ditolak
+                                            } else {
+                                                $status = 'progress';
+                                            }
                                         }
                                     @endphp
+
 
                                     @if ($status === 'acc')
                                         <span class="status-btn acc">Acc</span>

@@ -2,30 +2,44 @@
 
 @section('content')
     @php
+        use Illuminate\Support\Arr;
+
         $user = Auth::user();
-        $level = $user->id_level;
+        $level = $user->id_level; // 2=KPS, 3=Kajur, 4=KJM, 5=Direktur
 
-        $sudahAccKajur = $details->contains(fn($item) => $item->status_kajur === 'acc');
-        $sudahAccKps = $details->contains(fn($item) => $item->status_kps === 'acc');
-        $sudahAccKjm = $details->contains(fn($item) => $item->status_kjm === 'acc');
-        $sudahAccDirektur = $details->contains(fn($item) => $item->status_direktur === 'acc');
+        // Cek status KPS dan Kajur pada semua item
+        $adaRevKps = $details->contains(fn($item) => $item->status_kps === 'rev');
+        $adaRevKajur = $details->contains(fn($item) => $item->status_kajur === 'rev');
 
-        $bolehTampilkan = match ($level) {
-            2 => !$sudahAccKps,
-            3 => !$sudahAccKajur,
-            4 => !$sudahAccKjm,
-            5 => !$sudahAccDirektur,
-            default => false,
-        };
+        $semuaAccKps = $details->every(fn($item) => $item->status_kps === 'acc');
+        $semuaAccKajur = $details->every(fn($item) => $item->status_kajur === 'acc');
+
+        // Jika ada revisi (rev) di KPS atau Kajur, pesan muncul
+        // Jika ada item yang belum acc (status selain acc) di KPS atau Kajur, pesan muncul
+        // Jika KPS dan Kajur sudah semua acc, tampil form validasi
+
+        $validasiBelumTersedia = $adaRevKps || $adaRevKajur || !$semuaAccKps || !$semuaAccKajur;
+
+        // Logika tampil untuk masing-masing level
+        // Untuk KPS dan Kajur (2,3) tampilkan selalu form validasi
+        // Untuk KJM dan Direktur (4,5) tampilkan form validasi hanya jika validasi Belum Tersedia false (alias sudah acc)
+        if (in_array($level, [2, 3])) {
+            $bolehTampil = true;
+        } elseif (in_array($level, [4, 5])) {
+            $bolehTampil = !$validasiBelumTersedia;
+        } else {
+            // Level lain, tampilkan sesuai kebutuhan
+            $bolehTampil = true;
+        }
     @endphp
 
-    <!-- Header -->
+    {{-- Header --}}
     <div class="header">
-        <h3>Home / Kriteria 1</h3>
-        <h2>Kriteria 1</h2>
+        <h3>Home / Kriteria {{ $kriteria->id_kriteria }}</h3>
+        <h2>Kriteria {{ $kriteria->id_kriteria }}</h2>
     </div>
 
-    <!-- Tampilkan Pesan Error jika Ada -->
+    {{-- Pesan Error --}}
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -34,16 +48,17 @@
 
     <div style="height: 50px;"></div>
 
-    @if (!empty($error))
-        <div class="alert alert-warning">{{ $error }}</div>
-    @elseif ($bolehTampilkan)
+    {{-- Konten utama --}}
+    @if ($bolehTampil)
         <div class="main-content">
+            {{-- PDF Preview --}}
             <div class="pdf-preview-container">
-                <h3>Pratinjau Laporan Data Kriteria 1</h3>
+                <h3>Pratinjau Laporan Data Kriteria {{ $kriteria->id_kriteria }}</h3>
                 <embed src="{{ route('kriteria.stream', ['id_kriteria' => $kriteria->id_kriteria]) }}" type="application/pdf"
                     width="100%" height="500px">
             </div>
 
+            {{-- Form Validasi --}}
             <div class="comments-section">
                 <h3>Detail Revisi:</h3>
 
@@ -59,61 +74,27 @@
                         <label for="acc">Diterima</label>
                         <input type="radio" id="rev" name="status_validator" value="rev">
                         <label for="rev">Ditolak</label>
-                        <span>(Telah Diterima Oleh KJM)</span>
                     </div>
 
                     <div class="detail-revisi-item">
                         <label>Komentar:</label>
                         <textarea placeholder="Catatan untuk revisi..." name="komentar" id="komentar" disabled></textarea>
-                        <div class="comment-form">
-                            <br>
-                            <button type="submit">Kirim</button>
-                        </div>
+                    </div>
+
+                    <div class="comment-form">
+                        <br>
+                        <button type="submit">Kirim</button>
                     </div>
                 </form>
             </div>
         </div>
     @else
-        <div class="alert alert-info">
-            @switch($level)
-                @case(2)
-                    @if ($sudahAccKps)
-                        Data ini telah disetujui oleh KPS dan tidak memerlukan tindakan lebih lanjut dari Anda.
-                    @else
-                        Data belum tersedia untuk Anda. Silakan tunggu proses validasi sebelumnya.
-                    @endif
-                @break
-
-                @case(3)
-                    @if ($sudahAccKajur)
-                        Data ini telah disetujui oleh Kajur dan tidak memerlukan tindakan lebih lanjut dari Anda.
-                    @else
-                        Data belum tersedia untuk Anda. Silakan tunggu proses validasi sebelumnya.
-                    @endif
-                @break
-
-                @case(4)
-                    @if ($sudahAccKjm)
-                        Data ini telah disetujui oleh KJM dan tidak memerlukan tindakan lebih lanjut dari Anda.
-                    @else
-                        Data belum tersedia untuk Anda. Silakan tunggu proses validasi sebelumnya.
-                    @endif
-                @break
-
-                @case(5)
-                    @if ($sudahAccDirektur)
-                        Data ini telah disetujui oleh Direktur dan tidak memerlukan tindakan lebih lanjut dari Anda.
-                    @else
-                        Data belum tersedia untuk Anda. Silakan tunggu proses validasi sebelumnya.
-                    @endif
-                @break
-
-                @default
-                    Data belum tersedia atau Anda tidak memiliki hak akses untuk memverifikasi data ini.
-            @endswitch
+        <div class="alert alert-warning mt-4">
+            <strong>Validasi belum tersedia.</strong> Menunggu persetujuan dari KPS atau Kajur.
         </div>
     @endif
 
+    {{-- Script toggle komentar --}}
     <script>
         const accRadio = document.getElementById('acc');
         const revRadio = document.getElementById('rev');
