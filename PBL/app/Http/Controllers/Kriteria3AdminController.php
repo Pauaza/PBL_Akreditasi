@@ -285,7 +285,7 @@ class Kriteria3AdminController extends Controller
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
             $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('peningkatan_kriteria1', $fileName, 'public');
+            $filePath = $file->storeAs('peningkatan_kriteria3', $fileName, 'public');
         }
 
         PeningkatanModel::create([

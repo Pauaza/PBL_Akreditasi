@@ -3,8 +3,8 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 2 / Edit</h3>
-        <h2>Edit Kriteria 2</h2>
+        <h3>Home / Kriteria 3 / Edit</h3>
+        <h2>Edit Kriteria 3</h2>
     </div>
 
     <!-- Spacer untuk Header Fixed -->
@@ -15,7 +15,7 @@
         @csrf
         @method('PUT')
 
-        <input type="hidden" name="id_kriteria" value="2">
+        <input type="hidden" name="id_kriteria" value="3">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">
