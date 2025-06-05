@@ -176,7 +176,7 @@ class Kriteria6AdminController extends Controller
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
             $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('penetapan_kriteria5', $fileName, 'public');
+            $filePath = $file->storeAs('penetapan_kriteria6', $fileName, 'public');
         }
 
         PenetapanModel::create([
