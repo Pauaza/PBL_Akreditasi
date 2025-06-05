@@ -22,4 +22,9 @@ class KriteriaModel extends Model
     protected $fillable = [
         'nama_kriteria',
     ];
+
+       public function details()
+    {
+        return $this->hasMany(DetailKriteriaModel::class, 'id_kriteria', 'id_kriteria');
+    }
 }

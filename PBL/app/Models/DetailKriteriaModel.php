@@ -47,6 +47,11 @@ class DetailKriteriaModel extends Model
         return $this->belongsTo(KriteriaModel::class, 'id_kriteria');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class, 'id_user', 'id_user');
+    }
+
     public function penetapan(){
         return $this->hasOne(PenetapanModel::class, 'id_penetapan', 'id_penetapan');
     }

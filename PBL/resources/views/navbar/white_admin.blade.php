@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Navbar dengan Logout</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -70,6 +70,7 @@
             color: #315287;
             text-decoration: none;
             font-size: 16px;
+            cursor: pointer;
         }
 
         .nav-link:hover {
@@ -92,42 +93,99 @@
             background: #7a2e2a;
         }
 
-        /* Dropdown */
-        .dropdown {
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 5px;
             position: relative;
         }
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background: white;
-            min-width: 180px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 10px 0;
-            top: 35px;
-            z-index: 999;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
         }
 
-        .dropdown-menu li {
-            list-style: none;
-            padding: 0;
-        }
-
-        .dropdown-menu li a {
-            display: block;
-            padding: 10px 20px;
+        .close:hover,
+        .close:focus {
+            color: black;
             text-decoration: none;
-            color: #333;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .pdf-viewer-container {
+            position: relative;
+        }
+
+        .pdf-fallback {
+            display: none;
+            text-align: center;
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn-primary {
+            background: #315287;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
             font-size: 14px;
         }
 
-        .dropdown-menu li a:hover {
-            background-color: #f0f0f0;
+        .btn-primary:hover {
+            background: #264170;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-viewer {
+                height: 400px;
+            }
+
+            .modal-content {
+                width: 90%;
+            }
         }
     </style>
 </head>
-
 <body>
     <nav class="custom-navbar">
         <div class="container">
@@ -137,74 +195,13 @@
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="{{ route('dashboard_admin') }}" class="nav-link">Beranda</a></li>
-
-                <li class="nav-item">
-                    <a href="https://www.polinema.ac.id/" class="nav-link" target="_blank" rel="noopener noreferrer">
-                        Website Polinema
-                    </a>
-                </li>
-
-                <!-- Kriteria Dropdown -->
-                @php
-                    $username = Auth::user()->username;
-                    $akses = [
-                        'admin1' => 1,
-                        'admin2' => 2,
-                        'admin3' => 3,
-                        'admin4' => 4,
-                        'admin5' => 5,
-                        'admin6' => 6,
-                        'admin7' => 7,
-                        'admin8' => 8,
-                        'admin9' => 9,
-                    ];
-                    $kriteriaId = $akses[$username] ?? null;
-                @endphp
-
-                @if ($kriteriaId)
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria
-                            ▾</a>
-                        <ul class="dropdown-menu" id="dropdownKriteria">
-                            <li>
-                                <a href="/kriteria/admin/kriteria{{ $kriteriaId }}" rel="noopener noreferrer">
-                                    Kriteria {{ $kriteriaId }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
-
-                    <!-- Denah Gedung Dropdown -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
-                    <ul class="dropdown-menu" id="dropdownDenah">
-                        <li>
-                            <a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
-                                rel="noopener noreferrer">Gedung
-                                Lantai 5</a>
-                        </li>
-                        <li>
-                            <a href="https://my.matterport.com/show/?m=Fj8fbnjLjQq" target="_blank"
-                                rel="noopener noreferrer">Gedung
-                                Lantai 6</a>
-                        </li>
-                        <li>
-                            <a href="https://my.matterport.com/show/?m=fAgiViGeZaB" target="_blank"
-                                rel="noopener noreferrer">Gedung
-                                Lantai 7</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard_admin') }}#contact">Kontak</a></li>
-
+                <li class="nav-item"><a class="nav-link" onclick="openFinalDocModal()">Final Doc</a></li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
                         @csrf
                         <button type="submit" class="button-logout">
-                            <i class="fas fa-sign-out-alt"></i> Logout
+                            <i></i> Logout
                         </button>
                     </form>
                 </li>
@@ -212,43 +209,109 @@
         </div>
     </nav>
 
+    <!-- Modal for PDF Viewer -->
+    <div id="finalDocModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFinalDocModal()">&times;</span>
+            <h2>Finalisasi Dokumen</h2>
+            <p>Laporan ini menampilkan semua kriteria (1-9).</p>
+            <br>
+            <div class="mb-3">
+                <a href="{{ route('finalisasi.download') }}" class="btn btn-primary">Unduh Laporan Final</a>
+            </div>
+            <div class="pdf-viewer-container">
+                <div class="loading-spinner">Memuat laporan PDF...</div>
+                <iframe id="pdfViewer" class="pdf-viewer" title="Laporan Kriteria Disetujui"></iframe>
+                <div class="pdf-fallback">
+                    Gagal memuat laporan PDF. Silakan coba unduh laporan atau periksa koneksi Anda.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function toggleDropdown(event, menuId) {
-            event.preventDefault();
+        function openFinalDocModal() {
+            const modal = document.getElementById('finalDocModal');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const fallback = document.querySelector('.pdf-fallback');
+            const loadingSpinner = document.querySelector('.loading-spinner');
 
-            // Hide all dropdown menus first
-            const dropdowns = document.querySelectorAll('.dropdown-menu');
-            dropdowns.forEach((dd) => {
-                if (dd.id !== menuId) {
-                    dd.style.display = 'none';
+            // Reset states
+            pdfViewer.src = '';
+            pdfViewer.style.display = 'none';
+            fallback.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            modal.style.display = 'block';
+
+            fetch('{{ route('finalisasi.stream') }}', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                loadingSpinner.style.display = 'none';
+                console.log('Response data:', data); // Debug log
+                if (data.success && data.pdfBase64) {
+                    // Convert base64 to Blob
+                    try {
+                        const byteCharacters = atob(data.pdfBase64);
+                        const byteNumbers = new Array(byteCharacters.length);
+                        for (let i = 0; i < byteCharacters.length; i++) {
+                            byteNumbers[i] = byteCharacters.charCodeAt(i);
+                        }
+                        const byteArray = new Uint8Array(byteNumbers);
+                        const blob = new Blob([byteArray], { type: 'application/pdf' });
+                        const url = URL.createObjectURL(blob);
+                        pdfViewer.src = url;
+                        pdfViewer.style.display = 'block';
+                    } catch (e) {
+                        console.error('Error converting base64 to Blob:', e);
+                        fallback.style.display = 'block';
+                        fallback.textContent = 'Gagal merender PDF: Format data tidak valid.';
+                    }
+                } else {
+                    fallback.style.display = 'block';
+                    fallback.textContent = data.message || 'Gagal memuat laporan PDF.';
+                }
+            })
+            .catch(error => {
+                loadingSpinner.style.display = 'none';
+                fallback.style.display = 'block';
+                fallback.textContent = 'Gagal memuat laporan PDF: ' + error.message;
+                console.error('Error fetching PDF:', error);
             });
-
-            // Toggle clicked menu
-            const menu = document.getElementById(menuId);
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Close dropdown if clicked outside
+        function closeFinalDocModal() {
+            const modal = document.getElementById('finalDocModal');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const fallback = document.querySelector('.pdf-fallback');
+            const loadingSpinner = document.querySelector('.loading-spinner');
+
+            modal.style.display = 'none';
+            pdfViewer.src = '';
+            pdfViewer.style.display = 'none';
+            fallback.style.display = 'none';
+            loadingSpinner.style.display = 'none';
+        }
+
+        // Close modal when clicking outside content
         document.addEventListener('click', function (event) {
-            const dropdowns = document.querySelectorAll('.dropdown-menu');
-            const dropdownContainers = document.querySelectorAll('.dropdown');
-
-            let clickedInsideDropdown = false;
-
-            dropdownContainers.forEach((container) => {
-                if (container.contains(event.target)) {
-                    clickedInsideDropdown = true;
-                }
-            });
-
-            if (!clickedInsideDropdown) {
-                dropdowns.forEach((dd) => {
-                    dd.style.display = 'none';
-                });
+            const modal = document.getElementById('finalDocModal');
+            const modalContent = document.querySelector('.modal-content');
+            if (event.target === modal && modal.style.display === 'block') {
+                closeFinalDocModal();
             }
         });
     </script>
 </body>
-
 </html>
