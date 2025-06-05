@@ -10,7 +10,7 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
     
-    <form id="kriteria7" method="POST" action="{{ route('kriteria7.submit') }}" enctype="multipart/form-data">
+    <form id="kriteria7" method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name="id_kriteria" value="7">
@@ -36,7 +36,7 @@
                         <!-- Input Link Penetapan -->
                         <div class="col-md-9 mb-3">
                             <label for="link_penetapan" class="form-label" style="font-size: large; color: #1e293b">Link Penetapan :</label>
-                            <input type="url" name="link" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror"
+                            <input type="url" name="link_penetapan" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror"
                                 placeholder="Masukkan link penetapan" value="{{ old('link_penetapan') }}">
                             @error('link_penetapan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="pendukung" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*">
                         <img src="{{ session('penetapan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('penetapan') ? 'display:block' : 'display:none' }}" />
                     </div>

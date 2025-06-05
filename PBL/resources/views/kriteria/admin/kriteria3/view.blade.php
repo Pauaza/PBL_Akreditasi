@@ -172,9 +172,9 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="comment">Direktur:</label>
+                <label for="komentar" class="form-label">{{ $kriteria->komentar->user->username ?? '-' }}:</label>
                 <div class="form-control" style="min-height: 100px; background-color: #f8f9fa; white-space: pre-wrap;">
-                    {!! $kriteria->comment ?? 'Tidak ada komentar' !!}
+                    {!! $kriteria->komentar->komentar ?? 'Tidak ada komentar' !!}
                 </div>
             </div>
         </div>

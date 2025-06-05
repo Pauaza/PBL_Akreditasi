@@ -31,25 +31,53 @@
                             <tr>
                                 <td>{{ $item->kriteria->nama_kriteria ?? '-' }}</td>
                                 <td>
-                                    @if ($item->status_validator === 'acc')
+                                    @php
+                                        // Jika status_kps atau status_kajur 'rev', maka langsung status = ditolak
+                                        if ($item->status_kps === 'rev' || $item->status_kajur === 'rev') {
+                                            $status = 'rev'; // di sini 'rev' tetap untuk label 'ditolak'
+                                        } else {
+                                            $accKpsKajur = $item->status_kps === 'acc' && $item->status_kajur === 'acc';
+                                            $accKjmDirektur =
+                                                $item->status_kjm === 'acc' && $item->status_direktur === 'acc';
+
+                                            if ($accKpsKajur && $accKjmDirektur) {
+                                                $status = 'acc';
+                                            } elseif (in_array('rev', [$item->status_kjm, $item->status_direktur])) {
+                                                $status = 'rev'; // jika rev dari kjm/direktur juga dianggap ditolak
+                                            } else {
+                                                $status = 'progress';
+                                            }
+                                        }
+                                    @endphp
+
+
+                                    @if ($status === 'acc')
                                         <span class="status-btn acc">Acc</span>
-                                    @elseif ($item->status_validator === 'rev')
+                                    @elseif ($status === 'rev')
                                         <span class="status-btn ditolak">Ditolak</span>
                                     @else
                                         <span class="status-btn on-progress">On Progress</span>
                                     @endif
                                 </td>
+
                                 <td class="action-icons">
                                     <a href="{{ url('/kriteria/admin/kriteria2/view/' . $item->id_detail_kriteria) }}">
                                         <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
                                     </a>
-                                    <a href="{{ url('/kriteria/admin/kriteria2/edit/' . $item->id_detail_kriteria) }}">
-                                        <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
-                                    </a>
-                                    <a href="{{ url('/kriteria/admin/kriteria2/print/' . $item->id_detail_kriteria) }}">
-                                        <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
-                                    </a>
+
+                                    @if ($status === 'progress' || $status === 'rev')
+                                        <a href="{{ url('/kriteria/admin/kriteria2/edit/' . $item->id_detail_kriteria) }}">
+                                            <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
+                                        </a>
+                                    @endif
+
+                                    @if ($status === 'acc')
+                                        <a href="{{ url('/kriteria/admin/kriteria2/print/' . $item->id_detail_kriteria) }}">
+                                            <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
+                                        </a>
+                                    @endif
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

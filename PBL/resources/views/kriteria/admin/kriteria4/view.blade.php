@@ -3,8 +3,8 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 3 </h3>
-        <h2>Kriteria 3</h2>
+        <h3>Home / Kriteria 4 </h3>
+        <h2>Kriteria 4</h2>
     </div>
 
     <!-- Spacer untuk Header Fixed -->
@@ -172,9 +172,9 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="comment">Direktur:</label>
+                <label for="komentar" class="form-label">{{ $kriteria->komentar->user->username ?? '-' }}:</label>
                 <div class="form-control" style="min-height: 100px; background-color: #f8f9fa; white-space: pre-wrap;">
-                    {!! $kriteria->comment ?? 'Tidak ada komentar' !!}
+                    {!! $kriteria->komentar->komentar ?? 'Tidak ada komentar' !!}
                 </div>
             </div>
         </div>

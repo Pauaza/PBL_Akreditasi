@@ -62,14 +62,30 @@
 
     <div class="meta">
         <strong>Nama Kriteria:</strong> {{ $item->kriteria->nama_kriteria ?? '-' }}<br>
-        <strong>Status Validasi:</strong>
-        @if ($item->status_validator === 'acc')
-            ACC
-        @elseif ($item->status_validator === 'rev')
-            Ditolak
-        @else
-            On Progress
-        @endif
+         <strong>Status Validasi:</strong>
+            @php
+                // Tampilkan status validasi terakhir yang aktif berdasarkan hierarki direktur > kjm > kajur > kps
+                if ($item->status_direktur === 'acc') {
+                    $statusValidasi = 'Direktur: ACC';
+                } elseif ($item->status_direktur === 'rev') {
+                    $statusValidasi = 'Direktur: Ditolak';
+                } elseif ($item->status_kjm === 'acc') {
+                    $statusValidasi = 'KJM: ACC';
+                } elseif ($item->status_kjm === 'rev') {
+                    $statusValidasi = 'KJM: Ditolak';
+                } elseif ($item->status_kajur === 'acc') {
+                    $statusValidasi = 'Kajur: ACC';
+                } elseif ($item->status_kajur === 'rev') {
+                    $statusValidasi = 'Kajur: Ditolak';
+                } elseif ($item->status_kps === 'acc') {
+                    $statusValidasi = 'KPS: ACC';
+                } elseif ($item->status_kps === 'rev') {
+                    $statusValidasi = 'KPS: Ditolak';
+                } else {
+                    $statusValidasi = 'On Progress';
+                }
+            @endphp
+            {{ $statusValidasi }}
         <br>
         <strong>Status Selesai:</strong> {{ ucfirst($item->status_selesai) }}<br>
         <strong>Pengisi:</strong> {{ $item->user->name ?? '-' }}<br>

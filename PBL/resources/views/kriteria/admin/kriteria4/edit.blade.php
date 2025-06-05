@@ -10,7 +10,7 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <form method="POST" action="{{ route('kriteria4.update', $kriteria->id_detail_kriteria) }}"
+    <form method="POST" action="{{ route('kriteria.update', $kriteria->id_detail_kriteria) }}"
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
