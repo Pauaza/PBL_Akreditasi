@@ -10,12 +10,12 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <form method="POST" action="{{ route('kriteria2.update', $kriteria->id_detail_kriteria) }}"
+    <form method="POST" action="{{ route('kriteria.update', $kriteria->id_detail_kriteria) }}"
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        <input type="hidden" name="id_kriteria" value="2">
+        <input type="hidden" name="id_kriteria" value="1">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">

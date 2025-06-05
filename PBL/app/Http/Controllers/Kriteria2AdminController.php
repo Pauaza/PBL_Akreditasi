@@ -11,14 +11,13 @@ use App\Models\PeningkatanModel;
 use App\Models\DetailKriteriaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class Kriteria2AdminController extends Controller
 {
     public function index()
     {
-        $data = DetailKriteriaModel::with('kriteria')
-            ->where('id_kriteria', 2)
-            ->get();
+        $data = DetailKriteriaModel::with('kriteria')->where('id_kriteria', 1)->get();
         return view('kriteria.admin.kriteria2.index', compact('data'));
     }
 
@@ -400,6 +399,7 @@ class Kriteria2AdminController extends Controller
     public function show($id)
     {
         $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
+
         return view('kriteria.admin.kriteria2.view', compact('kriteria'));
     }
 

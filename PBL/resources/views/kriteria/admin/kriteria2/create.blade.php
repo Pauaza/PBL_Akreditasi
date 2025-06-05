@@ -10,10 +10,10 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
     
-    <form id="kriteria2" method="POST" action="{{ route('kriteria2.submit') }}" enctype="multipart/form-data">
+    <form id="kriteria1" method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
         @csrf
 
-        <input type="hidden" name="id_kriteria" value="2">
+        <input type="hidden" name="id_kriteria" value="1">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">
@@ -262,7 +262,7 @@
             });
         });
 
-        document.querySelector('#kriteria2').addEventListener('submit', function(e) {
+        document.querySelector('#kriteria1').addEventListener('submit', function(e) {
             const penetapan    = document.getElementById('penetapan').value.trim();
             const pelaksanaan  = document.getElementById('pelaksanaan').value.trim();
             const evaluasi     = document.getElementById('evaluasi').value.trim();
