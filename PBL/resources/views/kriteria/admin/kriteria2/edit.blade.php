@@ -15,7 +15,7 @@
         @csrf
         @method('PUT')
 
-        <input type="hidden" name="id_kriteria" value="1">
+        <input type="hidden" name="id_kriteria" value="2">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">

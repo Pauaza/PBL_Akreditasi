@@ -11,15 +11,14 @@ use App\Models\PeningkatanModel;
 use App\Models\DetailKriteriaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class Kriteria3AdminController extends Controller
 {
     public function index()
     {
-        $data = DetailKriteriaModel::with('kriteria')
-            ->where('id_kriteria', 3)
-            ->get();
-        return view('kriteria.admin.kriteria3.index', compact('data'));
+        $data = DetailKriteriaModel::with('kriteria')->where('id_kriteria', 1)->get();
+        return view('kriteria.admin.kriteria3.index', data: compact('data'));
     }
 
     public function create()
@@ -286,7 +285,7 @@ class Kriteria3AdminController extends Controller
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
             $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('peningkatan_kriteria3', $fileName, 'public');
+            $filePath = $file->storeAs('peningkatan_kriteria1', $fileName, 'public');
         }
 
         PeningkatanModel::create([
@@ -400,6 +399,7 @@ class Kriteria3AdminController extends Controller
     public function show($id)
     {
         $kriteria = DetailKriteriaModel::with('penetapan', 'pelaksanaan', 'evaluasi', 'pengendalian', 'peningkatan', 'komentar')->find($id);
+
         return view('kriteria.admin.kriteria3.view', compact('kriteria'));
     }
 

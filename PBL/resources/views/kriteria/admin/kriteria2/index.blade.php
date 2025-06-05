@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-header">
             <h5>Status Validasi</h5>
-            <button class="add-button"><a href="/kriteria/admin/kriteria1/create">Tambah Data</a></button>
+            <button class="add-button"><a href="/kriteria/admin/kriteria2/create">Tambah Data</a></button>
         </div>
         <div class="card-body">
             <div class="form-container">

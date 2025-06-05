@@ -3,19 +3,19 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 3 / Edit</h3>
-        <h2>Edit Kriteria 3</h2>
+        <h3>Home / Kriteria 2 / Edit</h3>
+        <h2>Edit Kriteria 2</h2>
     </div>
 
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <form method="POST" action="{{ route('kriteria3.update', $kriteria->id_detail_kriteria) }}"
+    <form method="POST" action="{{ route('kriteria.update', $kriteria->id_detail_kriteria) }}"
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        <input type="hidden" name="id_kriteria" value="3">
+        <input type="hidden" name="id_kriteria" value="2">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">

@@ -10,10 +10,10 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
     
-    <form id="kriteria1" method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
+    <form id="kriteria2" method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
         @csrf
 
-        <input type="hidden" name="id_kriteria" value="1">
+        <input type="hidden" name="id_kriteria" value="2">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">
