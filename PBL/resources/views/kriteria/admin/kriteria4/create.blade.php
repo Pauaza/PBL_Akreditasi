@@ -262,7 +262,7 @@
             });
         });
 
-        document.querySelector('#kriteria1').addEventListener('submit', function(e) {
+        document.querySelector('#kriteria4').addEventListener('submit', function(e) {
             const penetapan    = document.getElementById('penetapan').value.trim();
             const pelaksanaan  = document.getElementById('pelaksanaan').value.trim();
             const evaluasi     = document.getElementById('evaluasi').value.trim();
