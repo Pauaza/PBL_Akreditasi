@@ -31,7 +31,7 @@
         }
 
         .header {
-            background-color: #004085;
+            background-color: #315287;
             color: white;
             padding: 40px 0px 15px 20px;
             position: fixed;
