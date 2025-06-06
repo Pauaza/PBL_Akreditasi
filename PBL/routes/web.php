@@ -22,6 +22,10 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FinalisasiDocumentController;
+use App\Http\Controllers\KriteriaConfigController;
+use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\userConfigController;
 use App\Http\Controllers\ValidatorDashboardController;
 
 /*
@@ -46,6 +50,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 // Group route yang hanya bisa diakses setelah login
 Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::get('/dashboard_admin', [AdminDashboardController::class, 'index'])->name('dashboard_admin');
+
+    // Finalisasi Dokumen untuk semua admin
+    Route::get('/finalisasi/stream', [FinalisasiDocumentController::class, 'streamAllKriteria'])->name('finalisasi.stream');
+    Route::get('/finalisasi/download', [FinalisasiDocumentController::class, 'downloadAllKriteria'])->name('finalisasi.download');
+
     // Kriteria 1
     Route::get('/kriteria/admin/kriteria1/create', [KriteriaAdminController::class, 'create'])->name('kriteria.admin.kriteria1');
     Route::get('/kriteria/admin/kriteria1/', [KriteriaAdminController::class, 'index'])->name('index.admin.kriteria1');
@@ -210,4 +219,14 @@ Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
     Route::post('/validator/kriteria', [KriteriaValidatorController::class, 'validation'])->name('validator.kriteria');
 });
 
+//tes page superAdmin
+Route::get('/superAdmin', [SuperAdminController::class, 'index']) ->name('superAdmin.dashboard');
+
+Route::get('/superAdmin/user', [userConfigController::class, 'index']) ->name('superAdmin.user.index');
+Route::get('/superAdmin/view_user', [userConfigController::class, 'view']) ->name('superAdmin.user.view');
+Route::get('/superAdmin/edit_user', [userConfigController::class, 'edit']) ->name('superAdmin.user.edit');
+
+Route::get('/superAdmin/kriteria', [KriteriaConfigController::class, 'index']) ->name('superAdmin.kriteria.index');
+Route::get('/superAdmin/view_kriteria', [KriteriaConfigController::class, 'view']) ->name('superAdmin.kriteria.view');
+Route::get('/superAdmin/edit_kriteria', [KriteriaConfigController::class, 'edit']) ->name('superAdmin.kriteria.edit');
 
