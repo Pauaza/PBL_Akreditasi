@@ -31,7 +31,9 @@ class KriteriaValidatorController extends Controller
             // KPS atau Kajur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
             $query->where(function ($q) {
                 $q->whereNull('status_kps')
-                    ->orWhereNull('status_kajur');
+                    ->orWhereNull('status_kajur')
+                    ->orWhere('status_kps', 'rev')
+                    ->orWhere('status_kajur', 'rev');
             });
         } elseif ($level == 4 || $level == 5) {
             // KJM atau Direktur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
@@ -105,10 +107,12 @@ class KriteriaValidatorController extends Controller
 
         // Jika user adalah KJM (4) atau Direktur (5) → level 2
         if (in_array($level, [4, 5])) {
+           
             // Pastikan KPS & Kajur sudah acc dulu
             $alreadyAccLevel1 = $details->every(function ($d) {
                 return $d->status_kps === 'acc' && $d->status_kajur === 'acc';
             });
+             
             if (!$alreadyAccLevel1) {
                 return redirect()->back()->with('error', 'Proses level 1 (KPS/Kajur) harus selesai terlebih dahulu.');
             }

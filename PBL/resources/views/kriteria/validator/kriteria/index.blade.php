@@ -2,32 +2,32 @@
 
 @section('content')
     @php
-        use Illuminate\Support\Arr;
-
         $user = Auth::user();
-        $level = $user->id_level; // 2=KPS, 3=Kajur, 4=KJM, 5=Direktur
+        $level = $user->id_level;
 
-        // Cek status masing-masing validator
-        $adaRevKps = $details->contains(fn($item) => $item->status_kps === 'rev');
-        $adaRevKajur = $details->contains(fn($item) => $item->status_kajur === 'rev');
-        $semuaAccKps = $details->every(fn($item) => $item->status_kps === 'acc');
-        $semuaAccKajur = $details->every(fn($item) => $item->status_kajur === 'acc');
+        $adaRevKps = $details->contains(fn($item) => strtolower($item->status_kps ?? '') === 'rev');
+        $adaRevKajur = $details->contains(fn($item) => strtolower($item->status_kajur ?? '') === 'rev');
 
-        $adaAccKps = $details->contains(fn($item) => $item->status_kps === 'acc');
-        $adaAccKajur = $details->contains(fn($item) => $item->status_kajur === 'acc');
+        $semuaAccKps = $details->every(fn($item) => strtolower($item->status_kps ?? '') === 'acc');
+        $semuaAccKajur = $details->every(fn($item) => strtolower($item->status_kajur ?? '') === 'acc');
 
-        // True jika tidak ada satupun acc (semua kosong atau rev)
+        $adaAccKps = $details->contains(fn($item) => strtolower($item->status_kps ?? '') === 'acc');
+        $adaAccKajur = $details->contains(fn($item) => strtolower($item->status_kajur ?? '') === 'acc');
+
         $semuaKosongAtauRev = !$adaAccKps && !$adaAccKajur;
 
-        // Logika tampilkan form
+        $bolehTampilForm = false;
+
         if ($level === 2) {
-            $bolehTampilForm = !$semuaAccKps;
+            $bolehTampilForm = $details->contains(
+                fn($item) => in_array(strtolower($item->status_kps ?? ''), ['', 'rev']),
+            );
         } elseif ($level === 3) {
-            $bolehTampilForm = !$semuaAccKajur;
+            $bolehTampilForm = $details->contains(
+                fn($item) => in_array(strtolower($item->status_kajur ?? ''), ['', 'rev']),
+            );
         } elseif (in_array($level, [4, 5])) {
-            $bolehTampilForm = !$adaRevKps && !$adaRevKajur && $semuaAccKps && $semuaAccKajur;
-        } else {
-            $bolehTampilForm = true;
+            $bolehTampilForm = $semuaAccKps && $semuaAccKajur && !$adaRevKps && !$adaRevKajur;
         }
     @endphp
 
