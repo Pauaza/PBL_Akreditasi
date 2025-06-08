@@ -138,35 +138,20 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
-    Route::get('/dashboard_validator', [ValidatorDashboardController::class, 'index'])->name('dashboard_validator');
+Route::middleware('auth', 'authorize:SP')->group(function () {
+    //Tampilan
+    Route::get('/superAdmin', [SuperAdminController::class, 'index'])->name('superAdmin.dashboard');
+    Route::get('/superAdmin/user', [userConfigController::class, 'index'])->name('superAdmin.user.index');
+    Route::get('/superAdmin/view_user', [userConfigController::class, 'view'])->name('superAdmin.user.view');
+    Route::get('/superAdmin/edit_user', [userConfigController::class, 'edit'])->name('superAdmin.user.edit');
 
-    Route::get('/kriteria/validator/kriteria{id_kriteria}', [KriteriaValidatorController::class, 'index'])
-        ->where('id_kriteria', '[1-9]')
-        ->name('kriteria.index');
+    //proses
+    Route::delete('/superAdmin/delete_user', [userConfigController::class, 'delete'])->name('superAdmin.user.delete');
 
-    Route::get('/kriteria/validator/kriteria{id_kriteria}/overview', [KriteriaValidatorController::class, 'generateOverview'])
-        ->where('id_kriteria', '[1-9]')
-        ->name('kriteria.overview');
+    Route::get('/superAdmin/kriteria', [KriteriaConfigController::class, 'index'])->name('superAdmin.kriteria.index');
+    Route::get('/superAdmin/view_kriteria/{id}', [KriteriaConfigController::class, 'view'])->name('superAdmin.kriteria.view');
+    Route::get('/superAdmin/edit_kriteria/{id}', [KriteriaConfigController::class, 'edit'])->name('superAdmin.kriteria.edit');
 
-    Route::get('/kriteria/validator/kriteria{id_kriteria}/stream', [KriteriaValidatorController::class, 'streamOverview'])
-        ->where('id_kriteria', '[1-9]')
-        ->name('kriteria.stream');
-
-    Route::post('/validator/kriteria', [KriteriaValidatorController::class, 'validation'])->name('validator.kriteria');
+    Route::put('/superAdmin/update_kriteria/{id}', [KriteriaConfigController::class, 'update'])->name('superAdmin.kriteria.update');
+    Route::delete('/superAdmin/delete_kriteria/{id}', [KriteriaConfigController::class, 'destroy'])->name('superAdmin.kriteria.delete');
 });
-
-//tes page superAdmin
-Route::get('/superAdmin', [SuperAdminController::class, 'index'])->name('superAdmin.dashboard');
-
-Route::get('/superAdmin/user', [userConfigController::class, 'index'])->name('superAdmin.user.index');
-Route::get('/superAdmin/view_user', [userConfigController::class, 'view'])->name('superAdmin.user.view');
-Route::get('/superAdmin/edit_user', [userConfigController::class, 'edit'])->name('superAdmin.user.edit');
-
-//proses
-Route::delete('/superAdmin/delete_user', [userConfigController::class, 'delete'])->name('superAdmin.user.delete');
-
-Route::get('/superAdmin/kriteria', [KriteriaConfigController::class, 'index'])->name('superAdmin.kriteria.index');
-Route::get('/superAdmin/view_kriteria', [KriteriaConfigController::class, 'view'])->name('superAdmin.kriteria.view');
-Route::get('/superAdmin/edit_kriteria', [KriteriaConfigController::class, 'edit'])->name('superAdmin.kriteria.edit');
-

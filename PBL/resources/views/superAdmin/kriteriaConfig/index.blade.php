@@ -9,6 +9,7 @@
         </div>
     </div>
 
+
     <!-- Dashboard Container -->
     <div class="dashboard-container">
         <div class="card">
@@ -22,6 +23,18 @@
                     </div>
                 </div>
             </div>
+            @if (session('success'))
+                <script>
+                    alert("{{ session('success') }}");
+                </script>
+            @endif
+
+            @if (session('error'))
+                <script>
+                    alert("{{ session('error') }}");
+                </script>
+            @endif
+
             <div class="card-content">
                 <div class="card-body">
                     <table class="dashboard-table">
@@ -44,18 +57,26 @@
                                     <td>
                                         <div class="action-buttons">
                                             <button class="action-button"
-                                                onclick="window.location.href='{{ route('superAdmin.kriteria.view') }}'"
+                                                onclick="window.location.href='{{ route('superAdmin.kriteria.view', $kriteria->id_kriteria) }}'"
                                                 title="View">
                                                 <img src="{{ url('assets/icon/view.png') }}" alt="View Icon">
                                             </button>
                                             <button class="action-button"
-                                                onclick="window.location.href='{{ route('superAdmin.kriteria.edit') }}'"
+                                                onclick="window.location.href='{{ route('superAdmin.kriteria.edit', $kriteria->id_kriteria) }}'"
                                                 title="Edit">
                                                 <img src="{{ url('assets/icon/edit.png') }}" alt="Edit Icon">
                                             </button>
-                                            <button class="action-button" onclick="confirmDelete()" title="Delete">
-                                                <img src="{{ url('assets/icon/delete.png') }}" alt="Delete Icon">
-                                            </button>
+                                            <form id="deleteForm{{ $kriteria->id_kriteria }}"
+                                                action="{{ route('superAdmin.kriteria.delete', $kriteria->id_kriteria) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="action-button" title="Delete"
+                                                    onclick="confirmDelete('{{ $kriteria->id_kriteria }}')">
+                                                    <img src="{{ url('assets/icon/delete.png') }}" alt="Delete Icon">
+                                                </button>
+                                            </form>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -68,3 +89,10 @@
         </div>
     </div>
 @endsection
+<script>
+    function confirmDelete(id) {
+        if (confirm('Yakin ingin menghapus data kriteria ini?')) {
+            document.getElementById('deleteForm' + id).submit();
+        }
+    }
+</script>

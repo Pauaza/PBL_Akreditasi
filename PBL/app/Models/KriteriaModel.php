@@ -18,6 +18,8 @@ class KriteriaModel extends Model
     // Menentukan bahwa primary key adalah auto-incrementing
     public $incrementing = true;
 
+    public $timestamps = false;
+
     // Kolom yang dapat diisi melalui mass assignment
     protected $fillable = [
         'nama_kriteria',
