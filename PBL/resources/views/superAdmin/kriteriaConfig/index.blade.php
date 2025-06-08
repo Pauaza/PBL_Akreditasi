@@ -17,7 +17,8 @@
                 <div class="search-container">
                     <div class="search-bar">
                         <input type="text" placeholder="Search...">
-                        <img src="https://img.icons8.com/ios-filled/50/315287/search--v1.png" alt="Search Icon" class="search-icon">
+                        <img src="https://img.icons8.com/ios-filled/50/315287/search--v1.png" alt="Search Icon"
+                            class="search-icon">
                     </div>
                 </div>
             </div>
@@ -33,24 +34,32 @@
                         </thead>
                         <tbody>
                             <!-- Sample Data (Replace with dynamic data as needed) -->
-                            <tr>
-                                <td>1</td>
-                                <td>Kriteria 1</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="action-button" onclick="window.location.href='{{ route('superAdmin.kriteria.view') }}'" title="View">
-                                            <img src="{{ url('assets/icon/view.png') }}" alt="View Icon">
-                                        </button>
-                                        <button class="action-button" onclick="window.location.href='{{ route('superAdmin.kriteria.edit') }}'" title="Edit">
-                                            <img src="{{ url('assets/icon/edit.png') }}" alt="Edit Icon">
-                                        </button>
-                                        <button class="action-button" onclick="confirmDelete()" title="Delete">
-                                            <img src="{{ url('assets/icon/delete.png') }}" alt="Delete Icon">
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            
+                            @php
+                                $index = 1;
+                            @endphp
+                            @foreach ($kriterias as $kriteria)
+                                <tr>
+                                    <td>{{ $index++ }}</td>
+                                    <td>{{ $kriteria->nama_kriteria }}</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-button"
+                                                onclick="window.location.href='{{ route('superAdmin.kriteria.view') }}'"
+                                                title="View">
+                                                <img src="{{ url('assets/icon/view.png') }}" alt="View Icon">
+                                            </button>
+                                            <button class="action-button"
+                                                onclick="window.location.href='{{ route('superAdmin.kriteria.edit') }}'"
+                                                title="Edit">
+                                                <img src="{{ url('assets/icon/edit.png') }}" alt="Edit Icon">
+                                            </button>
+                                            <button class="action-button" onclick="confirmDelete()" title="Delete">
+                                                <img src="{{ url('assets/icon/delete.png') }}" alt="Delete Icon">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>
