@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\UserModel;
 
 class userConfigController extends Controller{
     public function index()
     {
-        return view('superAdmin.userConfig.index');
+        $users = UserModel::with('level')->get();
+        return view('superAdmin.userConfig.index', compact('users'));
     }
 
     public function view()
