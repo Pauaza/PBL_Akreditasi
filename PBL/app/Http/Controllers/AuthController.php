@@ -16,6 +16,10 @@ public function login()
             return redirect('/dashboard_admin');
         }
 
+        if($username === 'superadmin'){
+            return redirect()->route('superAdmin.dashboard');
+        }
+
         // Jika username adalah salah satu validator
         if (in_array($username, ['kps', 'kajur', 'direktur', 'kjm'])) {
             return redirect('/dashboard_validator');
@@ -68,6 +72,10 @@ public function login()
         // Check if the username is in the admin list
         if (in_array($username, $adminUsernames)) {
             return '/dashboard_admin';
+        }
+
+        if($username === 'superadmin'){
+            return '/superAdmin';
         }
 
         // Default redirect for other users (kps, kajur, direktur, kjm)

@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
             ['id_level' => 3, 'username' => 'kajur', 'name' => 'Gegas', 'password' => Hash::make('12345')],
             ['id_level' => 4, 'username' => 'kjm', 'name' => 'Bayu', 'password' => Hash::make('12345')],
             ['id_level' => 5, 'username' => 'direktur', 'name' => 'Ircham', 'password' => Hash::make('12345')],
+            ['id_level' => 6, 'username' => 'superadmin', 'name' => 'Super Admin', 'password' => Hash::make('superadmin')],
         ];
 
         DB::table('m_user')->insert($users);
