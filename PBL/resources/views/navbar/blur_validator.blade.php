@@ -146,6 +146,16 @@
 
 
                 <!-- Kriteria Dropdown -->
+                @php
+                    $username = Auth::user()->username;
+                    $name = Auth::user()->name;
+                    $akses = [
+                        'kps' => 10,
+                        'kajur' => 11,
+                        'kjm' => 12,
+                        'direktur' => 13,
+                    ];
+                @endphp
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria
                         ▾</a>
@@ -192,7 +202,7 @@
                     <form action="{{ route('logout') }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
                         @csrf
-                        <button type="submit" class="button-logout">
+                        <button type="submit" class="button-logout" title="Logout sebagai {{ $username }}, {{ $name }}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
