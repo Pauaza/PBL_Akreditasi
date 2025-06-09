@@ -13,7 +13,7 @@
     @component('layouts.temp_modal', [
         'modalId' => 'detailKriteriaModal',
         'modalTitle' => 'Detail Data Kriteria',
-        'cancelButton' => ['text' => 'Kembali', 'class' => 'btn-primary'],
+        'cancelButtons' => [['text' => 'Kembali ke Daftar Kriteria', 'class' => 'btn-primary', 'route' => route('superAdmin.kriteria.index')]],
     ])
     <div class="mb-3">
         <label class="form-label">Nama Kriteria</label>

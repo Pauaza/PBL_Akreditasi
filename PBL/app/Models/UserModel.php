@@ -19,6 +19,8 @@ class UserModel extends Authenticatable
 
     protected $casts = ['password' => 'hashed']; // casting password agar otomatis di hash
 
+    public $timestamps = false;
+
     /**
      * Relasi ke tabel level
      */

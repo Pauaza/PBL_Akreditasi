@@ -13,7 +13,7 @@
     @component('layouts.temp_modal', [
         'modalId' => 'editKriteriaModal',
         'modalTitle' => 'Edit Data Kriteria',
-        'cancelButton' => ['text' => 'Kembali', 'class' => 'btn-danger'],
+        'cancelButtons' => [['text' => 'Kembali ke Daftar Kriteria', 'class' => 'btn-primary', 'route' => route('superAdmin.kriteria.index')]],
         'actionButton' => ['text' => 'Simpan', 'class' => 'btn-primary', 'id' => 'saveEditKriteria'],
     ])
     <form id="editKriteriaForm" action="{{ route('superAdmin.kriteria.update', $kriteria->id_kriteria) }}"
