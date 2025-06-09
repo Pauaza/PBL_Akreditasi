@@ -217,17 +217,6 @@
                     <tr>
                         <td>
                             {!! $detail->peningkatan->penetapan ?? 'Tidak ada data' !!}
-                            @if (!empty($detail->peningkatan->pendukung))
-                                @php
-                                    $extension = pathinfo($detail->peningkatan->pendukung, PATHINFO_EXTENSION);
-                                    $isImage = in_array(strtolower($extension), ['jpg', 'jpeg', 'png']);
-                                @endphp
-                                @if ($isImage)
-                                    <div>
-                                        <img src="{{ public_path($detail->peningkatan->pendukung) }}" alt="Dokumen Peningkatan" class="preview-image">
-                                    </div>
-                                @endif
-                            @endif
                         </td>
                         <td>
                             @if (!empty($detail->peningkatan->link))
