@@ -10,7 +10,7 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
     
-    <form id="kriteria3" method="POST" action="{{ route('kriteria.submit') }}" enctype="multipart/form-data">
+    <form id="kriteria3" method="POST" action="{{ route('kriteria3.submit') }}" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name="id_kriteria" value="3">

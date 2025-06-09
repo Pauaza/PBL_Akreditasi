@@ -138,6 +138,24 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
 
 });
 
+Route::middleware(['auth', 'authorize:KPS,KJR,KJM,DIR'])->group(function () {
+    Route::get('/dashboard_validator', [ValidatorDashboardController::class, 'index'])->name('dashboard_validator');
+
+    Route::get('/kriteria/validator/kriteria{id_kriteria}', [KriteriaValidatorController::class, 'index'])
+        ->where('id_kriteria', '[1-9]')
+        ->name('kriteria.index');
+
+    Route::get('/kriteria/validator/kriteria{id_kriteria}/overview', [KriteriaValidatorController::class, 'generateOverview'])
+        ->where('id_kriteria', '[1-9]')
+        ->name('kriteria.overview');
+
+    Route::get('/kriteria/validator/kriteria{id_kriteria}/stream', [KriteriaValidatorController::class, 'streamOverview'])
+        ->where('id_kriteria', '[1-9]')
+        ->name('kriteria.stream');
+
+    Route::post('/validator/kriteria', [KriteriaValidatorController::class, 'validation'])->name('validator.kriteria');
+});
+
 Route::middleware('auth', 'authorize:SP')->group(function () {
     //Tampilan
     Route::get('/superAdmin', [SuperAdminController::class, 'index'])->name('superAdmin.dashboard');
