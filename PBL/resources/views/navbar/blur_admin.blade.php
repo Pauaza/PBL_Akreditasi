@@ -145,6 +145,7 @@
                 <!-- Kriteria Dropdown -->
                 @php
                     $username = Auth::user()->username;
+                    $name = Auth::user()->name;
                     $akses = [
                         'admin1' => 1,
                         'admin2' => 2,
@@ -155,6 +156,11 @@
                         'admin7' => 7,
                         'admin8' => 8,
                         'admin9' => 9,
+                        'kps' => 10,
+                        'kajur' => 11,
+                        'kjm' => 12,
+                        'direktur' => 13,
+                        'superadmin' => 14,
                     ];
                     $kriteriaId = $akses[$username] ?? null;
                 @endphp
@@ -202,7 +208,7 @@
                     <form action="{{ route('logout') }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
                         @csrf
-                        <button type="submit" class="button-logout" title="Logout sebagai {{ $username }}">
+                        <button type="submit" class="button-logout" title="Logout sebagai {{ $username }}, {{ $name }}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
