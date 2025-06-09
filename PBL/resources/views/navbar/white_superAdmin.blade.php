@@ -135,12 +135,19 @@
                 <img src="{{ asset('assets/img/logo-polinema.png') }}" alt="Logo">
                 <span>Akreditasi D4 Sistem Informasi Bisnis</span>
             </a>
+            @php
+                    $username = Auth::user()->username;
+                    $name = Auth::user()->name;
+                    $akses = [
+                        'superadmin' => 14,
+                    ];
+                @endphp
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST"
                         onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
                         @csrf
-                        <button type="submit" class="button-logout">
-                            <i></i> Logout
+                        <button type="submit" class="button-logout" title="Logout sebagai {{ $username }}, {{ $name }}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
                 </li>
