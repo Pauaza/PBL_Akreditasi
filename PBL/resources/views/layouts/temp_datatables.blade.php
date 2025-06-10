@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +26,8 @@
     .content {
         flex: 1;
         padding: 20px;
-        position: fixed center;
         margin-top: 110px;
+        margin-left: -150px;
     }
 
     .header {
@@ -56,34 +57,42 @@
     /* Card */
     .card {
         background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        margin-bottom: 20px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
     }
 
-    .card-header {
+    .card-title {
         background-color: #fff;
-        padding: 10px 20px;
-        display: flex; /* Menggunakan flexbox */
-        justify-content: space-between; /* Memisahkan Status Validasi dan tombol ke kanan */
-        margin-top: 30px;
-        margin-bottom: -10px;
+        padding: 8px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 50px;
     }
 
-    .card-header h5 {
-        margin-top: 30px;
-        margin-left: -20px;
-        display: inline-block;
-        font-size: 18px;
+    .card-title h5 {
+        margin: 0;
+        font-size: 24px;
         font-weight: 600;
         color: #315287;
-        border: none;
-        border-radius: 50px;
-        padding: 10px 20px;
+        background: none;
+    }
+
+    .card-content {
+        background-color: #fff;
+        border-radius: 0 0 10px 10px;
+        flex: 1;
+        overflow-y: auto;
     }
 
     .card-body {
-        padding: 0px 20px 20px 20px;
+        padding: 15px;
+
     }
 
     .add-button {
@@ -96,17 +105,17 @@
         font-size: 14px;
         height: 40px;
         box-sizing: border-box;
-        margin-top: 25px;
     }
+
     .add-button a {
-        color: white; /* warna font */
+        color: white;
         text-decoration: none;
     }
 
     /* Form Elements */
     .form-container {
         width: 100%;
-        box-sizing: border-box; /* Ensure padding/borders are included in width */
+        box-sizing: border-box;
     }
 
     .form-group {
@@ -136,7 +145,7 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    /* buttons */
+    /* Buttons */
     .button-group {
         display: flex;
         gap: 10px;
@@ -177,67 +186,107 @@
         color: white;
         font-weight: 500;
         text-align: center;
-        min-width: 120px; /* Ensures consistent width */
+        min-width: 120px;
         box-sizing: border-box;
     }
 
     .acc {
-        background-color: #28A745; /* Green for Acc */
+        background-color: #28A745;
     }
 
     .on-progress {
-        background-color: #FFC107; /* Yellow for On Progress */
+        background-color: #FFC107;
     }
 
     .selesai {
-        background-color: #007BFF; /* Blue for Selesai */
+        background-color: #007BFF;
     }
 
     .ditolak {
-        background-color: #DC3545; /* Red for Ditolak */
+        background-color: #DC3545;
     }
 
-    /* Table Styling */
-    table {
+    /* Dashboard Tables */
+    .dashboard-table {
         width: 100%;
         border-collapse: collapse;
-        table-layout: auto; /* Allow table to adjust column widths based on content */
-        position: fixed center;
-
     }
 
-    table th {
-        background-color: #315287;
-        color: white;
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #dee2e6;
-        font-weight: 500;
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: 6px 8px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        color: #315287;
     }
 
-    table td {
-        padding: 10px;
-        border: 1px solid #dee2e6;
-        text-align: center;
-        align-content: center;
+    .dashboard-table th {
+        border-bottom: 1px solid #dee2e6;
+        font-weight: 400;
     }
 
+    .dashboard-table tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .dashboard-table tbody tr:nth-child(even) {
+        background-color: #fff;
+    }
+
+    /* Search Bar */
+    .search-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ced4da;
+        border-radius: 20px;
+        padding: 5px 10px;
+        width: 300px;
+        background-color: #fff;
+    }
+
+    .search-bar input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 13px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .search-bar .search-icon {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    /* Action Icons */
     .action-icons {
         display: flex;
-        gap: 5px;
-        justify-content: center; /* Memusatkan ikon secara horizontal */
-        align-items: center;
+        gap: 15px;
+        justify-content: left;
     }
 
-    .action-icons button {
+    .action-button {
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0px 30px;
+        padding: 5px;
+        transition: transform 0.2s;
     }
 
-    .action-icons img {
-        size: 100%;
+    .action-button:hover {
+        transform: scale(1.1);
+    }
+
+    .action-button img {
+        width: 24px;
+        height: 24px;
     }
     </style>
 </head>
@@ -251,3 +300,4 @@
     </div>
 </body>
 </html>
+```
