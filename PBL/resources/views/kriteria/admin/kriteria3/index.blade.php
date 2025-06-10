@@ -1,3 +1,4 @@
+```html
 @extends('layouts.temp_datatables')
 
 @section('content')
@@ -12,13 +13,14 @@
 
     <!-- Card Content -->
     <div class="card">
-        <div class="card-header">
+        <div class="card-title">
             <h5>Status Validasi</h5>
             <button class="add-button"><a href="/kriteria/admin/kriteria3/create">Tambah Data</a></button>
         </div>
+        <div class="card-content">
         <div class="card-body">
             <div class="form-container">
-                <table>
+                <table class="dashboard-table">
                     <thead>
                         <tr>
                             <th>Nama Kriteria</th>
@@ -50,7 +52,6 @@
                                         }
                                     @endphp
 
-
                                     @if ($status === 'acc')
                                         <span class="status-btn acc">Acc</span>
                                     @elseif ($status === 'rev')
@@ -62,27 +63,28 @@
 
                                 <td class="action-icons">
                                     <a href="{{ url('/kriteria/admin/kriteria3/view/' . $item->id_detail_kriteria) }}">
-                                        <button><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
+                                        <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
                                     </a>
 
                                     @if ($status === 'progress' || $status === 'rev')
                                         <a href="{{ url('/kriteria/admin/kriteria3/edit/' . $item->id_detail_kriteria) }}">
-                                            <button><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
+                                            <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
                                         </a>
                                     @endif
 
                                     @if ($status === 'acc')
                                         <a href="{{ url('/kriteria/admin/kriteria3/print/' . $item->id_detail_kriteria) }}">
-                                            <button><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
+                                            <button class="action-button"><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
                                         </a>
                                     @endif
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        </div>
     </div>
 @endsection
+```
