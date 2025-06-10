@@ -70,6 +70,13 @@
                                         <a href="{{ url('/kriteria/admin/kriteria3/edit/' . $item->id_detail_kriteria) }}">
                                             <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
                                         </a>
+                                        <form action="{{ url('/kriteria/admin/kriteria1/delete/' . $item->id_detail_kriteria) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="action-button">
+                                                <img src="{{ asset('assets/icon/delete.png') }}" alt="Delete Icon">
+                                            </button>
+                                        </form>
                                     @endif
 
                                     @if ($status === 'acc')
