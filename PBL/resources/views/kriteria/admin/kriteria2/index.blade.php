@@ -1,3 +1,4 @@
+```html
 @extends('layouts.temp_datatables')
 
 @section('content')
@@ -12,13 +13,14 @@
 
     <!-- Card Content -->
     <div class="card">
-        <div class="card-header">
+        <div class="card-title">
             <h5>Status Validasi</h5>
             <button class="add-button"><a href="/kriteria/admin/kriteria2/create">Tambah Data</a></button>
         </div>
+        <div class="card-content">
         <div class="card-body">
             <div class="form-container">
-                <table>
+                <table class="dashboard-table">
                     <thead>
                         <tr>
                             <th>Nama Kriteria</th>
@@ -84,5 +86,7 @@
                 </table>
             </div>
         </div>
+        </div>
     </div>
 @endsection
+```
