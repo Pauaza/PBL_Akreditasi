@@ -73,7 +73,7 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/kriteria2/submit', [Kriteria2AdminController::class, 'submitKriteria'])->name('kriteria2.submit');
     Route::get('/kriteria/admin/kriteria2/view/{id}', [Kriteria2AdminController::class, 'show'])->name('kriteria2.show');
     Route::get('/kriteria/admin/kriteria2/print/{id}', [Kriteria2AdminController::class, 'print']);
-    Route::delete('/kriteria/admin/kriteria2/delete/{id}', [KriteriaAdminController::class, 'destroy'])->name('kriteria2.delete');
+    Route::delete('/kriteria/admin/kriteria2/delete/{id}', [Kriteria2AdminController::class, 'destroy'])->name('kriteria2.delete');
 
     // Kriteria 3
     Route::get('/kriteria/admin/kriteria3/create', [Kriteria3AdminController::class, 'create'])->name('kriteria.admin.kriteria3');
@@ -103,6 +103,7 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/kriteria5/submit', [Kriteria5AdminController::class, 'submitKriteria'])->name('kriteria5.submit');
     Route::get('/kriteria/admin/kriteria5/view/{id}', [Kriteria5AdminController::class, 'show'])->name('kriteria5.show');
     Route::get('/kriteria/admin/kriteria5/print/{id}', [Kriteria5AdminController::class, 'print']);
+    Route::delete('/kriteria/admin/kriteria5/delete/{id}', [Kriteria5AdminController::class, 'destroy'])->name('kriteria5.delete');
 
     // Kriteria 6
     Route::get('/kriteria/admin/kriteria6/create', [Kriteria6AdminController::class, 'create'])->name('kriteria.admin.kriteria6');
