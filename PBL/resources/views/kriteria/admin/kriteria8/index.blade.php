@@ -63,14 +63,19 @@
 
                                     <td class="action-icons">
                                         <a href="{{ url('/kriteria/admin/kriteria8/view/' . $item->id_detail_kriteria) }}">
-                                            <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}" alt="View Icon"></button>
+                                            <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}"
+                                                    alt="View Icon"></button>
                                         </a>
 
                                         @if ($status === 'progress' || $status === 'rev')
                                             <a href="{{ url('/kriteria/admin/kriteria8/edit/' . $item->id_detail_kriteria) }}">
-                                                <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}" alt="Edit Icon"></button>
+                                                <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}"
+                                                        alt="Edit Icon"></button>
                                             </a>
-                                            <form action="{{ url('/kriteria/admin/kriteria1/delete/' . $item->id_detail_kriteria) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display:inline;">
+                                            <form
+                                                action="{{ url('/kriteria/admin/kriteria8/delete/' . $item->id_detail_kriteria) }}"
+                                                method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="action-button">
@@ -81,7 +86,8 @@
 
                                         @if ($status === 'acc')
                                             <a href="{{ url('/kriteria/admin/kriteria8/print/' . $item->id_detail_kriteria) }}">
-                                                <button class="action-button"><img src="{{ asset('assets/icon/print.png') }}" alt="Print Icon"></button>
+                                                <button class="action-button"><img src="{{ asset('assets/icon/print.png') }}"
+                                                        alt="Print Icon"></button>
                                             </a>
                                         @endif
                                     </td>

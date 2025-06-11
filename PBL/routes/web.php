@@ -133,6 +133,7 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/kriteria8/submit', [Kriteria8AdminController::class, 'submitKriteria'])->name('kriteria8.submit');
     Route::get('/kriteria/admin/kriteria8/view/{id}', [Kriteria8AdminController::class, 'show'])->name('kriteria8.show');
     Route::get('/kriteria/admin/kriteria8/print/{id}', [Kriteria8AdminController::class, 'print']);
+    Route::delete('/kriteria/admin/kriteria8/delete/{id}', [Kriteria8AdminController::class, 'destroy'])->name('kriteria8.delete');
 
     // Kriteria 9
     Route::get('/kriteria/admin/kriteria9/create', [Kriteria9AdminController::class, 'create'])->name('kriteria.admin.kriteria9');
