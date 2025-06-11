@@ -73,6 +73,7 @@ Route::middleware(['auth', 'authorize:ADM'])->group(function () {
     Route::post('/kriteria2/submit', [Kriteria2AdminController::class, 'submitKriteria'])->name('kriteria2.submit');
     Route::get('/kriteria/admin/kriteria2/view/{id}', [Kriteria2AdminController::class, 'show'])->name('kriteria2.show');
     Route::get('/kriteria/admin/kriteria2/print/{id}', [Kriteria2AdminController::class, 'print']);
+    Route::delete('/kriteria/admin/kriteria2/delete/{id}', [KriteriaAdminController::class, 'destroy'])->name('kriteria2.delete');
 
     // Kriteria 3
     Route::get('/kriteria/admin/kriteria3/create', [Kriteria3AdminController::class, 'create'])->name('kriteria.admin.kriteria3');
