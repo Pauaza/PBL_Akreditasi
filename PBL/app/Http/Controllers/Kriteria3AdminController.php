@@ -410,4 +410,12 @@ class Kriteria3AdminController extends Controller
 
         return $pdf->download('Laporan_Kriteria3_' . $item->id_detail_kriteria . '.pdf');
     }
+
+    public function destroy($id)
+    {
+        $kriteria = DetailKriteriaModel::find($id);
+        $kriteria->delete();
+
+        return redirect()->route('index.admin.kriteria3')->with('success', 'Data berhasil dihapus.');
+    }
 }
