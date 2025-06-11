@@ -77,4 +77,30 @@ class userConfigController extends Controller
 
         return redirect()->route('superAdmin.user.index')->with('success', 'Data user berhasil dihapus.');
     }
+
+    public function create()
+    {
+        $levels = LevelModel::all();
+        return view('superAdmin.userConfig.create', compact('levels'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|unique:m_user,username|max:100',
+            'name' => 'required|string|max:100',
+            'id_level' => 'required|exists:m_level,id_level',
+            'password' => 'required|string|min:5',
+        ]);
+
+        UserModel::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'id_level' => $request->id_level,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('superAdmin.user.index')->with('success', 'User baru berhasil ditambahkan.');
+    }
+
 }

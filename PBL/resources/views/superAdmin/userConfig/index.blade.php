@@ -24,16 +24,23 @@
     <!-- Dashboard Container -->
     <div class="dashboard-container">
         <div class="card">
-            <div class="card-title">
+            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
                 <h5>Table User</h5>
-                <div class="search-container">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search...">
-                        <img src="https://img.icons8.com/ios-filled/50/315287/search--v1.png" alt="Search Icon"
-                            class="search-icon">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <a href="{{ route('superAdmin.user.create') }}" class="btn btn-primary"
+                        style="padding: 6px 12px; font-size: 14px; background-color: #315287; color: white; border-radius: 5px; text-decoration: none;">
+                        + Tambah User
+                    </a>
+                    <div class="search-container">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search..." style="height: 30px;">
+                            <img src="https://img.icons8.com/ios-filled/50/315287/search--v1.png" alt="Search Icon"
+                                class="search-icon">
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="card-content">
                 <div class="card-body">
                     <table class="dashboard-table">
@@ -83,7 +90,6 @@
                                 </tr>
                             @endforelse
                         </tbody>
-
                     </table>
                 </div>
             </div>
