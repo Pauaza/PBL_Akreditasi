@@ -69,6 +69,11 @@
 </head>
 
 <body>
+    @php
+        $user = Auth::user();
+        $level = $user->id_level;
+    @endphp
+
     <h1>LAPORAN DATA KRITERIA {{ $kriteria->id_kriteria }}</h1>
     <h2>Nama Kriteria: {{ $kriteria->nama_kriteria }}</h2>
 
@@ -76,7 +81,26 @@
         <strong>Tanggal Cetak:</strong> {{ \Carbon\Carbon::now()->format('d-m-Y') }}
     </div>
 
-    @foreach ($details as $detail)
+    @php
+        // Hitung jumlah detail yang akan ditampilkan
+        $detailsToShow = $details->filter(function ($detail) use ($level) {
+            if ($level === 2 && strtolower($detail->status_kps ?? '') === 'acc') {
+                return false;
+            }
+            if ($level === 3 && strtolower($detail->status_kajur ?? '') === 'acc') {
+                return false;
+            }
+            if ($level === 4 && strtolower($detail->status_kjm ?? '') === 'acc') {
+                return false;
+            }
+            if ($level === 5 && strtolower($detail->status_direktur ?? '') === 'acc') {
+                return false;
+            }
+            return true;
+        });
+    @endphp
+
+    @forelse ($detailsToShow as $detail)
         <h3>Detail Kriteria ID: {{ $detail->id_detail_kriteria }}</h3>
         <div class="meta">
             <strong>Status Validasi:</strong>
@@ -202,7 +226,11 @@
                 </tr>
             @endif
         </table>
-    @endforeach
+    @empty
+        <div style="margin: 50px 0; text-align:center;">
+            <strong>Tidak ada data yang perlu divalidasi. Semua detail sudah ACC oleh level Anda.</strong>
+        </div>
+    @endforelse
 
     <div class="footer">
         <p><em>Dokumen dicetak secara otomatis oleh sistem pada tanggal

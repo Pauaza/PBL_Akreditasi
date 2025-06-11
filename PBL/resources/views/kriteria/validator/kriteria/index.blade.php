@@ -5,19 +5,34 @@
         $user = Auth::user();
         $level = $user->id_level;
 
-        $adaRevKps = $details->contains(fn($item) => strtolower($item->status_kps ?? '') === 'rev');
-        $adaRevKajur = $details->contains(fn($item) => strtolower($item->status_kajur ?? '') === 'rev');
-
         $semuaAccKps = $details->every(fn($item) => strtolower($item->status_kps ?? '') === 'acc');
         $semuaAccKajur = $details->every(fn($item) => strtolower($item->status_kajur ?? '') === 'acc');
+        $semuaAccKjm = $details->every(fn($item) => strtolower($item->status_kjm ?? '') === 'acc');
+        $semuaAccDirektur = $details->every(fn($item) => strtolower($item->status_direktur ?? '') === 'acc');
+
+        $adaRevKps = $details->contains(fn($item) => strtolower($item->status_kps ?? '') === 'rev');
+        $adaRevKajur = $details->contains(fn($item) => strtolower($item->status_kajur ?? '') === 'rev');
 
         $adaAccKps = $details->contains(fn($item) => strtolower($item->status_kps ?? '') === 'acc');
         $adaAccKajur = $details->contains(fn($item) => strtolower($item->status_kajur ?? '') === 'acc');
 
         $semuaKosongAtauRev = !$adaAccKps && !$adaAccKajur;
 
-        $bolehTampilForm = false;
+        // Logika tampilkan PDF overview
+        $tampilPdf = false;
+        if ($level === 2) {
+            // KPS: PDF hilang jika semua status_kps sudah acc
+            $tampilPdf = !$semuaAccKps;
+        } elseif ($level === 3) {
+            // Kajur: PDF hilang jika semua status_kajur sudah acc
+            $tampilPdf = !$semuaAccKajur;
+        } elseif (in_array($level, [4, 5])) {
+            // KJM/Direktur: PDF muncul hanya jika semua KPS & Kajur acc, dan KJM & Direktur belum ada acc
+            $tampilPdf = $semuaAccKps && $semuaAccKajur && !$semuaAccKjm && !$semuaAccDirektur;
+        }
 
+        // Logika tampilkan form validasi
+        $bolehTampilForm = false;
         if ($level === 2) {
             $bolehTampilForm = $details->contains(
                 fn($item) => in_array(strtolower($item->status_kps ?? ''), ['', 'rev']),
@@ -46,19 +61,20 @@
 
     <div style="height: 50px;"></div>
 
-    {{-- PDF Preview selalu tampil --}}
     <div class="main-content">
-        <div class="pdf-preview-container">
-            <h3>Pratinjau Laporan Data Kriteria {{ $kriteria->id_kriteria }}</h3>
-            <embed src="{{ route('kriteria.stream', ['id_kriteria' => $kriteria->id_kriteria]) }}" type="application/pdf"
-                width="100%" height="500px">
-        </div>
+        {{-- PDF Preview hanya muncul sesuai logika --}}
+        @if ($tampilPdf)
+            <div class="pdf-preview-container">
+                <h3>Pratinjau Laporan Data Kriteria {{ $kriteria->id_kriteria }}</h3>
+                <embed src="{{ route('kriteria.stream', ['id_kriteria' => $kriteria->id_kriteria]) }}" type="application/pdf"
+                    width="100%" height="500px">
+            </div>
+        @endif
 
         {{-- Form Validasi hanya untuk yang boleh --}}
         @if ($bolehTampilForm)
             <div class="comments-section">
                 <h3>Detail Revisi:</h3>
-
                 <form action="{{ route('validator.kriteria') }}" method="POST">
                     @csrf
 
@@ -104,7 +120,6 @@
                 komentar.value = '';
             }
         }
-
         accRadio?.addEventListener('change', toggleKomentar);
         revRadio?.addEventListener('change', toggleKomentar);
         toggleKomentar();
