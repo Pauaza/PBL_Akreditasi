@@ -9,7 +9,7 @@ class DetailKriteriaModel extends Model
 {
     protected $table = 'm_detail_kriteria';
     protected $primaryKey = 'id_detail_kriteria';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
         'id_user',
         'id_penetapan',
@@ -74,5 +74,15 @@ class DetailKriteriaModel extends Model
 
     public function komentar(){
         return $this->hasOne(KomentarModel::class, 'id_komentar', 'id_komentar');
+    }
+    
+    public function getCreatedAtAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('d-m-Y H:i') : '-';
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('d-m-Y H:i') : '-';
     }
 }

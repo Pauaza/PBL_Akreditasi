@@ -1,4 +1,3 @@
-```html
 @extends('layouts.temp_datatables')
 
 @section('content')
@@ -25,6 +24,7 @@
                             <tr>
                                 <th>Nama Kriteria</th>
                                 <th>Status</th>
+                                <th>Keterangan Krieria</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -60,7 +60,27 @@
                                             <span class="status-btn on-progress">On Progress</span>
                                         @endif
                                     </td>
-
+                                    <td>
+                                        @php
+                                            $createdAt = \Carbon\Carbon::parse($item->created_at)->setTimezone('Asia/Jakarta');
+                                            $updatedAt = $item->updated_at ? \Carbon\Carbon::parse($item->updated_at)->setTimezone('Asia/Jakarta') : null;
+                                            $isUpdated = $updatedAt && $updatedAt->greaterThan($createdAt);
+                                            // Debugging
+                                            \Log::info('Tanggal Akses Debug', [
+                                                'id_detail_kriteria' => $item->id_detail_kriteria,
+                                                'created_at' => $createdAt->toDateTimeString(),
+                                                'updated_at' => $updatedAt ? $updatedAt->toDateTimeString() : null,
+                                                'is_updated' => $isUpdated
+                                            ]);
+                                        @endphp
+                                        @if ($status === 'acc')
+                                            Data Telah Di Validasi
+                                        @elseif ($isUpdated)
+                                            Data Diubah Pada {{ $updatedAt->format('d-m-Y H:i') }} WIB
+                                        @else
+                                            Data Ditambahkan Pada {{ $createdAt->format('d-m-Y H:i') }} WIB
+                                        @endif
+                                    </td>
                                     <td class="action-icons">
                                         <a href="{{ url('/kriteria/admin/kriteria7/view/' . $item->id_detail_kriteria) }}">
                                             <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}"
