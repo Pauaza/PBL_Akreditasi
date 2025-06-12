@@ -12,6 +12,7 @@ use App\Models\DetailKriteriaModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Kriteria5AdminController extends Controller
 {
@@ -51,6 +52,7 @@ class Kriteria5AdminController extends Controller
 
         $kriteria = DetailKriteriaModel::findOrFail($id);
         $id_kriteria = (int) $request->input('id_kriteria');
+        $isUpdated = false;
 
         // Update Penetapan
         if ($request->penetapan || $request->hasFile('file_penetapan')) {
@@ -62,6 +64,7 @@ class Kriteria5AdminController extends Controller
                     $penetapan->pendukung = $path;
                 }
                 $penetapan->save();
+                $isUpdated = true;
             } else {
                 $path = $request->file('file_penetapan')?->store('pendukung/penetapan');
                 $penetapan = PenetapanModel::create([
@@ -70,6 +73,7 @@ class Kriteria5AdminController extends Controller
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_penetapan = $penetapan->id_penetapan;
+                $isUpdated = true;
             }
         }
 
@@ -83,6 +87,7 @@ class Kriteria5AdminController extends Controller
                     $pelaksanaan->pendukung = $path;
                 }
                 $pelaksanaan->save();
+                $isUpdated = true;
             } else {
                 $path = $request->file('file_pelaksanaan')?->store('pendukung/pelaksanaan');
                 $pelaksanaan = PelaksanaanModel::create([
@@ -91,6 +96,7 @@ class Kriteria5AdminController extends Controller
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_pelaksanaan = $pelaksanaan->id_pelaksanaan;
+                $isUpdated = true;
             }
         }
 
@@ -104,6 +110,7 @@ class Kriteria5AdminController extends Controller
                     $evaluasi->pendukung = $path;
                 }
                 $evaluasi->save();
+                $isUpdated = true;
             } else {
                 $path = $request->file('file_evaluasi')?->store('pendukung/evaluasi');
                 $evaluasi = EvaluasiModel::create([
@@ -112,6 +119,7 @@ class Kriteria5AdminController extends Controller
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_evaluasi = $evaluasi->id_evaluasi;
+                $isUpdated = true;
             }
         }
 
@@ -125,6 +133,7 @@ class Kriteria5AdminController extends Controller
                     $pengendalian->pendukung = $path;
                 }
                 $pengendalian->save();
+                $isUpdated = true;
             } else {
                 $path = $request->file('file_pengendalian')?->store('pendukung/pengendalian');
                 $pengendalian = PengendalianModel::create([
@@ -133,6 +142,7 @@ class Kriteria5AdminController extends Controller
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_pengendalian = $pengendalian->id_pengendalian;
+                $isUpdated = true;
             }
         }
 
@@ -146,6 +156,7 @@ class Kriteria5AdminController extends Controller
                     $peningkatan->pendukung = $path;
                 }
                 $peningkatan->save();
+                $isUpdated = true;
             } else {
                 $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan');
                 $peningkatan = PeningkatanModel::create([
@@ -154,10 +165,20 @@ class Kriteria5AdminController extends Controller
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_peningkatan = $peningkatan->id_peningkatan;
+                $isUpdated = true;
             }
         }
 
-        $kriteria->save();
+       if ($isUpdated) {
+            $kriteria->updated_at = now();
+            $kriteria->save();
+            Log::info('Updated DetailKriteria', [
+                'id_detail_kriteria' => $kriteria->id_detail_kriteria,
+                'created_at' => $kriteria->created_at,
+                'updated_at' => $kriteria->updated_at,
+                'is_updated' => $isUpdated
+            ]);
+        }
 
         return redirect()->route('index.admin.kriteria5')->with('success', 'Data berhasil diperbarui.');
     }

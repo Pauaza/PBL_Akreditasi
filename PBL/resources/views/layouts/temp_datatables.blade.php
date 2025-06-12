@@ -27,7 +27,7 @@
         flex: 1;
         padding: 20px;
         margin-top: 110px;
-        margin-left: -150px;
+        margin-left: -40px;
     }
 
     .header {
@@ -288,6 +288,10 @@
         width: 24px;
         height: 24px;
     }
+
+    .text-updated { color: #e67e22; }
+    .text-created { color: #27ae60; }
+    
     </style>
 </head>
 <body>
