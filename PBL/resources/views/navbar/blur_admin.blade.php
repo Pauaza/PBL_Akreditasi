@@ -205,17 +205,20 @@
                 <li class="nav-item"><a href="#contact" class="nav-link">Kontak</a></li>
 
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST"
-                        onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" class="button-logout" title="Logout sebagai {{ $username }}, {{ $name }}">
+                        <button type="button" class="button-logout"
+                            title="Logout sebagai {{ Auth::user()->username }}, {{ Auth::user()->name }}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
                 </li>
+
+                <!-- Include alert di bagian bawah file, sebelum </body> -->
             </ul>
         </div>
     </nav>
+    @include('alert.logout_alert')
 
     <script>
         function toggleDropdown(event, menuId) {

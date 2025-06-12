@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,7 +104,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal-content {
@@ -186,6 +187,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="custom-navbar">
         <div class="container">
@@ -196,18 +198,22 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="{{ route('dashboard_admin') }}" class="nav-link">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" onclick="openFinalDocModal()">Final Doc</a></li>
+                <!-- Di dalam ul navbar-nav -->
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST"
-                        onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" class="button-logout">
+                        <button type="button" class="button-logout"
+                            title="Logout sebagai {{ Auth::user()->username }}, {{ Auth::user()->name }}">
                             <i></i> Logout
                         </button>
                     </form>
                 </li>
+
+                <!-- Include alert di bagian bawah file, sebelum </body> -->
             </ul>
         </div>
     </nav>
+    @include('alert.logout_alert')
 
     <!-- Modal for PDF Viewer -->
     <div id="finalDocModal" class="modal">
@@ -244,51 +250,53 @@
             modal.style.display = 'block';
 
             fetch('{{ route('finalisasi.stream') }}', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                loadingSpinner.style.display = 'none';
-                console.log('Response data:', data); // Debug log
-                if (data.success && data.pdfBase64) {
-                    // Convert base64 to Blob
-                    try {
-                        const byteCharacters = atob(data.pdfBase64);
-                        const byteNumbers = new Array(byteCharacters.length);
-                        for (let i = 0; i < byteCharacters.length; i++) {
-                            byteNumbers[i] = byteCharacters.charCodeAt(i);
-                        }
-                        const byteArray = new Uint8Array(byteNumbers);
-                        const blob = new Blob([byteArray], { type: 'application/pdf' });
-                        const url = URL.createObjectURL(blob);
-                        pdfViewer.src = url;
-                        pdfViewer.style.display = 'block';
-                    } catch (e) {
-                        console.error('Error converting base64 to Blob:', e);
-                        fallback.style.display = 'block';
-                        fallback.textContent = 'Gagal merender PDF: Format data tidak valid.';
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     }
-                } else {
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loadingSpinner.style.display = 'none';
+                    console.log('Response data:', data); // Debug log
+                    if (data.success && data.pdfBase64) {
+                        // Convert base64 to Blob
+                        try {
+                            const byteCharacters = atob(data.pdfBase64);
+                            const byteNumbers = new Array(byteCharacters.length);
+                            for (let i = 0; i < byteCharacters.length; i++) {
+                                byteNumbers[i] = byteCharacters.charCodeAt(i);
+                            }
+                            const byteArray = new Uint8Array(byteNumbers);
+                            const blob = new Blob([byteArray], {
+                                type: 'application/pdf'
+                            });
+                            const url = URL.createObjectURL(blob);
+                            pdfViewer.src = url;
+                            pdfViewer.style.display = 'block';
+                        } catch (e) {
+                            console.error('Error converting base64 to Blob:', e);
+                            fallback.style.display = 'block';
+                            fallback.textContent = 'Gagal merender PDF: Format data tidak valid.';
+                        }
+                    } else {
+                        fallback.style.display = 'block';
+                        fallback.textContent = data.message || 'Gagal memuat laporan PDF.';
+                    }
+                })
+                .catch(error => {
+                    loadingSpinner.style.display = 'none';
                     fallback.style.display = 'block';
-                    fallback.textContent = data.message || 'Gagal memuat laporan PDF.';
-                }
-            })
-            .catch(error => {
-                loadingSpinner.style.display = 'none';
-                fallback.style.display = 'block';
-                fallback.textContent = 'Gagal memuat laporan PDF: ' + error.message;
-                console.error('Error fetching PDF:', error);
-            });
+                    fallback.textContent = 'Gagal memuat laporan PDF: ' + error.message;
+                    console.error('Error fetching PDF:', error);
+                });
         }
 
         function closeFinalDocModal() {
@@ -305,7 +313,7 @@
         }
 
         // Close modal when clicking outside content
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function(event) {
             const modal = document.getElementById('finalDocModal');
             const modalContent = document.querySelector('.modal-content');
             if (event.target === modal && modal.style.display === 'block') {
@@ -314,4 +322,5 @@
         });
     </script>
 </body>
+
 </html>
