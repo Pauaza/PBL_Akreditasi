@@ -145,7 +145,8 @@
                 </li>
                 <!-- Kriteria Dropdown -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria ▾</a>
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria
+                        ▾</a>
                     <ul class="dropdown-menu" id="dropdownKriteria">
                         <li><a href="/kriteria/validator/kriteria1" rel="noopener noreferrer">Kriteria 1</a></li>
                         <li><a href="/kriteria/validator/kriteria2" rel="noopener noreferrer">Kriteria 2</a></li>
@@ -161,7 +162,8 @@
 
                     <!-- Denah Gedung Dropdown -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung ▾</a>
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownDenah')">Denah Gedung
+                        ▾</a>
                     <ul class="dropdown-menu" id="dropdownDenah">
                         <li>
                             <a href="https://my.matterport.com/show/?m=xufa7UrDLJe" target="_blank"
@@ -181,13 +183,14 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard_validator') }}#contact">Kontak</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard_validator') }}#contact">Kontak</a>
+                </li>
 
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST"
-                        onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" class="button-logout">
+                        <button type="button" class="button-logout"
+                            title="Logout sebagai {{ Auth::user()->username }}, {{ Auth::user()->name }}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
@@ -195,6 +198,7 @@
             </ul>
         </div>
     </nav>
+    @include('alert.logout_alert')
 
     <script>
         function toggleDropdown(event, menuId) {
@@ -214,7 +218,7 @@
         }
 
         // Close dropdown if clicked outside
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function(event) {
             const dropdowns = document.querySelectorAll('.dropdown-menu');
             const dropdownContainers = document.querySelectorAll('.dropdown');
 
