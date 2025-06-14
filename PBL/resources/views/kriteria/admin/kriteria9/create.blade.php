@@ -24,28 +24,19 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="penetapan" class="form-label" style="font-size: large; color: #1e293b">Penetapan
-                                :</label>
-                            <textarea name="penetapan" id="penetapan" class="form-control @error('penetapan') is-invalid @enderror"
-                                placeholder="Masukkan penetapan">{{ old('penetapan') }}</textarea>
-                            @error('penetapan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="penetapan" class="form-label" style="font-size: large; color: #1e293b">Penetapan :</label>
+                            <textarea name="penetapan" id="penetapan" class="form-control" placeholder="Masukkan penetapan">{{ old('penetapan') }}</textarea>
                         </div>
 
                         <!-- Input Link Penetapan -->
                         <div class="col-md-9 mb-3">
                             <label for="link_penetapan" class="form-label" style="font-size: large; color: #1e293b">Link Penetapan :</label>
-                            <input type="url" name="link_penetapan" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror"
-                                placeholder="Masukkan link penetapan" value="{{ old('link_penetapan') }}">
-                            @error('link_penetapan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="url" name="link_penetapan" id="link_penetapan" class="form-control" placeholder="Masukkan link penetapan" value="{{ old('link_penetapan') }}">
                         </div>
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*,application/pdf">
                         <img src="{{ session('penetapan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('penetapan') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -62,28 +53,19 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Pelaksanaan
-                                :</label>
-                            <textarea name="pelaksanaan" id="pelaksanaan" class="form-control @error('pelaksanaan') is-invalid @enderror"
-                                placeholder="Masukkan pelaksanaan">{{ old('pelaksanaan') }}</textarea>
-                            @error('pelaksanaan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Pelaksanaan :</label>
+                            <textarea name="pelaksanaan" id="pelaksanaan" class="form-control" placeholder="Masukkan pelaksanaan">{{ old('pelaksanaan') }}</textarea>
                         </div>
 
                         <!-- Input Link Pelaksanaan -->
                         <div class="col-md-9 mb-3">
                             <label for="link_pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Link Pelaksanaan :</label>
-                            <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control @error('link_pelaksanaan') is-invalid @enderror"
-                                placeholder="Masukkan link pelaksanaan" value="{{ old('link_pelaksanaan') }}">
-                            @error('link_pelaksanaan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control" placeholder="Masukkan link pelaksanaan" value="{{ old('link_pelaksanaan') }}">
                         </div>
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;" accept="image/*,application/pdf">
                         <img src="{{ session('pelaksanaan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('pelaksanaan') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -100,28 +82,19 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="evaluasi" class="form-label" style="font-size: large; color: #1e293b">Evaluasi
-                                :</label>
-                            <textarea name="evaluasi" id="evaluasi" class="form-control @error('evaluasi') is-invalid @enderror"
-                                placeholder="Masukkan evaluasi">{{ old('evaluasi') }}</textarea>
-                            @error('evaluasi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="evaluasi" class="form-label" style="font-size: large; color: #1e293b">Evaluasi :</label>
+                            <textarea name="evaluasi" id="evaluasi" class="form-control" placeholder="Masukkan evaluasi">{{ old('evaluasi') }}</textarea>
                         </div>
 
                         <!-- Input Link Evaluasi -->
                         <div class="col-md-9 mb-3">
                             <label for="link_evaluasi" class="form-label" style="font-size: large; color: #1e293b">Link Evaluasi :</label>
-                            <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control @error('link_evaluasi') is-invalid @enderror"
-                                placeholder="Masukkan link evaluasi" value="{{ old('link_evaluasi') }}">
-                            @error('link_evaluasi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control" placeholder="Masukkan link evaluasi" value="{{ old('link_evaluasi') }}">
                         </div>
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_evaluasi" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_evaluasi" class="file-input" style="display: none;" accept="image/*,application/pdf">
                         <img src="{{ session('evaluasi') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('evaluasi') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -138,28 +111,19 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pengendalian" class="form-label" style="font-size: large; color: #1e293b">Pengendalian
-                                :</label>
-                            <textarea name="pengendalian" id="pengendalian" class="form-control @error('pengendalian') is-invalid @enderror"
-                                placeholder="Masukkan pengendalian">{{ old('pengendalian') }}</textarea>
-                            @error('pengendalian')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="pengendalian" class="form-label" style="font-size: large; color: #1e293b">Pengendalian :</label>
+                            <textarea name="pengendalian" id="pengendalian" class="form-control" placeholder="Masukkan pengendalian">{{ old('pengendalian') }}</textarea>
                         </div>
 
                         <!-- Input Link Pengendalian -->
                         <div class="col-md-9 mb-3">
                             <label for="link_pengendalian" class="form-label" style="font-size: large; color: #1e293b">Link Pengendalian :</label>
-                            <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control @error('link_pengendalian') is-invalid @enderror"
-                                placeholder="Masukkan link pengendalian" value="{{ old('link_pengendalian') }}">
-                            @error('link_pengendalian')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control" placeholder="Masukkan link pengendalian" value="{{ old('link_pengendalian') }}">
                         </div>
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_pengendalian" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_pengendalian" class="file-input" style="display: none;" accept="image/*,application/pdf">
                         <img src="{{ session('pengendalian') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('pengendalian') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -167,7 +131,7 @@
             </div>
         </div>
 
-    <!-- Bagian 5: Peningkatan -->
+        <!-- Bagian 5: Peningkatan -->
         <div class="card">
             <div class="card-header">
                 <h5>Peningkatan</h5>
@@ -176,28 +140,19 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="peningkatan" class="form-label" style="font-size: large; color: #1e293b">Peningkatan
-                                :</label>
-                            <textarea name="peningkatan" id="peningkatan" class="form-control @error('peningkatan') is-invalid @enderror"
-                                placeholder="Masukkan peningkatan">{{ old('peningkatan') }}</textarea>
-                            @error('peningkatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="peningkatan" class="form-label" style="font-size: large; color: #1e293b">Peningkatan :</label>
+                            <textarea name="peningkatan" id="peningkatan" class="form-control" placeholder="Masukkan peningkatan">{{ old('peningkatan') }}</textarea>
                         </div>
 
                         <!-- Input Link Peningkatan -->
                         <div class="col-md-9 mb-3">
                             <label for="link_peningkatan" class="form-label" style="font-size: large; color: #1e293b">Link Peningkatan :</label>
-                            <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control @error('link_peningkatan') is-invalid @enderror"
-                                placeholder="Masukkan link peningkatan" value="{{ old('link_peningkatan') }}">
-                            @error('link_peningkatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control" placeholder="Masukkan link peningkatan" value="{{ old('link_peningkatan') }}">
                         </div>
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_peningkatan" class="file-input" style="display: none;" accept="image/*">
+                        <input type="file" name="file_peningkatan" class="file-input" style="display: none;" accept="image/*,application/pdf">
                         <img src="{{ session('peningkatan') ?? '' }}" alt="Preview" class="preview-image"
                             style="{{ session('peningkatan') ? 'display:block' : 'display:none' }}" />
                     </div>
@@ -207,36 +162,27 @@
 
         <!-- Tombol Submit/Save -->
         <div class="button-group" style="margin-top: 20px;">
-            <button type="submit" name="action" value="submit" class="btn-blue">Submit</button>
+            <button type="submit" name="form_action" value="submit" class="btn-blue">Submit</button>
         </div>
     </form>
 
-    <!-- Comments Section -->
-    <div class="card">
-        <div class="card-header">
-            <h4>Comments:</h4>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label for="comment">Direktur:</label>
-                <textarea name="comment" id="comment" readonly>
-                    Pada Bab penetapan ada yang salah di point ke-1 yaitu dokumen tidak ada tangan dari Ketua Jurusan
-                </textarea>
-            </div>
-        </div>
-    </div>
+   
 
-    <script src="https://cdn.tiny.cloud/1/1bjp48je8qidj72md96na5rj62hlodgqbonp4y20d4cibjom/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/1bjp48je8qidj72md96na5rj62hlodgqbonp4y20d4cibjom/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
+        // Initialize TinyMCE for textareas
         tinymce.init({
             selector: 'textarea#peningkatan, textarea#pengendalian, textarea#evaluasi, textarea#pelaksanaan, textarea#penetapan',
-            plugins: 'tables lists link image',
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+            plugins: 'lists link image',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | link image',
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save(); // Sync TinyMCE content with textarea
+                });
+            }
         });
-    </script>
-    <!-- Upload Button Handler with Preview -->
-    <script>
+
+        // Handle file upload preview
         document.querySelectorAll('.upload-photo').forEach((container) => {
             const fileInput = container.querySelector('.file-input');
             const previewImage = container.querySelector('.preview-image');
@@ -253,8 +199,8 @@
 
                     reader.onload = function(e) {
                         previewImage.src = e.target.result;
-                        previewImage.style.display = 'block'; // Show preview image
-                        uploadText.style.display = 'none'; // Hide upload text
+                        previewImage.style.display = 'block';
+                        uploadText.style.display = 'none';
                     };
 
                     reader.readAsDataURL(file);
@@ -262,16 +208,178 @@
             });
         });
 
-        document.querySelector('#kriteria9').addEventListener('submit', function(e) {
-            const penetapan    = document.getElementById('penetapan').value.trim();
-            const pelaksanaan  = document.getElementById('pelaksanaan').value.trim();
-            const evaluasi     = document.getElementById('evaluasi').value.trim();
-            const pengendalian = document.getElementById('pengendalian').value.trim();
-            const peningkatan  = document.getElementById('peningkatan').value.trim();
+        // Handle form submission with AJAX
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('#kriteria9');
+            const submitUrl = '{{ route('kriteria9.submit') }}';
 
-            if (!penetapan || !pelaksanaan || !evaluasi || !pengendalian || !peningkatan) {
-                e.preventDefault(); // stop submit
-                alert('Semua form (Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan) wajib diisi!');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Client-side validation for required fields
+                const requiredFields = [
+                    'penetapan', 'link_penetapan',
+                    'pelaksanaan', 'link_pelaksanaan',
+                    'evaluasi', 'link_evaluasi',
+                    'pengendalian', 'link_pengendalian',
+                    'peningkatan', 'link_peningkatan'
+                ];
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    const input = form.querySelector(`[name="${field}"]`);
+                    let value = input.value.trim();
+
+                    // For TinyMCE textareas, get content from editor
+                    if (input.tagName === 'TEXTAREA' && tinymce.get(input.id)) {
+                        value = tinymce.get(input.id).getContent().trim();
+                        input.value = value; // Sync textarea value with TinyMCE content
+                    }
+
+                    if (!value) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                        const feedback = input.nextElementSibling;
+                        if (feedback && feedback.classList.contains('invalid-feedback')) {
+                            feedback.textContent = `${field.replace('_', ' ').toUpperCase()} wajib diisi.`;
+                        }
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    showAlert(
+                        'Semua field deskripsi dan link wajib diisi!',
+                        '{{ asset('assets/icon/cross.png') }}',
+                        '#993a36'
+                    );
+                    return;
+                }
+
+                const formData = new FormData(form);
+                const csrfToken = form.querySelector('input[name="_token"]').value;
+
+                // Log data for debugging
+                for (let [key, value] of formData.entries()) {
+                    console.log(`FormData: ${key} = ${value}`);
+                }
+                console.log('Submit URL:', submitUrl);
+
+                // Send AJAX request
+                fetch(submitUrl, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Status respons:', response.status);
+                    if (response.status === 302 || response.redirected) {
+                        return response.text().then(() => {
+                            fetch(window.location.href, { method: 'GET' })
+                                .then(res => res.text())
+                                .then(html => {
+                                    if (html.includes('Data berhasil disimpan')) {
+                                        showAlert(
+                                            'Data Berhasil Disimpan',
+                                            '{{ asset('assets/icon/checkmark.png') }}',
+                                            '#315287'
+                                        );
+                                        setTimeout(() => {
+                                            window.location.href = '{{ route('index.admin.kriteria9') }}';
+                                        }, 2000);
+                                    } else {
+                                        throw new Error('No success message found');
+                                    }
+                                });
+                        });
+                    }
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(JSON.stringify(err));
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data respons:', data);
+                    if (data.status) {
+                        showAlert(
+                            'Data Berhasil Disimpan',
+                            '{{ asset('assets/icon/checkmark.png') }}',
+                            '#315287'
+                        );
+                        setTimeout(() => {
+                            console.log('Redirect ke:', data.redirect);
+                            window.location.href = data.redirect || '{{ route('index.admin.kriteria9') }}';
+                        }, 2000);
+                    } else {
+                        let errorMessage = data.message || 'Gagal menyimpan data';
+                        if (data.errors) {
+                            errorMessage += ': ' + Object.values(data.errors).flat().join(', ');
+                        }
+                        showAlert(
+                            errorMessage,
+                            '{{ asset('assets/icon/cross.png') }}',
+                            '#993a36'
+                        );
+                    }
+                })
+                .catch(error => {
+                    console.error('Kesalahan AJAX:');
+                    showAlert(
+                        'Gagal menyimpan data: ' ,
+                        '{{ asset('assets/icon/cross.png') }}',
+                        '#993a36'
+                    );
+                });
+            });
+
+            // Function to display alert
+            function showAlert(message, iconSrc, backgroundColor) {
+                const existingAlert = document.querySelector('.custom-alert');
+                if (existingAlert) existingAlert.remove();
+
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'custom-alert';
+                alertDiv.style.position = 'fixed';
+                alertDiv.style.top = '20px';
+                alertDiv.style.right = '20px';
+                alertDiv.style.padding = '15px 30px';
+                alertDiv.style.backgroundColor = backgroundColor;
+                alertDiv.style.color = '#fff';
+                alertDiv.style.borderRadius = '10px';
+                alertDiv.style.display = 'flex';
+                alertDiv.style.alignItems = 'center';
+                alertDiv.style.gap = '10px';
+                alertDiv.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+                alertDiv.style.zIndex = '1000';
+                alertDiv.style.fontFamily = 'Montserrat, sans-serif';
+                alertDiv.style.fontSize = '14px';
+                alertDiv.style.fontWeight = '500';
+
+                const icon = document.createElement('img');
+                icon.src = iconSrc;
+                icon.style.width = '24px';
+                icon.style.height = '24px';
+                icon.style.objectFit = 'contain';
+                icon.onerror = () => console.error('Gagal memuat ikon:', iconSrc);
+
+                const messageSpan = document.createElement('span');
+                messageSpan.textContent = message;
+
+                alertDiv.appendChild(icon);
+                alertDiv.appendChild(messageSpan);
+                document.body.appendChild(alertDiv);
+
+                console.log('Alert ditampilkan:', message);
+
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 3000);
             }
         });
     </script>
