@@ -24,7 +24,7 @@
                             <tr>
                                 <th>Nama Kriteria</th>
                                 <th>Status</th>
-                                <th>Keterangan Kritria</th>
+                                <th>Keterangan Kriteria</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -34,31 +34,31 @@
                                     <td>{{ $item->kriteria->nama_kriteria ?? '-' }}</td>
                                     <td>
                                         @php
-                                            // Jika status_kps atau status_kajur 'rev', maka langsung status = ditolak
+                                            // Logika status tetap sama
                                             if ($item->status_kps === 'rev' || $item->status_kajur === 'rev') {
-                                                $status = 'rev'; // di sini 'rev' tetap untuk label 'ditolak'
+                                                $status = 'rev';
                                             } else {
                                                 $accKpsKajur =
                                                     $item->status_kps === 'acc' && $item->status_kajur === 'acc';
                                                 $accKjmDirektur =
                                                     $item->status_kjm === 'acc' && $item->status_direktur === 'acc';
-
                                                 if ($accKpsKajur && $accKjmDirektur) {
                                                     $status = 'acc';
                                                 } elseif (
                                                     in_array('rev', [$item->status_kjm, $item->status_direktur])
                                                 ) {
-                                                    $status = 'rev'; // jika rev dari kjm/direktur juga dianggap ditolak
+                                                    $status = 'rev';
                                                 } else {
-                                                    $status = 'progress';
+                                                    $status = $item->status_selesai === 'save' ? 'draft' : 'progress';
                                                 }
                                             }
                                         @endphp
-
                                         @if ($status === 'acc')
                                             <span class="status-btn acc">Acc</span>
                                         @elseif ($status === 'rev')
                                             <span class="status-btn ditolak">Ditolak</span>
+                                        @elseif ($status === 'draft')
+                                            <span class="status-btn draft">Draf</span>
                                         @else
                                             <span class="status-btn on-progress">On Progress</span>
                                         @endif
@@ -84,6 +84,8 @@
                                             Data Telah Di Validasi
                                         @elseif ($isUpdated)
                                             Data Diubah Pada {{ $updatedAt->format('d-m-Y H:i') }} WIB
+                                        @elseif ($status === 'draft')
+                                            Data Disimpan sebagai Draf Pada {{ $createdAt->format('d-m-Y H:i') }} WIB
                                         @else
                                             Data Ditambahkan Pada {{ $createdAt->format('d-m-Y H:i') }} WIB
                                         @endif
@@ -93,8 +95,7 @@
                                             <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}"
                                                     alt="View Icon"></button>
                                         </a>
-
-                                        @if ($status === 'progress' || $status === 'rev')
+                                        @if (($status === 'progress' || $status === 'rev' || $status === 'draft') && $item->status_selesai !== 'submit')
                                             <a
                                                 href="{{ url('/kriteria/admin/kriteria5/edit/' . $item->id_detail_kriteria) }}">
                                                 <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}"
@@ -111,7 +112,6 @@
                                                 </button>
                                             </form>
                                         @endif
-
                                         @if ($status === 'acc')
                                             <a
                                                 href="{{ url('/kriteria/admin/kriteria5/print/' . $item->id_detail_kriteria) }}">
@@ -241,6 +241,8 @@
             background-color: #dc3545;
             color: #fff;
         }
+
+       
     </style>
 
     <script>

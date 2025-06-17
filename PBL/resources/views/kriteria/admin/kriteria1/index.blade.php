@@ -49,7 +49,7 @@
                                                 ) {
                                                     $status = 'rev';
                                                 } else {
-                                                    $status = 'progress';
+                                                    $status = $item->status_selesai === 'save' ? 'draft' : 'progress';
                                                 }
                                             }
                                         @endphp
@@ -57,6 +57,8 @@
                                             <span class="status-btn acc">Acc</span>
                                         @elseif ($status === 'rev')
                                             <span class="status-btn ditolak">Ditolak</span>
+                                        @elseif ($status === 'draft')
+                                            <span class="status-btn draft">Draf</span>
                                         @else
                                             <span class="status-btn on-progress">On Progress</span>
                                         @endif
@@ -82,6 +84,8 @@
                                             Data Telah Di Validasi
                                         @elseif ($isUpdated)
                                             Data Diubah Pada {{ $updatedAt->format('d-m-Y H:i') }} WIB
+                                        @elseif ($status === 'draft')
+                                            Data Disimpan sebagai Draf Pada {{ $createdAt->format('d-m-Y H:i') }} WIB
                                         @else
                                             Data Ditambahkan Pada {{ $createdAt->format('d-m-Y H:i') }} WIB
                                         @endif
@@ -91,7 +95,7 @@
                                             <button class="action-button"><img src="{{ asset('assets/icon/view.png') }}"
                                                     alt="View Icon"></button>
                                         </a>
-                                        @if ($status === 'progress' || $status === 'rev')
+                                        @if (($status === 'progress' || $status === 'rev' || $status === 'draft') && $item->status_selesai !== 'submit')
                                             <a
                                                 href="{{ url('/kriteria/admin/kriteria1/edit/' . $item->id_detail_kriteria) }}">
                                                 <button class="action-button"><img src="{{ asset('assets/icon/edit.png') }}"
@@ -237,6 +241,8 @@
             background-color: #dc3545;
             color: #fff;
         }
+
+       
     </style>
 
     <script>

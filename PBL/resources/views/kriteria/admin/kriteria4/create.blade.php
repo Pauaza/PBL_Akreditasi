@@ -14,6 +14,7 @@
         @csrf
 
         <input type="hidden" name="id_kriteria" value="4">
+        <input type="hidden" name="form_action" id="form-action" value="submit">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">
@@ -162,11 +163,10 @@
 
         <!-- Tombol Submit/Save -->
         <div class="button-group" style="margin-top: 20px;">
-            <button type="submit" name="form_action" value="submit" class="btn-blue">Submit</button>
+            <button type="submit" name="form_action" value="draft" class="btn-blue" onclick="document.getElementById('form-action').value='draft'">Simpan sebagai Draf</button>
+            <button type="submit" name="form_action" value="submit" class="btn-green" onclick="document.getElementById('form-action').value='submit'">Submit</button>
         </div>
     </form>
-
-   
 
     <script src="https://cdn.tiny.cloud/1/1bjp48je8qidj72md96na5rj62hlodgqbonp4y20d4cibjom/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
@@ -331,7 +331,7 @@
                 .catch(error => {
                     console.error('Kesalahan AJAX:');
                     showAlert(
-                        'Gagal menyimpan data: ' ,
+                        'Gagal menyimpan data: ',
                         '{{ asset('assets/icon/cross.png') }}',
                         '#993a36'
                     );
@@ -383,4 +383,36 @@
             }
         });
     </script>
+
+    <style>
+        .btn-blue {
+            background-color: #315287;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .btn-blue:hover {
+            background-color: #263f6a;
+        }
+        .btn-green {
+            background-color: #2e7d32;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .btn-green:hover {
+            background-color: #1b5e20;
+        }
+    </style>
 @endsection

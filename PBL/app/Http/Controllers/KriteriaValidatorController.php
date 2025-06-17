@@ -25,24 +25,24 @@ class KriteriaValidatorController extends Controller
             'pengendalian',
             'peningkatan',
             'kriteria'
-        ])->where('id_kriteria', $id_kriteria);
+        ])->where('id_kriteria', $id_kriteria)
+          ->where('status_selesai', 'submit'); // Hanya tampilkan data yang sudah submit (bukan draf)
 
         if ($level == 2 || $level == 3) {
             // KPS atau Kajur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
             $query->where(function ($q) {
                 $q->whereNull('status_kps')
-                    ->orWhereNull('status_kajur')
-                    ->orWhere('status_kps', 'rev')
-                    ->orWhere('status_kajur', 'rev');
+                  ->orWhereNull('status_kajur')
+                  ->orWhere('status_kps', 'rev')
+                  ->orWhere('status_kajur', 'rev');
             });
         } elseif ($level == 4 || $level == 5) {
             // KJM atau Direktur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
             $query->where(function ($q) {
                 $q->whereNull('status_kjm')
-                    ->orWhereNull('status_direktur');
+                  ->orWhereNull('status_direktur');
             });
         }
-
 
         $details = $query->get();
 
@@ -65,8 +65,10 @@ class KriteriaValidatorController extends Controller
         $user = Auth::user();
         $level = $user->id_level; // 2 = KPS, 3 = Kajur, 4 = KJM, 5 = Direktur
 
-        // Ambil semua detail berdasarkan id_kriteria
-        $details = DetailKriteriaModel::where('id_kriteria', $id_kriteria)->get();
+        // Ambil semua detail berdasarkan id_kriteria yang sudah submit
+        $details = DetailKriteriaModel::where('id_kriteria', $id_kriteria)
+                                     ->where('status_selesai', 'submit')
+                                     ->get();
         if ($details->isEmpty()) {
             return redirect()->back()->with('error', 'Data tidak ditemukan untuk divalidasi.');
         }
@@ -107,12 +109,11 @@ class KriteriaValidatorController extends Controller
 
         // Jika user adalah KJM (4) atau Direktur (5) → level 2
         if (in_array($level, [4, 5])) {
-           
             // Pastikan KPS & Kajur sudah acc dulu
             $alreadyAccLevel1 = $details->every(function ($d) {
                 return $d->status_kps === 'acc' && $d->status_kajur === 'acc';
             });
-             
+
             if (!$alreadyAccLevel1) {
                 return redirect()->back()->with('error', 'Proses level 1 (KPS/Kajur) harus selesai terlebih dahulu.');
             }
@@ -142,7 +143,6 @@ class KriteriaValidatorController extends Controller
         return redirect()->back()->with('error', 'Level user tidak dikenali.');
     }
 
-
     public function generateOverview($id_kriteria)
     {
         $user = Auth::user();
@@ -157,19 +157,20 @@ class KriteriaValidatorController extends Controller
             'pengendalian',
             'peningkatan',
             'kriteria'
-        ])->where('id_kriteria', $id_kriteria);
+        ])->where('id_kriteria', $id_kriteria)
+          ->where('status_selesai', 'submit'); // Hanya tampilkan data yang sudah submit
 
         if ($level == 2 || $level == 3) {
             // KPS atau Kajur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
             $query->where(function ($q) {
                 $q->whereNull('status_kps')
-                    ->orWhereNull('status_kajur');
+                  ->orWhereNull('status_kajur');
             });
         } elseif ($level == 4 || $level == 5) {
             // KJM atau Direktur: tampilkan jika belum di-ACC oleh salah satu dari keduanya
             $query->where(function ($q) {
                 $q->whereNull('status_kjm')
-                    ->orWhereNull('status_direktur');
+                  ->orWhereNull('status_direktur');
             });
         }
 
@@ -186,7 +187,7 @@ class KriteriaValidatorController extends Controller
 
         $kriteria = KriteriaModel::findOrFail($id_kriteria);
 
-        // Ambil semua detail berdasarkan id_kriteria tanpa filter status acc/rev
+        // Ambil semua detail berdasarkan id_kriteria tanpa filter status acc/rev, tapi hanya yang sudah submit
         $details = DetailKriteriaModel::with([
             'penetapan',
             'pelaksanaan',
@@ -194,7 +195,9 @@ class KriteriaValidatorController extends Controller
             'pengendalian',
             'peningkatan',
             'kriteria'
-        ])->where('id_kriteria', $id_kriteria)->get();
+        ])->where('id_kriteria', $id_kriteria)
+          ->where('status_selesai', 'submit')
+          ->get();
 
         $pdf = PDF::loadView('kriteria.validator.kriteria.overview', compact('kriteria', 'details'));
         return $pdf->stream('laporan_kriteria_' . $id_kriteria . '.pdf');

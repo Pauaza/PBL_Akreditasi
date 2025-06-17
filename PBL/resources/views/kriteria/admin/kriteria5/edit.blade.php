@@ -10,11 +10,17 @@
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <form id="kriteria5-edit" method="POST" action="{{ route('kriteria5.update', $kriteria->id_detail_kriteria) }}" enctype="multipart/form-data">
+    @php
+        $isSubmitted = $kriteria->isSubmitted();
+        $disabled = $isSubmitted ? 'disabled' : '';
+    @endphp
+
+    <form id="kriteria5-edit" method="POST" action="{{ route('kriteria5.update', $kriteria->id_detail_kriteria) }}" enctype="multipart/form-data" {{ $disabled }}>
         @csrf
         @method('PUT')
 
         <input type="hidden" name="id_kriteria" value="5">
+        <input type="hidden" name="form_action" id="form-action" value="submit">
 
         <!-- Bagian 1: Penetapan -->
         <div class="card">
@@ -26,14 +32,14 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <label for="penetapan" class="form-label" style="font-size: large; color: #1e293b">Penetapan:</label>
-                            <textarea name="penetapan" id="penetapan" class="form-control @error('penetapan') is-invalid @enderror" placeholder="Masukkan penetapan">{{ old('penetapan', $kriteria->penetapan->penetapan ?? '') }}</textarea>
+                            <textarea name="penetapan" id="penetapan" class="form-control @error('penetapan') is-invalid @enderror" placeholder="Masukkan penetapan" {{ $disabled }}>{{ old('penetapan', $kriteria->penetapan->penetapan ?? '') }}</textarea>
                             @error('penetapan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
                             <label for="link_penetapan" class="form-label" style="font-size: large; color: #1e293b">Link Penetapan:</label>
-                            <input type="url" name="link_penetapan" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_penetapan', $kriteria->penetapan->link ?? '') }}">
+                            <input type="url" name="link_penetapan" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_penetapan', $kriteria->penetapan->link ?? '') }}" {{ $disabled }}>
                             @error('link_penetapan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -41,7 +47,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*,application/pdf">
+                        <input type="file" name="file_penetapan" class="file-input" style="display: none;" accept="image/*,application/pdf" {{ $disabled }}>
                         <img src="{{ $kriteria->penetapan->pendukung ? asset('storage/' . $kriteria->penetapan->pendukung) : '' }}" alt="Preview" class="preview-image" style="{{ $kriteria->penetapan->pendukung ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
@@ -58,14 +64,14 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <label for="pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Pelaksanaan:</label>
-                            <textarea name="pelaksanaan" id="pelaksanaan" class="form-control @error('pelaksanaan') is-invalid @enderror" placeholder="Masukkan pelaksanaan">{{ old('pelaksanaan', $kriteria->pelaksanaan->penetapan ?? '') }}</textarea>
+                            <textarea name="pelaksanaan" id="pelaksanaan" class="form-control @error('pelaksanaan') is-invalid @enderror" placeholder="Masukkan pelaksanaan" {{ $disabled }}>{{ old('pelaksanaan', $kriteria->pelaksanaan->penetapan ?? '') }}</textarea>
                             @error('pelaksanaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
                             <label for="link_pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Link Pelaksanaan:</label>
-                            <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control @error('link_pelaksanaan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pelaksanaan', $kriteria->pelaksanaan->link ?? '') }}">
+                            <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control @error('link_pelaksanaan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pelaksanaan', $kriteria->pelaksanaan->link ?? '') }}" {{ $disabled }}>
                             @error('link_pelaksanaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -73,7 +79,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;" accept="image/*,application/pdf">
+                        <input type="file" name="file_pelaksanaan" class="file-input" style="display: none;" accept="image/*,application/pdf" {{ $disabled }}>
                         <img src="{{ $kriteria->pelaksanaan->pendukung ? asset('storage/' . $kriteria->pelaksanaan->pendukung) : '' }}" alt="Preview" class="preview-image" style="{{ $kriteria->pelaksanaan->pendukung ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
@@ -90,14 +96,14 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <label for="evaluasi" class="form-label" style="font-size: large; color: #1e293b">Evaluasi:</label>
-                            <textarea name="evaluasi" id="evaluasi" class="form-control @error('evaluasi') is-invalid @enderror" placeholder="Masukkan evaluasi">{{ old('evaluasi', $kriteria->evaluasi->penetapan ?? '') }}</textarea>
+                            <textarea name="evaluasi" id="evaluasi" class="form-control @error('evaluasi') is-invalid @enderror" placeholder="Masukkan evaluasi" {{ $disabled }}>{{ old('evaluasi', $kriteria->evaluasi->penetapan ?? '') }}</textarea>
                             @error('evaluasi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
                             <label for="link_evaluasi" class="form-label" style="font-size: large; color: #1e293b">Link Evaluasi:</label>
-                            <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control @error('link_evaluasi') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_evaluasi', $kriteria->evaluasi->link ?? '') }}">
+                            <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control @error('link_evaluasi') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_evaluasi', $kriteria->evaluasi->link ?? '') }}" {{ $disabled }}>
                             @error('link_evaluasi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -105,7 +111,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_evaluasi" class="file-input" style="display: none;" accept="image/*,application/pdf">
+                        <input type="file" name="file_evaluasi" class="file-input" style="display: none;" accept="image/*,application/pdf" {{ $disabled }}>
                         <img src="{{ $kriteria->evaluasi->pendukung ? asset('storage/' . $kriteria->evaluasi->pendukung) : '' }}" alt="Preview" class="preview-image" style="{{ $kriteria->evaluasi->pendukung ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
@@ -122,14 +128,14 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <label for="pengendalian" class="form-label" style="font-size: large; color: #1e293b">Pengendalian:</label>
-                            <textarea name="pengendalian" id="pengendalian" class="form-control @error('pengendalian') is-invalid @enderror" placeholder="Masukkan pengendalian">{{ old('pengendalian', $kriteria->pengendalian->penetapan ?? '') }}</textarea>
+                            <textarea name="pengendalian" id="pengendalian" class="form-control @error('pengendalian') is-invalid @enderror" placeholder="Masukkan pengendalian" {{ $disabled }}>{{ old('pengendalian', $kriteria->pengendalian->penetapan ?? '') }}</textarea>
                             @error('pengendalian')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
                             <label for="link_pengendalian" class="form-label" style="font-size: large; color: #1e293b">Link Pengendalian:</label>
-                            <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control @error('link_pengendalian') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pengendalian', $kriteria->pengendalian->link ?? '') }}">
+                            <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control @error('link_pengendalian') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pengendalian', $kriteria->pengendalian->link ?? '') }}" {{ $disabled }}>
                             @error('link_pengendalian')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -137,7 +143,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_pengendalian" class="file-input" style="display: none;" accept="image/*,application/pdf">
+                        <input type="file" name="file_pengendalian" class="file-input" style="display: none;" accept="image/*,application/pdf" {{ $disabled }}>
                         <img src="{{ $kriteria->pengendalian->pendukung ? asset('storage/' . $kriteria->pengendalian->pendukung) : '' }}" alt="Preview" class="preview-image" style="{{ $kriteria->pengendalian->pendukung ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
@@ -154,14 +160,14 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <label for="peningkatan" class="form-label" style="font-size: large; color: #1e293b">Peningkatan:</label>
-                            <textarea name="peningkatan" id="peningkatan" class="form-control @error('peningkatan') is-invalid @enderror" placeholder="Masukkan peningkatan">{{ old('peningkatan', $kriteria->peningkatan->penetapan ?? '') }}</textarea>
+                            <textarea name="peningkatan" id="peningkatan" class="form-control @error('peningkatan') is-invalid @enderror" placeholder="Masukkan peningkatan" {{ $disabled }}>{{ old('peningkatan', $kriteria->peningkatan->penetapan ?? '') }}</textarea>
                             @error('peningkatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
                             <label for="link_peningkatan" class="form-label" style="font-size: large; color: #1e293b">Link Peningkatan:</label>
-                            <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control @error('link_peningkatan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_peningkatan', $kriteria->peningkatan->link ?? '') }}">
+                            <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control @error('link_peningkatan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_peningkatan', $kriteria->peningkatan->link ?? '') }}" {{ $disabled }}>
                             @error('link_peningkatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -169,7 +175,7 @@
                     </div>
                     <div class="upload-photo">
                         <span class="upload-text">+ Upload</span>
-                        <input type="file" name="file_peningkatan" class="file-input" style="display: none;" accept="image/*,application/pdf">
+                        <input type="file" name="file_peningkatan" class="file-input" style="display: none;" accept="image/*,application/pdf" {{ $disabled }}>
                         <img src="{{ $kriteria->peningkatan->pendukung ? asset('storage/' . $kriteria->peningkatan->pendukung) : '' }}" alt="Preview" class="preview-image" style="{{ $kriteria->peningkatan->pendukung ? 'display:block' : 'display:none' }}" />
                     </div>
                 </div>
@@ -197,20 +203,18 @@
                 const uploadText = container.querySelector('.upload-text');
 
                 container.addEventListener('click', () => {
-                    if (fileInput) fileInput.click();
+                    if (fileInput && !fileInput.disabled) fileInput.click();
                 });
 
                 fileInput.addEventListener('change', function(event) {
-                    if (event.target.files.length > 0) {
+                    if (event.target.files.length > 0 && !event.target.disabled) {
                         const file = event.target.files[0];
                         const reader = new FileReader();
-
                         reader.onload = function(e) {
                             previewImage.src = e.target.result;
                             previewImage.style.display = 'block';
                             uploadText.style.display = 'none';
                         };
-
                         reader.readAsDataURL(file);
                     }
                 });
@@ -226,10 +230,10 @@
 
                     const formData = new FormData(form);
                     const csrfToken = form.querySelector('input[name="_token"]').value;
+                    const action = form.querySelector('#form-action').value;
 
-                    // Send AJAX request
                     fetch(submitUrl, {
-                        method: 'POST', // Laravel handles @method('PUT') via _method field
+                        method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': csrfToken,
                             'Accept': 'application/json'
@@ -269,6 +273,9 @@
                                 '{{ asset('assets/icon/checkmark.png') }}',
                                 '#315287'
                             );
+                            if (action === 'submit') {
+                                form.querySelectorAll('textarea, input[type="url"], input[type="file"]').forEach(el => el.disabled = true);
+                            }
                             setTimeout(() => {
                                 window.location.href = data.redirect || '{{ route('index.admin.kriteria5') }}';
                             }, 2000);
@@ -276,7 +283,6 @@
                     })
                     .catch(error => {
                         console.error('Kesalahan AJAX:', error);
-                        // No error alert as per requirement
                     });
                 });
 
@@ -324,6 +330,9 @@
             });
         </script>
 
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <div class="button-group" style="margin-top: 20px;">
+            <button type="submit" name="form_action" value="draft" class="btn-blue" onclick="document.getElementById('form-action').value='draft'" {{ $disabled }}>Simpan sebagai Draf</button>
+            <button type="submit" name="form_action" value="submit" class="btn-green" onclick="document.getElementById('form-action').value='submit'" {{ $disabled }}>Submit</button>
+        </div>
     </form>
 @endsection

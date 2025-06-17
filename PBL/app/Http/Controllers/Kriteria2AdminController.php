@@ -150,7 +150,7 @@ class Kriteria2AdminController extends Controller
         if ($request->peningkatan || $request->hasFile('file_peningkatan')) {
             $peningkatan = PeningkatanModel::where('id_peningkatan', $kriteria->id_peningkatan)->first();
             if ($peningkatan) {
-                $peningkatan->penetapan = $request->peningkatan ?? $peningkatan->penetapan; // Perbaikan: gunakan penetapan
+                $peningkatan->penetapan = $request->peningkatan ?? $peningkatan->penetapan;
                 if ($request->hasFile('file_peningkatan')) {
                     $path = $request->file('file_peningkatan')->store('pendukung/peningkatan');
                     $peningkatan->pendukung = $path;
@@ -161,14 +161,13 @@ class Kriteria2AdminController extends Controller
                 $path = $request->file('file_peningkatan')?->store('pendukung/peningkatan');
                 $peningkatan = PeningkatanModel::create([
                     'id_kriteria' => $id_kriteria,
-                    'penetapan' => $request->peningkatan, // Perbaikan: gunakan penetapan
+                    'penetapan' => $request->peningkatan,
                     'pendukung' => $path,
                 ]);
                 $kriteria->id_peningkatan = $peningkatan->id_peningkatan;
                 $isUpdated = true;
             }
         }
-
        if ($isUpdated) {
             $kriteria->updated_at = now();
             $kriteria->save();
@@ -196,7 +195,7 @@ class Kriteria2AdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('penetapan_kriteria2', $fileName, 'public');
         }
 
@@ -223,7 +222,7 @@ class Kriteria2AdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('pelaksanaan_kriteria2', $fileName, 'public');
         }
 
@@ -250,7 +249,7 @@ class Kriteria2AdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('evaluasi_kriteria2', $fileName, 'public');
         }
 
@@ -277,7 +276,7 @@ class Kriteria2AdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('pengendalian_kriteria2', $fileName, 'public');
         }
 
@@ -292,7 +291,6 @@ class Kriteria2AdminController extends Controller
     }
 
     // PENINGKATAN
-    // Perbaiki fungsi storePeningkatan
     public function storePeningkatan(Request $request)
     {
         $request->validate([
@@ -305,13 +303,13 @@ class Kriteria2AdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('peningkatan_kriteria2', $fileName, 'public');
         }
 
         PeningkatanModel::create([
             'id_detail_kriteria' => $request->id_detail_kriteria,
-            'penetapan' => $request->peningkatan, // Perbaikan: gunakan penetapan
+            'penetapan' => $request->peningkatan,
             'link' => $request->link,
             'pendukung' => $filePath,
         ]);
@@ -341,6 +339,7 @@ class Kriteria2AdminController extends Controller
         ]);
 
         $kriteria = (int) $request->input('id_kriteria');
+        $action = $request->input('form_action', 'submit'); // Default ke 'submit' jika tidak ada
 
         $id_penetapan = null;
         $id_pelaksanaan = null;
@@ -403,7 +402,7 @@ class Kriteria2AdminController extends Controller
             $id_peningkatan = $peningkatan->id_peningkatan;
         }
 
-        DetailKriteriaModel::create([
+        $detailKriteria = DetailKriteriaModel::create([
             'id_user' => auth()->user()->id_user,
             'id_penetapan' => $id_penetapan,
             'id_pelaksanaan' => $id_pelaksanaan,
@@ -411,10 +410,10 @@ class Kriteria2AdminController extends Controller
             'id_pengendalian' => $id_pengendalian,
             'id_peningkatan' => $id_peningkatan,
             'id_kriteria' => $kriteria,
-            'status_selesai' => 'save',
+            'status_selesai' => $action === 'draft' ? 'save' : 'submit',
         ]);
 
-        return redirect()->route('index.admin.kriteria2')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('index.admin.kriteria2')->with('success', 'Data berhasil disimpan sebagai ' . ($action === 'draft' ? 'draf' : 'submit') . '.');
     }
 
     public function show($id)

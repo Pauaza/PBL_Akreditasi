@@ -82,21 +82,24 @@
     </div>
 
     @php
-        // Hitung jumlah detail yang akan ditampilkan
+        // Filter hanya data yang sudah submit dan belum selesai validasi penuh
         $detailsToShow = $details->filter(function ($detail) use ($level) {
-            if ($level === 2 && strtolower($detail->status_kps ?? '') === 'acc') {
-                return false;
+            $isOnProgress = false;
+
+            if ($detail->status_selesai !== 'submit') {
+                return false; // Hanya tampilkan yang sudah submit
             }
-            if ($level === 3 && strtolower($detail->status_kajur ?? '') === 'acc') {
-                return false;
+
+            if ($level === 2 || $level === 3) { // KPS atau Kajur
+                $isOnProgress = is_null($detail->status_kps) || is_null($detail->status_kajur) ||
+                                $detail->status_kps === 'rev' || $detail->status_kajur === 'rev';
+            } elseif ($level === 4 || $level === 5) { // KJM atau Direktur
+                $isOnProgress = is_null($detail->status_kjm) || is_null($detail->status_direktur) ||
+                                ($detail->status_kps === 'acc' && $detail->status_kajur === 'acc' &&
+                                 (is_null($detail->status_kjm) || is_null($detail->status_direktur)));
             }
-            if ($level === 4 && strtolower($detail->status_kjm ?? '') === 'acc') {
-                return false;
-            }
-            if ($level === 5 && strtolower($detail->status_direktur ?? '') === 'acc') {
-                return false;
-            }
-            return true;
+
+            return $isOnProgress;
         });
     @endphp
 
@@ -228,7 +231,7 @@
         </table>
     @empty
         <div style="margin: 50px 0; text-align:center;">
-            <strong>Tidak ada data yang perlu divalidasi. Semua detail sudah ACC oleh level Anda.</strong>
+            <strong>Tidak ada data yang perlu divalidasi. Semua detail sudah ACC oleh level Anda atau masih dalam draf.</strong>
         </div>
     @endforelse
 

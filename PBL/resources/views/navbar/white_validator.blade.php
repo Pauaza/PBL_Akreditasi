@@ -191,7 +191,7 @@
                         @csrf
                         <button type="button" class="button-logout"
                             title="Logout sebagai {{ Auth::user()->username }}, {{ Auth::user()->name }}">
-                            <i class="fas fa-sign-out-alt"></i> Logout
+                            <i></i> Logout
                         </button>
                     </form>
                 </li>
