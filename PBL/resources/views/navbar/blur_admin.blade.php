@@ -146,35 +146,21 @@
                 @php
                     $username = Auth::user()->username;
                     $name = Auth::user()->name;
-                    $akses = [
-                        'admin1' => 1,
-                        'admin2' => 2,
-                        'admin3' => 3,
-                        'admin4' => 4,
-                        'admin5' => 5,
-                        'admin6' => 6,
-                        'admin7' => 7,
-                        'admin8' => 8,
-                        'admin9' => 9,
-                        'kps' => 10,
-                        'kajur' => 11,
-                        'kjm' => 12,
-                        'direktur' => 13,
-                        'superadmin' => 14,
-                    ];
-                    $kriteriaId = $akses[$username] ?? null;
+                    $hak_akses = Auth::user()->getHakAkses() ?? [];
                 @endphp
 
-                @if ($kriteriaId)
+                @if (!empty($hak_akses))
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" onclick="toggleDropdown(event, 'dropdownKriteria')">Kriteria
                             ▾</a>
                         <ul class="dropdown-menu" id="dropdownKriteria">
-                            <li>
-                                <a href="/kriteria/admin/kriteria{{ $kriteriaId }}" rel="noopener noreferrer">
-                                    Kriteria {{ $kriteriaId }}
-                                </a>
-                            </li>
+                            @foreach ($hak_akses as $kriteriaId)
+                                <li>
+                                    <a href="/kriteria/admin/kriteria{{ $kriteriaId }}" rel="noopener noreferrer">
+                                        Kriteria {{ $kriteriaId }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                 @endif

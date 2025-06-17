@@ -177,10 +177,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/superAdmin/user', [userConfigController::class, 'index'])->name('superAdmin.user.index');
         Route::get('/superAdmin/view_user/{id}', [userConfigController::class, 'view'])->name('superAdmin.user.view');
         Route::get('/superAdmin/edit_user/{id}', [userConfigController::class, 'edit'])->name('superAdmin.user.edit');
-        Route::put('/superAdmin/update_user/{id}', [userConfigController::class, 'update'])->name('superAdmin.user.update');
+        Route::put('/superAdmin/update/{id}', [userConfigController::class, 'update'])->name('superAdmin.user.update');
         Route::delete('/superAdmin/delete_user/{id}', [userConfigController::class, 'destroy'])->name('superAdmin.user.delete');
         Route::get('/superAdmin/create_user', [userConfigController::class, 'create'])->name('superAdmin.user.create');
         Route::post('/superAdmin/store_user', [userConfigController::class, 'store'])->name('superAdmin.user.store');
+        Route::post('/superadmin/user/update-hak-akses/{id}', [userConfigController::class, 'updateHakAkses'])->name('superAdmin.user.updateHakAkses');
 
         // Kriteria Config
         Route::get('/superAdmin/kriteria', [KriteriaConfigController::class, 'index'])->name('superAdmin.kriteria.index');

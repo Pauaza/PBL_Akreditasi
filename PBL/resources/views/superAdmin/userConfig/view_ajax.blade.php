@@ -24,6 +24,11 @@
         <input type="text" id="detailNama" class="form-control" value="{{ $user->name }}" readonly>
     </div>
     <div class="mb-3">
+        <label class="form-label">Hak Akses</label>
+        <input type="text" id="detailHakAkses" class="form-control" 
+               value="{{ $user->hakAkses->count() > 0 ? $user->hakAkses->pluck('id_kriteria')->implode(', ') : '-' }}" readonly>
+    </div>
+    <div class="mb-3">
         <label class="form-label">Role</label>
         <input type="text" id="detailRole" class="form-control" value="{{ ucfirst($user->level->level_nama ?? '-') }}"
             readonly>
@@ -31,15 +36,6 @@
     @endcomponent
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function showDetailUser() {
-            new bootstrap.Modal(document.getElementById('detailUserModal')).show();
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            showDetailUser();
-        });
-    </script>
 </body>
 
 </html>

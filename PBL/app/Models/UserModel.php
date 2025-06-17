@@ -53,7 +53,18 @@ class UserModel extends Authenticatable
         return $this->level->level_kode;
     }
 
-    public function getAuthIdentifierName(){
+    public function getAuthIdentifierName()
+    {
         return 'username';
+    }
+
+    public function hakAkses()
+    {
+        return $this->belongsToMany(KriteriaModel::class, 'user_hak_akses', 'id_user', 'id_kriteria');
+    }
+
+    public function getHakAkses()
+    {
+        return $this->hakAkses->pluck('id_kriteria')->toArray();
     }
 }

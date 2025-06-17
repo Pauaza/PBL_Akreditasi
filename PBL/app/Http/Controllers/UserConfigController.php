@@ -30,35 +30,39 @@ class userConfigController extends Controller
         return view('superAdmin.userConfig.edit_ajax', compact('user', 'levels'));
     }
 
-    public function update(Request $request, $id)
-    {
-        // Validasi data
-        $request->validate([
-            'username' => 'required|string|max:100',
-            'name' => 'required|string|max:100',
-            'id_level' => 'required|exists:m_level,id_level',
-            'password' => 'nullable|string|min:5',
-        ]);
+public function update(Request $request, $id)
+{
+    // Validasi data
+    $request->validate([
+        'username' => 'required|string|max:100',
+        'name' => 'required|string|max:100',
+        'password' => 'nullable|string|min:5',
+        'hak_akses' => 'sometimes|array',
+    ]);
 
-        // Ambil user
-        $user = UserModel::findOrFail($id);
+    // Ambil user
+    $user = UserModel::findOrFail($id);
 
-        // Update data
-        $user->username = $request->username;
-        $user->name = $request->name;
-        $user->id_level = $request->id_level;
+    // Update data
+    $user->username = $request->username;
+    $user->name = $request->name;
 
-        // Hanya ubah password jika diisi
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
-        // Simpan
-        $user->save();
-
-        // Redirect kembali dengan pesan sukses
-        return redirect()->route('superAdmin.user.index')->with('success', 'Data user berhasil diperbarui.');
+    // Hanya ubah password jika diisi
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
     }
+
+    // Simpan data user
+    $user->save();
+
+    // Sinkronisasi hak akses
+    if ($request->has('hak_akses')) {
+        $user->hakAkses()->sync($request->hak_akses);
+    }
+
+    // Redirect atau response JSON untuk AJAX
+    return response()->json(['success' => true]);
+}
 
     public function destroy($id)
     {
@@ -103,4 +107,14 @@ class userConfigController extends Controller
         return redirect()->route('superAdmin.user.index')->with('success', 'User baru berhasil ditambahkan.');
     }
 
+    public function updateHakAkses(Request $request, $id)
+    {
+        $user = UserModel::findOrFail($id);
+        $hakAkses = $request->input('hak_akses', []);
+
+        // Sinkronisasi hak akses
+        $user->hakAkses()->sync($hakAkses);
+
+        return response()->json(['success' => true]);
+    }
 }
