@@ -3,7 +3,7 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 9 </h3>
+        <h3>Beranda / Kriteria 9 </h3>
         <h2>Kriteria 9</h2>
     </div>
 
@@ -19,20 +19,17 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Penetapan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->penetapan->penetapan ?? 'Tidak ada data' !!}
                         </div>
                         @if (!empty($kriteria->penetapan->link))
-                            <a href="{{ $kriteria->penetapan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link
-                                Penetapan</a>
+                            <a href="{{ $kriteria->penetapan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link Penetapan</a>
                         @endif
                     </div>
                 </div>
                 <div class="image-preview">
                     @if (!empty($kriteria->penetapan->pendukung))
-                        <img src="{{ asset('storage/' . $kriteria->penetapan->pendukung) }}" alt="Penetapan Image"
-                            class="preview-image" style="display: block; max-width: 200px;" />
+                        <img src="{{ asset('storage/' . $kriteria->penetapan->pendukung) }}" alt="Penetapan Image" class="preview-image" style="display: block; max-width: 200px;" />
                     @else
                         <p>Tidak ada gambar</p>
                     @endif
@@ -50,20 +47,17 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pelaksanaan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pelaksanaan->penetapan ?? 'Tidak ada data' !!}
                         </div>
                         @if (!empty($kriteria->pelaksanaan->link))
-                            <a href="{{ $kriteria->pelaksanaan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link
-                                Pelaksanaan</a>
+                            <a href="{{ $kriteria->pelaksanaan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link Pelaksanaan</a>
                         @endif
                     </div>
                 </div>
                 <div class="image-preview">
                     @if (!empty($kriteria->pelaksanaan->pendukung))
-                        <img src="{{ asset('storage/' . $kriteria->pelaksanaan->pendukung) }}" alt="Pelaksanaan Image"
-                            class="preview-image" style="display: block; max-width: 200px;" />
+                        <img src="{{ asset('storage/' . $kriteria->pelaksanaan->pendukung) }}" alt="Pelaksanaan Image" class="preview-image" style="display: block; max-width: 200px;" />
                     @else
                         <p>Tidak ada gambar</p>
                     @endif
@@ -81,20 +75,17 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Evaluasi :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->evaluasi->penetapan ?? 'Tidak ada data' !!}
                         </div>
                         @if (!empty($kriteria->evaluasi->link))
-                            <a href="{{ $kriteria->evaluasi->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link
-                                Evaluasi</a>
+                            <a href="{{ $kriteria->evaluasi->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link Evaluasi</a>
                         @endif
                     </div>
                 </div>
                 <div class="image-preview">
                     @if (!empty($kriteria->evaluasi->pendukung))
-                        <img src="{{ asset('storage/' . $kriteria->evaluasi->pendukung) }}" alt="Evaluasi Image"
-                            class="preview-image" style="display: block; max-width: 200px;" />
+                        <img src="{{ asset('storage/' . $kriteria->evaluasi->pendukung) }}" alt="Evaluasi Image" class="preview-image" style="display: block; max-width: 200px;" />
                     @else
                         <p>Tidak ada gambar</p>
                     @endif
@@ -112,20 +103,17 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pengendalian :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pengendalian->penetapan ?? 'Tidak ada data' !!}
                         </div>
                         @if (!empty($kriteria->pengendalian->link))
-                            <a href="{{ $kriteria->pengendalian->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link
-                                Pengendalian</a>
+                            <a href="{{ $kriteria->pengendalian->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link Pengendalian</a>
                         @endif
                     </div>
                 </div>
                 <div class="image-preview">
                     @if (!empty($kriteria->pengendalian->pendukung))
-                        <img src="{{ asset('storage/' . $kriteria->pengendalian->pendukung) }}" alt="Pengendalian Image"
-                            class="preview-image" style="display: block; max-width: 200px;" />
+                        <img src="{{ asset('storage/' . $kriteria->pengendalian->pendukung) }}" alt="Pengendalian Image" class="preview-image" style="display: block; max-width: 200px;" />
                     @else
                         <p>Tidak ada gambar</p>
                     @endif
@@ -143,20 +131,17 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Peningkatan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->peningkatan->penetapan ?? 'Tidak ada data' !!}
                         </div>
                         @if (!empty($kriteria->peningkatan->link))
-                            <a href="{{ $kriteria->peningkatan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link
-                                Peningkatan</a>
+                            <a href="{{ $kriteria->peningkatan->link }}" target="_blank" class="btn btn-link mt-2">Lihat Link Peningkatan</a>
                         @endif
                     </div>
                 </div>
                 <div class="image-preview">
                     @if (!empty($kriteria->peningkatan->pendukung))
-                        <img src="{{ asset('storage/' . $kriteria->peningkatan->pendukung) }}" alt="Peningkatan Image"
-                            class="preview-image" style="display: block; max-width: 200px;" />
+                        <img src="{{ asset('storage/' . $kriteria->peningkatan->pendukung) }}" alt="Peningkatan Image" class="preview-image" style="display: block; max-width: 200px;" />
                     @else
                         <p>Tidak ada gambar</p>
                     @endif
@@ -194,7 +179,7 @@
             };
         }
 
-        // Handler klik menu sidebar (pastikan kamu punya elemen .menu-item dengan atribut data-section)
+        // Handler klik menu sidebar
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -241,7 +226,7 @@
 
             if (currentSection) {
                 document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-                const activeItem = document.querySelector(.menu - item[data - section="${currentSection}"]);
+                const activeItem = document.querySelector(`.menu-item[data-section="${currentSection}"]`);
                 if (activeItem) {
                     activeItem.classList.add('active');
                 }

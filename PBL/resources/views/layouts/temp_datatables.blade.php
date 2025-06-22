@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Sistem Informasi Bisnis</title>
+    <title>SiAkred - Admin</title>
+    <link rel="icon" href="assets/img/jti.png" type="image/png">
     <!-- Tambahkan Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 

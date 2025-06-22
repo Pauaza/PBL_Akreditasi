@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Sistem Informasi Bisnis</title>
+    <title>SiAkred - Admin</title>
+    <link rel="icon" href="{{ asset('assets/img/jti.png?v=2') }}" type="image/png">
     <!-- Tambahkan Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -59,23 +60,23 @@
             border: 1px solid #dee2e6;
             border-radius: 5px;
             margin-bottom: 20px;
+            border:none;
         }
 
         .card-header {
             background-color: #fff;
-            padding: 10px 20px;
+            padding: 20px 20px;
         }
 
         .card-header h5 {
-            margin-left: -10px;
             display: inline-block;
             font-size: 18px;
             font-weight: 500;
             background: #315287;
             color: white;
             border: none;
-            border-radius: 50px;
             padding: 10px 20px;
+            width: 100%;
         }
 
         .card-body {
@@ -102,7 +103,7 @@
         .form-label {
             display: block;
             margin-bottom: 5px;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .form-group textarea {
@@ -130,25 +131,37 @@
         .status-btn.draft {
             margin: 0;
             display: inline-block;
-            font-weight: 500;
+            font-weight: 400;
             border: none;
             border-radius: 50px;
             padding: 10px 20px;
         }
 
-        .btn-blue {
+        .btn-blues {
             background: #315287;
             color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            border:none;
+            cursor:pointer;
         }
 
-        .btn-green {
+        .btn-greens {
             background: #28A745;
             color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            border:none;
+            cursor:pointer;
         }
 
-        .btn-yellow {
+        .btn-yellows {
             background: #FFC107;
             color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            border:none;
+            cursor:pointer;
         }
 
         .status-btn.draft {

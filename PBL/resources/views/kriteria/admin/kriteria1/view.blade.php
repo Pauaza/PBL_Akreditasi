@@ -3,7 +3,7 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 1 </h3>
+        <h3>Beranda / Kriteria 1 </h3>
         <h2>Kriteria 1</h2>
     </div>
 
@@ -19,7 +19,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Penetapan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->penetapan->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -50,7 +49,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pelaksanaan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pelaksanaan->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -81,7 +79,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Evaluasi :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->evaluasi->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -112,7 +109,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pengendalian :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pengendalian->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -143,7 +139,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Peningkatan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->peningkatan->penetapan ?? 'Tidak ada data' !!}
                         </div>

@@ -3,7 +3,7 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 6 </h3>
+        <h3>Beranda / Kriteria 6 </h3>
         <h2>Kriteria 6</h2>
     </div>
 
@@ -17,7 +17,7 @@
         <input type="hidden" name="form_action" id="form-action" value="submit">
 
         <!-- Bagian 1: Penetapan -->
-        <div class="card">
+        <div class="card" id="penetapan-section">
             <div class="card-header">
                 <h5>Penetapan</h5>
             </div>
@@ -25,13 +25,13 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="penetapan" class="form-label" style="font-size: large; color: #1e293b">Penetapan :</label>
                             <textarea name="penetapan" id="penetapan" class="form-control" placeholder="Masukkan penetapan">{{ old('penetapan') }}</textarea>
                         </div>
 
                         <!-- Input Link Penetapan -->
                         <div class="col-md-9 mb-3">
-                            <label for="link_penetapan" class="form-label" style="font-size: large; color: #1e293b">Link Penetapan :</label>
+                            <br>
+                            <label for="link_penetapan" class="form-label" style="font-size: medium; color: #315287">Link Penetapan :</label>
                             <input type="url" name="link_penetapan" id="link_penetapan" class="form-control" placeholder="Masukkan link penetapan" value="{{ old('link_penetapan') }}">
                         </div>
                     </div>
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Bagian 2: Pelaksanaan -->
-        <div class="card">
+        <div class="card" id="pelaksanaan-section">
             <div class="card-header">
                 <h5>Pelaksanaan</h5>
             </div>
@@ -54,13 +54,13 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Pelaksanaan :</label>
                             <textarea name="pelaksanaan" id="pelaksanaan" class="form-control" placeholder="Masukkan pelaksanaan">{{ old('pelaksanaan') }}</textarea>
                         </div>
 
                         <!-- Input Link Pelaksanaan -->
                         <div class="col-md-9 mb-3">
-                            <label for="link_pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Link Pelaksanaan :</label>
+                            <br>
+                            <label for="link_pelaksanaan" class="form-label" style="font-size: medium; color: #315287">Link Pelaksanaan :</label>
                             <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control" placeholder="Masukkan link pelaksanaan" value="{{ old('link_pelaksanaan') }}">
                         </div>
                     </div>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Bagian 3: Evaluasi -->
-        <div class="card">
+        <div class="card" id="evaluasi-section">
             <div class="card-header">
                 <h5>Evaluasi</h5>
             </div>
@@ -83,13 +83,13 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="evaluasi" class="form-label" style="font-size: large; color: #1e293b">Evaluasi :</label>
                             <textarea name="evaluasi" id="evaluasi" class="form-control" placeholder="Masukkan evaluasi">{{ old('evaluasi') }}</textarea>
                         </div>
 
                         <!-- Input Link Evaluasi -->
                         <div class="col-md-9 mb-3">
-                            <label for="link_evaluasi" class="form-label" style="font-size: large; color: #1e293b">Link Evaluasi :</label>
+                            <br>
+                            <label for="link_evaluasi" class="form-label" style="font-size: medium; color: #315287">Link Evaluasi :</label>
                             <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control" placeholder="Masukkan link evaluasi" value="{{ old('link_evaluasi') }}">
                         </div>
                     </div>
@@ -104,7 +104,7 @@
         </div>
 
         <!-- Bagian 4: Pengendalian -->
-        <div class="card">
+        <div class="card" id="pengendalian-section">
             <div class="card-header">
                 <h5>Pengendalian</h5>
             </div>
@@ -112,13 +112,13 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pengendalian" class="form-label" style="font-size: large; color: #1e293b">Pengendalian :</label>
                             <textarea name="pengendalian" id="pengendalian" class="form-control" placeholder="Masukkan pengendalian">{{ old('pengendalian') }}</textarea>
                         </div>
 
                         <!-- Input Link Pengendalian -->
                         <div class="col-md-9 mb-3">
-                            <label for="link_pengendalian" class="form-label" style="font-size: large; color: #1e293b">Link Pengendalian :</label>
+                            <br>
+                            <label for="link_pengendalian" class="form-label" style="font-size: medium; color: #315287">Link Pengendalian :</label>
                             <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control" placeholder="Masukkan link pengendalian" value="{{ old('link_pengendalian') }}">
                         </div>
                     </div>
@@ -133,7 +133,7 @@
         </div>
 
         <!-- Bagian 5: Peningkatan -->
-        <div class="card">
+        <div class="card" id="peningkatan-section">
             <div class="card-header">
                 <h5>Peningkatan</h5>
             </div>
@@ -141,13 +141,13 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="peningkatan" class="form-label" style="font-size: large; color: #1e293b">Peningkatan :</label>
                             <textarea name="peningkatan" id="peningkatan" class="form-control" placeholder="Masukkan peningkatan">{{ old('peningkatan') }}</textarea>
                         </div>
 
                         <!-- Input Link Peningkatan -->
                         <div class="col-md-9 mb-3">
-                            <label for="link_peningkatan" class="form-label" style="font-size: large; color: #1e293b">Link Peningkatan :</label>
+                            <br>
+                            <label for="link_peningkatan" class="form-label" style="font-size: medium; color: #315287">Link Peningkatan :</label>
                             <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control" placeholder="Masukkan link peningkatan" value="{{ old('link_peningkatan') }}">
                         </div>
                     </div>
@@ -163,12 +163,12 @@
 
         <!-- Tombol Submit/Save -->
         <div class="button-group" style="margin-top: 20px;">
-            <button type="submit" name="form_action" value="draft" class="btn-blue" onclick="document.getElementById('form-action').value='draft'">Simpan sebagai Draf</button>
-            <button type="submit" name="form_action" value="submit" class="btn-green" onclick="document.getElementById('form-action').value='submit'">Submit</button>
+            <button type="submit" name="form_action" value="draft" class="btn-blues" onclick="document.getElementById('form-action').value='draft'">Simpan sebagai Draf</button>
+            <button type="submit" name="form_action" value="submit" class="btn-greens" onclick="document.getElementById('form-action').value='submit'">Submit</button>
         </div>
     </form>
 
-    <script src="https://cdn.tiny.cloud/1/1bjp48je8qidj72md96na5rj62hlodgqbonp4y20d4cibjom/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/aez3so5sai0j78w7i5ze78fm7kg0c8xmofpla04py4xfxh0f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         // Initialize TinyMCE for textareas
         tinymce.init({
@@ -329,9 +329,9 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Kesalahan AJAX:');
+                    console.error('Kesalahan AJAX:', error);
                     showAlert(
-                        'Gagal menyimpan data: ',
+                        'Gagal menyimpan data: ' + error.message,
                         '{{ asset('assets/icon/cross.png') }}',
                         '#993a36'
                     );

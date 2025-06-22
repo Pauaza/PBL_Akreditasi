@@ -3,7 +3,7 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 4 / Edit</h3>
+        <h3>Beranda / Kriteria 4 / Edit</h3>
         <h2>Edit Kriteria 4</h2>
     </div>
 
@@ -23,7 +23,7 @@
         <input type="hidden" name="form_action" id="form-action" value="submit">
 
         <!-- Bagian 1: Penetapan -->
-        <div class="card">
+        <div class="card" id="penetapan-section">
             <div class="card-header">
                 <h5>Penetapan</h5>
             </div>
@@ -31,14 +31,14 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="penetapan" class="form-label" style="font-size: large; color: #1e293b">Penetapan:</label>
                             <textarea name="penetapan" id="penetapan" class="form-control @error('penetapan') is-invalid @enderror" placeholder="Masukkan penetapan" {{ $disabled }}>{{ old('penetapan', $kriteria->penetapan->penetapan ?? '') }}</textarea>
                             @error('penetapan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
-                            <label for="link_penetapan" class="form-label" style="font-size: large; color: #1e293b">Link Penetapan:</label>
+                            <br>
+                            <label for="link_penetapan" class="form-label" style="font-size: medium; color: #315287">Link Penetapan:</label>
                             <input type="url" name="link_penetapan" id="link_penetapan" class="form-control @error('link_penetapan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_penetapan', $kriteria->penetapan->link ?? '') }}" {{ $disabled }}>
                             @error('link_penetapan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Bagian 2: Pelaksanaan -->
-        <div class="card">
+        <div class="card" id="pelaksanaan-section">
             <div class="card-header">
                 <h5>Pelaksanaan</h5>
             </div>
@@ -63,14 +63,14 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Pelaksanaan:</label>
                             <textarea name="pelaksanaan" id="pelaksanaan" class="form-control @error('pelaksanaan') is-invalid @enderror" placeholder="Masukkan pelaksanaan" {{ $disabled }}>{{ old('pelaksanaan', $kriteria->pelaksanaan->penetapan ?? '') }}</textarea>
                             @error('pelaksanaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
-                            <label for="link_pelaksanaan" class="form-label" style="font-size: large; color: #1e293b">Link Pelaksanaan:</label>
+                            <br>
+                            <label for="link_pelaksanaan" class="form-label" style="font-size: medium; color: #315287">Link Pelaksanaan:</label>
                             <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control @error('link_pelaksanaan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pelaksanaan', $kriteria->pelaksanaan->link ?? '') }}" {{ $disabled }}>
                             @error('link_pelaksanaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -87,7 +87,7 @@
         </div>
 
         <!-- Bagian 3: Evaluasi -->
-        <div class="card">
+        <div class="card" id="evaluasi-section">
             <div class="card-header">
                 <h5>Evaluasi</h5>
             </div>
@@ -95,14 +95,14 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="evaluasi" class="form-label" style="font-size: large; color: #1e293b">Evaluasi:</label>
                             <textarea name="evaluasi" id="evaluasi" class="form-control @error('evaluasi') is-invalid @enderror" placeholder="Masukkan evaluasi" {{ $disabled }}>{{ old('evaluasi', $kriteria->evaluasi->penetapan ?? '') }}</textarea>
                             @error('evaluasi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
-                            <label for="link_evaluasi" class="form-label" style="font-size: large; color: #1e293b">Link Evaluasi:</label>
+                            <br>
+                            <label for="link_evaluasi" class="form-label" style="font-size: medium; color: #315287">Link Evaluasi:</label>
                             <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control @error('link_evaluasi') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_evaluasi', $kriteria->evaluasi->link ?? '') }}" {{ $disabled }}>
                             @error('link_evaluasi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -119,7 +119,7 @@
         </div>
 
         <!-- Bagian 4: Pengendalian -->
-        <div class="card">
+        <div class="card" id="pengendalian-section">
             <div class="card-header">
                 <h5>Pengendalian</h5>
             </div>
@@ -127,14 +127,14 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="pengendalian" class="form-label" style="font-size: large; color: #1e293b">Pengendalian:</label>
                             <textarea name="pengendalian" id="pengendalian" class="form-control @error('pengendalian') is-invalid @enderror" placeholder="Masukkan pengendalian" {{ $disabled }}>{{ old('pengendalian', $kriteria->pengendalian->penetapan ?? '') }}</textarea>
                             @error('pengendalian')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
-                            <label for="link_pengendalian" class="form-label" style="font-size: large; color: #1e293b">Link Pengendalian:</label>
+                            <br>
+                            <label for="link_pengendalian" class="form-label" style="font-size: medium; color: #315287">Link Pengendalian:</label>
                             <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control @error('link_pengendalian') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_pengendalian', $kriteria->pengendalian->link ?? '') }}" {{ $disabled }}>
                             @error('link_pengendalian')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Bagian 5: Peningkatan -->
-        <div class="card">
+        <div class="card" id="peningkatan-section">
             <div class="card-header">
                 <h5>Peningkatan</h5>
             </div>
@@ -159,14 +159,14 @@
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
-                            <label for="peningkatan" class="form-label" style="font-size: large; color: #1e293b">Peningkatan:</label>
                             <textarea name="peningkatan" id="peningkatan" class="form-control @error('peningkatan') is-invalid @enderror" placeholder="Masukkan peningkatan" {{ $disabled }}>{{ old('peningkatan', $kriteria->peningkatan->penetapan ?? '') }}</textarea>
                             @error('peningkatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-9 mb-3">
-                            <label for="link_peningkatan" class="form-label" style="font-size: large; color: #1e293b">Link Peningkatan:</label>
+                            <br>
+                            <label for="link_peningkatan" class="form-label" style="font-size: medium; color: #315287">Link Peningkatan:</label>
                             <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control @error('link_peningkatan') is-invalid @enderror" placeholder="Masukkan link pendukung (URL)" value="{{ old('link_peningkatan', $kriteria->peningkatan->link ?? '') }}" {{ $disabled }}>
                             @error('link_peningkatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -182,7 +182,7 @@
             </div>
         </div>
 
-        <script src="https://cdn.tiny.cloud/1/1bjp48je8qidj72md96na5rj62hlodgqbonp4y20d4cibjom/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.tiny.cloud/1/aez3so5sai0j78w7i5ze78fm7kg0c8xmofpla04py4xfxh0f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
             // Initialize TinyMCE for textareas
             tinymce.init({
@@ -331,8 +331,8 @@
         </script>
 
         <div class="button-group" style="margin-top: 20px;">
-            <button type="submit" name="form_action" value="draft" class="btn-blue" onclick="document.getElementById('form-action').value='draft'" {{ $disabled }}>Simpan sebagai Draf</button>
-            <button type="submit" name="form_action" value="submit" class="btn-green" onclick="document.getElementById('form-action').value='submit'" {{ $disabled }}>Submit</button>
+            <button type="submit" name="form_action" value="draft" class="btn-blues" onclick="document.getElementById('form-action').value='draft'" {{ $disabled }}>Simpan sebagai Draf</button>
+            <button type="submit" name="form_action" value="submit" class="btn-greens" onclick="document.getElementById('form-action').value='submit'" {{ $disabled }}>Submit</button>
         </div>
     </form>
 @endsection

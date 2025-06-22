@@ -4,8 +4,8 @@
     <!-- Header -->
     <div class="header">
         <div>
-            <h3>Super Admin / Page</h3>
-            <h2>Page Configuration</h2>
+            <h3>SuperAdmin / Konten</h3>
+            <h2>Konfigurasi Konten</h2>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
         <!-- Dashboard Table -->
         <div class="card mb-4">
             <div class="card-title">
-                <h5>Table Dashboard</h5>
+                <h5>Tabel Dashboard</h5>
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -81,7 +81,7 @@
         <!-- Login Table -->
         <div class="card mb-4">
             <div class="card-title">
-                <h5>Table Login</h5>
+                <h5>Tabel Login</h5>
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -136,7 +136,7 @@
         <!-- Landing Table -->
         <div class="card">
             <div class="card-title">
-                <h5>Table Landing</h5>
+                <h5>Tabel Landing</h5>
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -238,5 +238,10 @@
         .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1040; }
         .modal { z-index: 1050; }
         .card.mb-4 { margin-bottom: 1.5rem; }
+
+        .card h5{
+            font-size: 20px;
+            font-weight: 600;
+        }
     </style>
 @endsection

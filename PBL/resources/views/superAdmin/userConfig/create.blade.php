@@ -42,7 +42,7 @@
 <body>
     @component('layouts.temp_modal', [
         'modalId' => 'createUserModal',
-        'modalTitle' => 'Tambah User Baru',
+        'modalTitle' => 'Tambah Pengguna Baru',
         'cancelButtons' => [['text' => 'Kembali ke Daftar User', 'class' => 'btn-danger', 'route' => route('superAdmin.user.index')]],
         'actionButton' => ['text' => 'Simpan', 'class' => 'btn-primary', 'id' => 'saveCreateUser'],
     ])

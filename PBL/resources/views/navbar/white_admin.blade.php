@@ -81,7 +81,7 @@
         .button-logout {
             background: #993A36;
             color: white;
-            padding: 10px 30px;
+            padding: 10px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 12px;
@@ -197,7 +197,7 @@
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="{{ route('dashboard_admin') }}" class="nav-link">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" onclick="openFinalDocModal()">Final Doc</a></li>
+                <li class="nav-item"><a class="nav-link" onclick="openFinalDocModal()">Finalisasi Dokumen</a></li>
                 <!-- Di dalam ul navbar-nav -->
                 <li class="nav-item">
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: inline;">

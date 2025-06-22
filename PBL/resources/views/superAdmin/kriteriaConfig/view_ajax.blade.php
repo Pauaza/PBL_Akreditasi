@@ -1,39 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- resources/views/superAdmin/kriteria/view_modal.blade.php -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Kriteria</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<div class="modal-header">
+    <h5 class="modal-title custom-modal-title">Detail Data Kriteria</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
 
-<body>
-    @component('layouts.temp_modal', [
-        'modalId' => 'detailKriteriaModal',
-        'modalTitle' => 'Detail Data Kriteria',
-        'cancelButtons' => [['text' => 'Kembali ke Daftar Kriteria', 'class' => 'btn-primary', 'route' => route('superAdmin.kriteria.index')]],
-    ])
+<div class="modal-body">
     <div class="mb-3">
-        <label class="form-label">Nama Kriteria</label>
-        <input type="text" id="detailNamaKriteria" class="form-control" value="{{ $kriteria->nama_kriteria }}" readonly>
+        <label class="form-label custom-form-label">Nama Kriteria</label>
+        <input type="text" class="form-control custom-form-control" value="{{ $kriteria->nama_kriteria }}" readonly>
     </div>
-    @endcomponent
+</div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Function to open detail modal
-        function showDetailKriteria() {
-            new bootstrap.Modal(document.getElementById('detailKriteriaModal')).show();
-        }
-
-        // Auto-open modal for preview
-        document.addEventListener('DOMContentLoaded', function () {
-            showDetailKriteria();
-        });
-    </script>
-</body>
-
-</html>
+<div class="modal-footer">
+    <button type="button" class="custom-modal-btn" data-bs-dismiss="modal">Tutup</button>
+</div>

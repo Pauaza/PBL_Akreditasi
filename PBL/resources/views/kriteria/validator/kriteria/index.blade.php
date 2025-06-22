@@ -48,7 +48,7 @@
 
     {{-- Header --}}
     <div class="header">
-        <h3>Home / Kriteria {{ $kriteria->id_kriteria }}</h3>
+        <h3>Beranda / Kriteria {{ $kriteria->id_kriteria }}</h3>
         <h2>Kriteria {{ $kriteria->id_kriteria }}</h2>
     </div>
 

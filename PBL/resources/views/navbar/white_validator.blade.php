@@ -79,7 +79,7 @@
         .button-logout {
             background: #993A36;
             color: white;
-            padding: 10px 30px;
+            padding: 10px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 12px;
