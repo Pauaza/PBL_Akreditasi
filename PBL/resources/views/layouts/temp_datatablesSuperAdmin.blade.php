@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datatables Super Admin</title>
+    <title>Konfigurasi Super Admin</title>
+    <link rel="icon" href="assets/img/jti.png" type="image/png">
     <!-- Tambahkan Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Bundle with Popper -->
     
     <style>
     * {
@@ -61,6 +65,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
+        border:none;
     }
 
     .card-title {
@@ -74,7 +79,7 @@
 
     .card-title h5 {
         margin: 0;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: 600;
         color: #315287; /* Biru sesuai template */
         background: none; /* Tanpa background */
@@ -187,6 +192,43 @@
         width: 24px;
         height: 24px;
     }
+    .custom-modal-title {
+        color: #315287;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .custom-form-label {
+        color:#315287;
+        font-weight: 600;
+    }
+
+    .custom-form-control {
+        border-radius: 50px;
+        color: #315287;
+    }
+
+    .custom-modal-btn {
+        background:#315287;
+        color:#fff;
+        border-radius: 50px;
+        padding: 5px 25px;
+        font-weight: 400;
+        font-size: 13px;
+        border: none;
+    }
+
+    .custom-modal-btn-back {
+        background:#993A36;
+        color:#fff;
+        border-radius: 50px;
+        padding: 5px 25px;
+        font-weight: 400;
+        font-size: 13px;
+        border: none;
+        text-decoration: none;
+    }
+
     </style>
 </head>
 <body>
@@ -200,5 +242,12 @@
     <div class="content">
         @yield('content')
     </div>
+
+        <!-- jQuery (HARUS sebelum Bootstrap JS) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap Bundle JS (wajib untuk modal) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

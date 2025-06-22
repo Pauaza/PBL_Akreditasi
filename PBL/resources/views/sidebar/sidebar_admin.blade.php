@@ -117,9 +117,6 @@
             <div class="menu-item" data-section="peningkatan-section">
                 <h5>V Peningkatan</h5>
             </div>
-            <div class="menu-item" data-section="comments-section">
-                <h5>Comments</h5>
-            </div>
         </div>
 
         @php
@@ -135,7 +132,12 @@
                 'admin8' => 8,
                 'admin9' => 9,
             ];
-            $kriteriaId = $akses[$username] ?? null;
+            // Ambil segment ke-3 (kriteria2) dan konversi ke integer
+            $segmentId = request()->segment(3)
+                ? (int) filter_var(request()->segment(3), FILTER_SANITIZE_NUMBER_INT)
+                : null;
+            // Gunakan segmentId jika valid, fallback ke akses user
+            $kriteriaId = in_array($segmentId, $akses) ? $segmentId : $akses[$username] ?? null;
         @endphp
 
         <div class="back-button">
@@ -144,15 +146,70 @@
     </div>
     <script>
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function () {
-                // Remove active class from all menu items
-                document.querySelectorAll('.menu-item').forEach(i => {
-                    i.classList.remove('active');
-                });
-                // Add active class to clicked item
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
+
+                const sectionId = this.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const headerOffset = 170;
+                    const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                        top: sectionPosition - headerOffset,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
+
+        // Highlight menu sidebar berdasarkan posisi scroll
+        window.addEventListener('scroll', debounce(() => {
+            const sections = [
+                'penetapan-section',
+                'pelaksanaan-section',
+                'evaluasi-section',
+                'pengendalian-section',
+                'peningkatan-section',
+                'comments-section'
+            ];
+
+            let currentSection = '';
+            const headerOffset = 170;
+
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= headerOffset + 50 && rect.bottom >= headerOffset) {
+                        currentSection = sectionId;
+                        break;
+                    }
+                }
+            }
+
+            if (currentSection) {
+                document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+                const activeItem = document.querySelector(`.menu-item[data-section="${currentSection}"]`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+        }, 100));
+
+        // Fungsi debounce untuk mengoptimalkan event scroll
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
     </script>
 </body>
 

@@ -4,8 +4,8 @@
     <!-- Header -->
     <div class="header">
         <div>
-            <h3>Super Admin / Dashboard</h3>
-            <h2>Dashboard</h2>
+            <h3>SuperAdmin / Beranda</h3>
+            <h2>Beranda</h2>
         </div>
     </div>
 
@@ -18,8 +18,8 @@
                 <!-- User Lists Title Card -->
                 <div class="card" style="min-height: 50px;">
                     <div class="card-title">
-                        <h5>User Lists</h5>
-                        <a href="#" class="view-more-btn">View More</a>
+                        <h5>Daftar Pengguna</h5>
+                        <a href="{{ route('superAdmin.user.index') }}" class="view-more-btn">Selengkapnya...</a>
                     </div>
                 </div>
                 <!-- User Lists Content Card -->
@@ -60,8 +60,8 @@
                 <!-- Kriteria Lists Title Card -->
                 <div class="card" style="min-height: 50px;">
                     <div class="card-title">
-                        <h5>Kriteria Lists</h5>
-                        <a href="#" class="view-more-btn">View More</a>
+                        <h5>Daftar Kriteria</h5>
+                        <a href="{{ route('superAdmin.kriteria.index') }}" class="view-more-btn">Selengkapnya...</a>
                     </div>
                 </div>
                 <!-- Kriteria Lists Content Card -->
@@ -97,8 +97,8 @@
                 <!-- Manage Content Title Card -->
                 <div class="card" style="min-height: 50px;">
                     <div class="card-title">
-                        <h5>Manage Content</h5>
-                        <a href="#" class="view-more-btn">View More</a>
+                        <h5>Kelola Konten</h5>
+                        <a href="{{ route('superAdmin.page.index') }}" class="view-more-btn">Selengkapnya...</a>
                     </div>
                 </div>
                 <!-- Manage Content Content Card -->
@@ -108,21 +108,21 @@
                             <div class="manage-content-container">
                                 <!-- Profile Section -->
                                 <div class="manage-content-item">   
-                                    <h6>Profile Section</h6>
+                                    <h6>Halaman Profil</h6>
                                     <div class="content-placeholder">
                                         <img src="assets/sa/profile.png">
                                     </div>
                                 </div>
                                 <!-- News Section -->
                                 <div class="manage-content-item">
-                                    <h6>News Section</h6>
+                                    <h6>Berita</h6>
                                     <div class="content-placeholder">
                                         <img src="assets/sa/news.png">
                                     </div>
                                 </div>
                                 <!-- Maps Section -->
                                 <div class="manage-content-item">
-                                    <h6>Maps Section</h6>
+                                    <h6>Denah</h6>
                                     <div class="content-placeholder">
                                         <img src="assets/sa/maps.png">
                                     </div>

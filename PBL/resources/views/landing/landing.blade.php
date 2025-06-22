@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Akreditasi D4 Sistem Informasi Bisnis</title>
+    <title>Si Akred SIB</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/img/jti.png" type="image/png">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;

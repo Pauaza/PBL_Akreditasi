@@ -3,7 +3,7 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 9</h3>
+        <h3>Beranda / Kriteria 9</h3>
         <h2>Kriteria 9</h2>
     </div>
 

@@ -4,8 +4,8 @@
     <!-- Header -->
     <div class="header">
         <div>
-            <h3>Super Admin / User</h3>
-            <h2>User Configuration</h2>
+            <h3>SuperAdmin / Pengguna</h3>
+            <h2>Konfigurasi Pengguna</h2>
         </div>
     </div>
 
@@ -25,22 +25,11 @@
     <div class="dashboard-container">
         <div class="card">
             <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <h5>Table User</h5>
+                <h5>Tabel Pengguna</h5>
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <button onclick="loadCreateModal('{{ route('superAdmin.user.create') }}')" class="btn btn-primary add-user-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="margin-right: 8px;">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg>
-                        Tambah User
+                        Tambah Pengguna
                     </button>
-                    <div class="search-container">
-                        <div class="search-bar">
-                            <input type="text" placeholder="Search..." style="height: 30px;">
-                            <img src="https://img.icons8.com/ios-filled/50/315287/search--v1.png" alt="Search Icon"
-                                class="search-icon">
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -177,6 +166,11 @@
             transition: none !important; /* Prevent any zoom/transition effects */
         }
 
+        .card h5{
+            font-size: 20px;
+            font-weight: 600;
+        }
+
         /* Action button styles */
         .action-button {
             cursor: pointer;
@@ -202,11 +196,11 @@
             display: flex;
             align-items: center;
             padding: 8px 16px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             background-color: #315287;
             color: white;
-            border-radius: 8px;
+            border-radius: 50px;
             border: none;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
@@ -215,7 +209,6 @@
 
         .add-user-btn:hover {
             background-color: #274273;
-            transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 

@@ -59,6 +59,8 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Login Berhasil',
+                'icon' => asset('assets/icon/checkmark.png'),
+                'backgroundColor' => '#315287',
                 'redirect' => url($redirectUrl)
             ], 200);
         }
@@ -67,7 +69,9 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => false,
-            'message' => 'Username atau Password Salah'
+            'message' => 'Username atau Password Salah',
+            'icon' => asset('assets/icon/cross.png'),
+            'backgroundColor' => '#993a36'
         ], 401);
     }
 

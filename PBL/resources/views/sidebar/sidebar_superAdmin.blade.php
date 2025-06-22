@@ -114,16 +114,16 @@
         </div>
         <div class="menu">
             <div class="menu-item">
-                <a href="{{ route('superAdmin.dashboard') }}"><h5>Dashboard</h5></a>
+                <a href="{{ route('superAdmin.dashboard') }}"><h5>Beranda</h5></a>
             </div>
             <div class="menu-item">
-                <a href="{{ route('superAdmin.user.index') }}"><h5>User Configuration</h5></a>
+                <a href="{{ route('superAdmin.user.index') }}"><h5>Konfigurasi Pengguna</h5></a>
             </div>
             <div class="menu-item">
-                <a href="{{ route('superAdmin.kriteria.index') }}"><h5>Kriteria Configuration</h5></a>
+                <a href="{{ route('superAdmin.kriteria.index') }}"><h5>Konfigurasi Kriteria</h5></a>
             </div>
             <div class="menu-item">
-                <a href="{{ route('superAdmin.page.index') }}"><h5>Page Configuration</h5></a>
+                <a href="{{ route('superAdmin.page.index') }}"><h5>Kelola Konten</h5></a>
             </div>
         </div>
         

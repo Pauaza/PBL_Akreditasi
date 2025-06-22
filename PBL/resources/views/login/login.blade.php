@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Login Page - 2 Containers</title>
+    <title>Laman Login</title>
+    <link rel="icon" href="assets/img/jti.png" type="image/png">
     <style>
         * {
             box-sizing: border-box;
@@ -50,7 +51,7 @@
             background: #ffffff;
             color: #315287;
             border: none;
-            padding: 15px 20px 15px 15px;
+            padding: 15px 24px 15px 23px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
@@ -79,11 +80,7 @@
             display: block;
         }
 
-        #profile,
-        #vision,
-        #mission,
-        #goals,
-        #objectives {
+        #profile, #vision, #mission, #goals, #objectives {
             background: #315287;
         }
 
@@ -166,6 +163,32 @@
             font-weight: 500;
         }
 
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            padding: 17px 40px 17px 17px;
+            border-radius: 50px;
+            border: 2px solid #315287;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 27px;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
         .login-container2 button {
             width: 100%;
             padding: 17px;
@@ -229,21 +252,39 @@
             height: 50px;
             object-fit: contain;
         }
+
+        .custom-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background-color: #315287;
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
     </style>
 </head>
 
 <body>
     <div class="top-logo">
-        <img src="assets/img/jti.png" alt="Logo" />
+        <img src="{{ asset('assets/img/jti.png') }}" alt="Logo" />
     </div>
 
     <div class="login-container1">
         <div class="tab-buttons">
-            <button class="tab-button active" onclick="openTab('profile')">Profile</button>
-            <button class="tab-button" onclick="openTab('vision')">Vision</button>
-            <button class="tab-button" onclick="openTab('mission')">Mission</button>
-            <button class="tab-button" onclick="openTab('goals')">Goals</button>
-            <button class="tab-button" onclick="openTab('objectives')">Objectives</button>
+            <button class="tab-button active" onclick="openTab('profile')">Profil</button>
+            <button class="tab-button" onclick="openTab('vision')">Visi</button>
+            <button class="tab-button" onclick="openTab('mission')">Misi</button>
+            <button class="tab-button" onclick="openTab('goals')">Tujuan</button>
+            <button class="tab-button" onclick="openTab('objectives')">Objektif</button>
         </div>
 
         <div id="profile" class="tab-content active">
@@ -299,33 +340,123 @@
 
     <div class="login-container2">
         <div class="login-header">
-            <img src="assets/icon/user.png" alt="Login Icon" class="login-icon" />
-            <p class="login-desc">Please input registered username and password</p>
+            <img src="{{ asset('assets/icon/user.png') }}" alt="Login Icon" class="login-icon" />
+            <p class="login-desc">Mohon masukkan username dan password yang telah terdaftar</p>
         </div>
-        <form method="POST" action="{{ route('login.post') }}">
+        <form id="loginForm" method="POST" action="{{ route('login.post') }}">
             @csrf
             <input type="text" name="username" placeholder="username" required>
-            <input type="password" name="password" placeholder="password" required>
-            <button type="submit">Login</button>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="password" placeholder="password" required>
+                <img src="{{ asset('assets/icon/eye-off.png') }}" alt="Toggle Password" class="eye-icon" id="togglePassword">
+            </div>
+            <button type="submit">Masuk</button>
         </form>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.src = type === 'password' ? '{{ asset('assets/icon/eye-off.png') }}' : '{{ asset('assets/icon/eye-on.png') }}';
+        });
+
+        // Handle form submission with AJAX
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+
+                const form = $(this);
+                const url = form.attr('action');
+                const csrfToken = form.find('input[name="_token"]').val();
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: form.serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            showAlert(response.message, response.icon, response.backgroundColor);
+                            document.querySelector('#loginForm button[type="submit"]').setAttribute('data-redirect', response.redirect);
+                        } else {
+                            showAlert(response.message, response.icon, response.backgroundColor);
+                        }
+                    },
+                    error: function(xhr) {
+                        const response = xhr.responseJSON || { message: 'Terjadi kesalahan pada server' };
+                        showAlert(response.message, '{{ asset('assets/icon/cross.png') }}', '#993a36');
+                    }
+                });
+            });
+        });
+
+        function showAlert(message, iconSrc, backgroundColor) {
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) existingAlert.remove();
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'custom-alert';
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.padding = '15px 30px';
+            alertDiv.style.backgroundColor = backgroundColor;
+            alertDiv.style.color = '#fff';
+            alertDiv.style.borderRadius = '10px';
+            alertDiv.style.display = 'flex';
+            alertDiv.style.alignItems = 'center';
+            alertDiv.style.gap = '10px';
+            alertDiv.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+            alertDiv.style.zIndex = '1000';
+            alertDiv.style.fontFamily = 'Montserrat, sans-serif';
+            alertDiv.style.fontSize = '14px';
+            alertDiv.style.fontWeight = '500';
+
+            const icon = document.createElement('img');
+            icon.src = iconSrc;
+            icon.style.width = '24px';
+            icon.style.height = '24px';
+            icon.style.objectFit = 'contain';
+            icon.onerror = () => console.error('Gagal memuat ikon:', iconSrc);
+
+            const messageSpan = document.createElement('span');
+            messageSpan.textContent = message;
+
+            alertDiv.appendChild(icon);
+            alertDiv.appendChild(messageSpan);
+            document.body.appendChild(alertDiv);
+
+            console.log('Alert ditampilkan:', message);
+
+            setTimeout(() => {
+                alertDiv.remove();
+                if (backgroundColor === '#315287') {
+                    window.location.href = document.querySelector('#loginForm button[type="submit"]').getAttribute('data-redirect');
+                }
+            }, 3000);
+        }
+    </script>
 </body>
-
-<script>
-    function openTab(tabName) {
-        const tabContents = document.getElementsByClassName("tab-content");
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove("active");
-        }
-
-        const tabButtons = document.getElementsByClassName("tab-button");
-        for (let i = 0; i < tabButtons.length; i++) {
-            tabButtons[i].classList.remove("active");
-        }
-
-        document.getElementById(tabName).classList.add("active");
-        event.currentTarget.classList.add("active");
-    }
-</script>
-
 </html>

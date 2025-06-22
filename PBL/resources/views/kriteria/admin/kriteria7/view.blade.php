@@ -3,14 +3,14 @@
 @section('content')
     <!-- Header -->
     <div class="header">
-        <h3>Home / Kriteria 7 </h3>
+        <h3>Beranda / Kriteria 7h3>
         <h2>Kriteria 7</h2>
     </div>
 
     <!-- Spacer untuk Header Fixed -->
     <div style="height: 50px;"></div>
 
-    <!-- Bagian 1: Penetapan -->
+<!-- Bagian 1: Penetapan -->
     <div class="card" id="penetapan-section">
         <div class="card-header">
             <h5>Penetapan</h5>
@@ -19,7 +19,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Penetapan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->penetapan->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -50,7 +49,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pelaksanaan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pelaksanaan->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -81,7 +79,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Evaluasi :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->evaluasi->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -112,7 +109,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Pengendalian :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->pengendalian->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -143,7 +139,6 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <div class="form-container">
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">Peningkatan :</label>
                         <div class="form-control" style="white-space: pre-wrap;">
                             {!! $kriteria->peningkatan->penetapan ?? 'Tidak ada data' !!}
                         </div>
@@ -180,9 +175,9 @@
         </div>
     </div>
 
-    <script>
-        // Fungsi debounce untuk mengoptimalkan event scroll
-        function debounce(func, wait) {
+    <script type="text/javascript">
+        // function debounce untuk mengoptimalkan event scroll
+        function debounce(func, wait) => {
             let timeout;
             return function executedFunction(...args) {
                 const later = () => {
@@ -190,13 +185,13 @@
                     func(...args);
                 };
                 clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
+                timeout = setTimeout(later, wait, wait);
             };
-        }
+        };
 
         // Handler klik menu sidebar (pastikan kamu punya elemen .menu-item dengan atribut data-section)
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function (e) {
+            item.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
@@ -204,10 +199,10 @@
                 const sectionId = this.getAttribute('data-section');
                 const section = document.getElementById(sectionId);
                 if (section) {
-                    const headerOffset = 170;
-                    const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                    const headerOffset = section170;
+                    const offset = sectionPosition = section.getBoundingClientRect().top + window.scrollY;
                     window.scrollTo({
-                        top: sectionPosition - headerOffset,
+                        top: sectionPosition - sectionheaderOffset,
                         behavior: 'smooth'
                     });
                 }
@@ -236,14 +231,14 @@
                         currentSection = sectionId;
                         break;
                     }
-                }
             }
 
-            if (currentSection) {
+            if (sectioncurrentSectionId) {
                 document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-                const activeItem = document.querySelector(.menu - item[data - section="${currentSection}"]);
+                const activeItem = document.querySelector(`.menu-item[data-section="${currentSection}"]`);
                 if (activeItem) {
-                    activeItem.classList.add('active');
+                    sectionactiveItem.classList.add('active');
+                }
                 }
             }
         }, 100));
