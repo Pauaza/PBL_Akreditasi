@@ -37,28 +37,53 @@ class KriteriaAdminController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $request->validate([
+        $action = $request->input('form_action', 'submit');
+
+        $rules = [
             'penetapan' => 'nullable|string',
             'pelaksanaan' => 'nullable|string',
             'evaluasi' => 'nullable|string',
             'pengendalian' => 'nullable|string',
             'peningkatan' => 'nullable|string',
+            'link_penetapan' => 'nullable|url',
+            'link_pelaksanaan' => 'nullable|url',
+            'link_evaluasi' => 'nullable|url',
+            'link_pengendalian' => 'nullable|url',
+            'link_peningkatan' => 'nullable|url',
             'file_penetapan' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'file_pelaksanaan' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'file_evaluasi' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'file_pengendalian' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'file_peningkatan' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-        ]);
+        ];
+
+        if ($action === 'submit') {
+            $rules = array_merge($rules, [
+                'penetapan' => 'required|string',
+                'pelaksanaan' => 'required|string',
+                'evaluasi' => 'required|string',
+                'pengendalian' => 'required|string',
+                'peningkatan' => 'required|string',
+                'link_penetapan' => 'required|url',
+                'link_pelaksanaan' => 'required|url',
+                'link_evaluasi' => 'required|url',
+                'link_pengendalian' => 'required|url',
+                'link_peningkatan' => 'required|url',
+            ]);
+        }
+
+        $request->validate($rules);
 
         $kriteria = DetailKriteriaModel::findOrFail($id);
         $id_kriteria = (int) $request->input('id_kriteria');
         $isUpdated = false;
 
         // Update Penetapan
-        if ($request->penetapan || $request->hasFile('file_penetapan')) {
+        if ($request->penetapan || $request->hasFile('file_penetapan') || $request->link_penetapan) {
             $penetapan = PenetapanModel::where('id_penetapan', $kriteria->id_penetapan)->first();
             if ($penetapan) {
                 $penetapan->penetapan = $request->penetapan ?? $penetapan->penetapan;
+                $penetapan->link = $request->link_penetapan ?? $penetapan->link;
                 if ($request->hasFile('file_penetapan')) {
                     $path = $request->file('file_penetapan')->store('pendukung/penetapan');
                     $penetapan->pendukung = $path;
@@ -71,6 +96,7 @@ class KriteriaAdminController extends Controller
                     'id_kriteria' => $id_kriteria,
                     'penetapan' => $request->penetapan,
                     'pendukung' => $path,
+                    'link' => $request->link_penetapan,
                 ]);
                 $kriteria->id_penetapan = $penetapan->id_penetapan;
                 $isUpdated = true;
@@ -78,10 +104,11 @@ class KriteriaAdminController extends Controller
         }
 
         // Update Pelaksanaan
-        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan')) {
+        if ($request->pelaksanaan || $request->hasFile('file_pelaksanaan') || $request->link_pelaksanaan) {
             $pelaksanaan = PelaksanaanModel::where('id_pelaksanaan', $kriteria->id_pelaksanaan)->first();
             if ($pelaksanaan) {
                 $pelaksanaan->penetapan = $request->pelaksanaan ?? $pelaksanaan->penetapan;
+                $pelaksanaan->link = $request->link_pelaksanaan ?? $pelaksanaan->link;
                 if ($request->hasFile('file_pelaksanaan')) {
                     $path = $request->file('file_pelaksanaan')->store('pendukung/pelaksanaan');
                     $pelaksanaan->pendukung = $path;
@@ -94,6 +121,7 @@ class KriteriaAdminController extends Controller
                     'id_kriteria' => $id_kriteria,
                     'penetapan' => $request->pelaksanaan,
                     'pendukung' => $path,
+                    'link' => $request->link_pelaksanaan,
                 ]);
                 $kriteria->id_pelaksanaan = $pelaksanaan->id_pelaksanaan;
                 $isUpdated = true;
@@ -101,10 +129,11 @@ class KriteriaAdminController extends Controller
         }
 
         // Update Evaluasi
-        if ($request->evaluasi || $request->hasFile('file_evaluasi')) {
+        if ($request->evaluasi || $request->hasFile('file_evaluasi') || $request->link_evaluasi) {
             $evaluasi = EvaluasiModel::where('id_evaluasi', $kriteria->id_evaluasi)->first();
             if ($evaluasi) {
                 $evaluasi->penetapan = $request->evaluasi ?? $evaluasi->penetapan;
+                $evaluasi->link = $request->link_evaluasi ?? $evaluasi->link;
                 if ($request->hasFile('file_evaluasi')) {
                     $path = $request->file('file_evaluasi')->store('pendukung/evaluasi');
                     $evaluasi->pendukung = $path;
@@ -117,6 +146,7 @@ class KriteriaAdminController extends Controller
                     'id_kriteria' => $id_kriteria,
                     'penetapan' => $request->evaluasi,
                     'pendukung' => $path,
+                    'link' => $request->link_evaluasi,
                 ]);
                 $kriteria->id_evaluasi = $evaluasi->id_evaluasi;
                 $isUpdated = true;
@@ -124,10 +154,11 @@ class KriteriaAdminController extends Controller
         }
 
         // Update Pengendalian
-        if ($request->pengendalian || $request->hasFile('file_pengendalian')) {
+        if ($request->pengendalian || $request->hasFile('file_pengendalian') || $request->link_pengendalian) {
             $pengendalian = PengendalianModel::where('id_pengendalian', $kriteria->id_pengendalian)->first();
             if ($pengendalian) {
                 $pengendalian->penetapan = $request->pengendalian ?? $pengendalian->penetapan;
+                $pengendalian->link = $request->link_pengendalian ?? $pengendalian->link;
                 if ($request->hasFile('file_pengendalian')) {
                     $path = $request->file('file_pengendalian')->store('pendukung/pengendalian');
                     $pengendalian->pendukung = $path;
@@ -140,6 +171,7 @@ class KriteriaAdminController extends Controller
                     'id_kriteria' => $id_kriteria,
                     'penetapan' => $request->pengendalian,
                     'pendukung' => $path,
+                    'link' => $request->link_pengendalian,
                 ]);
                 $kriteria->id_pengendalian = $pengendalian->id_pengendalian;
                 $isUpdated = true;
@@ -147,10 +179,11 @@ class KriteriaAdminController extends Controller
         }
 
         // Update Peningkatan
-        if ($request->peningkatan || $request->hasFile('file_peningkatan')) {
+        if ($request->peningkatan || $request->hasFile('file_peningkatan') || $request->link_peningkatan) {
             $peningkatan = PeningkatanModel::where('id_peningkatan', $kriteria->id_peningkatan)->first();
             if ($peningkatan) {
                 $peningkatan->penetapan = $request->peningkatan ?? $peningkatan->penetapan;
+                $peningkatan->link = $request->link_peningkatan ?? $peningkatan->link;
                 if ($request->hasFile('file_peningkatan')) {
                     $path = $request->file('file_peningkatan')->store('pendukung/peningkatan');
                     $peningkatan->pendukung = $path;
@@ -163,23 +196,27 @@ class KriteriaAdminController extends Controller
                     'id_kriteria' => $id_kriteria,
                     'penetapan' => $request->peningkatan,
                     'pendukung' => $path,
+                    'link' => $request->link_peningkatan,
                 ]);
                 $kriteria->id_peningkatan = $peningkatan->id_peningkatan;
                 $isUpdated = true;
             }
         }
-       if ($isUpdated) {
+
+        if ($isUpdated) {
+            $kriteria->status_selesai = $action === 'draft' ? 'save' : 'submit';
             $kriteria->updated_at = now();
             $kriteria->save();
             Log::info('Updated DetailKriteria', [
                 'id_detail_kriteria' => $kriteria->id_detail_kriteria,
                 'created_at' => $kriteria->created_at,
                 'updated_at' => $kriteria->updated_at,
-                'is_updated' => $isUpdated
+                'is_updated' => $isUpdated,
+                'status_selesai' => $kriteria->status_selesai,
             ]);
         }
 
-        return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('index.admin.kriteria1')->with('success', 'Data berhasil diperbarui sebagai ' . ($action === 'draft' ? 'draf' : 'submit') . '.');
     }
 
     // PENETAPAN
@@ -195,7 +232,7 @@ class KriteriaAdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(5) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('penetapan_kriteria1', $fileName, 'public');
         }
 
@@ -222,7 +259,7 @@ class KriteriaAdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(5) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('pelaksanaan_kriteria1', $fileName, 'public');
         }
 
@@ -249,7 +286,7 @@ class KriteriaAdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(5) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('evaluasi_kriteria1', $fileName, 'public');
         }
 
@@ -276,7 +313,7 @@ class KriteriaAdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(5) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('pengendalian_kriteria1', $fileName, 'public');
         }
 
@@ -303,7 +340,7 @@ class KriteriaAdminController extends Controller
         $filePath = '';
         if ($request->hasFile('pendukung')) {
             $file = $request->file('pendukung');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = time() . '_' . Str::random(5) . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('peningkatan_kriteria1', $fileName, 'public');
         }
 
@@ -320,26 +357,44 @@ class KriteriaAdminController extends Controller
     // Fungsi submit berdasarkan id_detail_kriteria
     public function submitKriteria(Request $request)
     {
-        $request->validate([
+        $action = $request->input('form_action', 'submit');
+
+        $rules = [
             'penetapan' => 'nullable|string',
-            'link_penetapan' => 'nullable|url',
             'pelaksanaan' => 'nullable|string',
-            'link_pelaksanaan' => 'nullable|url',
             'evaluasi' => 'nullable|string',
-            'link_evaluasi' => 'nullable|url',
             'pengendalian' => 'nullable|string',
-            'link_pengendalian' => 'nullable|url',
             'peningkatan' => 'nullable|string',
+            'link_penetapan' => 'nullable|url',
+            'link_pelaksanaan' => 'nullable|url',
+            'link_evaluasi' => 'nullable|url',
+            'link_pengendalian' => 'nullable|url',
             'link_peningkatan' => 'nullable|url',
             'file_penetapan' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_pelaksanaan' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_evaluasi' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_pengendalian' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
             'file_peningkatan' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
-        ]);
+        ];
+
+        if ($action === 'submit') {
+            $rules = array_merge($rules, [
+                'penetapan' => 'required|string',
+                'pelaksanaan' => 'required|string',
+                'evaluasi' => 'required|string',
+                'pengendalian' => 'required|string',
+                'peningkatan' => 'required|string',
+                'link_penetapan' => 'required|url',
+                'link_pelaksanaan' => 'required|url',
+                'link_evaluasi' => 'required|url',
+                'link_pengendalian' => 'required|url',
+                'link_peningkatan' => 'required|url',
+            ]);
+        }
+
+        $request->validate($rules);
 
         $kriteria = (int) $request->input('id_kriteria');
-        $action = $request->input('form_action', 'submit'); // Default ke 'submit' jika tidak ada
 
         $id_penetapan = null;
         $id_pelaksanaan = null;

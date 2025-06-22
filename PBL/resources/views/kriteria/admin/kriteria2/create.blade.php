@@ -26,13 +26,15 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <textarea name="penetapan" id="penetapan" class="form-control" placeholder="Masukkan penetapan">{{ old('penetapan') }}</textarea>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Input Link Penetapan -->
                         <div class="col-md-9 mb-3">
                             <br>
-                            <label for="link_pelaksanaan" class="form-label" style="font-size: medium; color: #315287">Link Penetapan :</label>
+                            <label for="link_penetapan" class="form-label" style="font-size: medium; color: #315287">Link Penetapan :</label>
                             <input type="url" name="link_penetapan" id="link_penetapan" class="form-control" placeholder="Masukkan link penetapan" value="{{ old('link_penetapan') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="upload-photo">
@@ -55,6 +57,7 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <textarea name="pelaksanaan" id="pelaksanaan" class="form-control" placeholder="Masukkan pelaksanaan">{{ old('pelaksanaan') }}</textarea>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Input Link Pelaksanaan -->
@@ -62,6 +65,7 @@
                             <br>
                             <label for="link_pelaksanaan" class="form-label" style="font-size: medium; color: #315287">Link Pelaksanaan :</label>
                             <input type="url" name="link_pelaksanaan" id="link_pelaksanaan" class="form-control" placeholder="Masukkan link pelaksanaan" value="{{ old('link_pelaksanaan') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="upload-photo">
@@ -84,6 +88,7 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <textarea name="evaluasi" id="evaluasi" class="form-control" placeholder="Masukkan evaluasi">{{ old('evaluasi') }}</textarea>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Input Link Evaluasi -->
@@ -91,6 +96,7 @@
                             <br>
                             <label for="link_evaluasi" class="form-label" style="font-size: medium; color: #315287">Link Evaluasi :</label>
                             <input type="url" name="link_evaluasi" id="link_evaluasi" class="form-control" placeholder="Masukkan link evaluasi" value="{{ old('link_evaluasi') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="upload-photo">
@@ -113,6 +119,7 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <textarea name="pengendalian" id="pengendalian" class="form-control" placeholder="Masukkan pengendalian">{{ old('pengendalian') }}</textarea>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Input Link Pengendalian -->
@@ -120,6 +127,7 @@
                             <br>
                             <label for="link_pengendalian" class="form-label" style="font-size: medium; color: #315287">Link Pengendalian :</label>
                             <input type="url" name="link_pengendalian" id="link_pengendalian" class="form-control" placeholder="Masukkan link pengendalian" value="{{ old('link_pengendalian') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="upload-photo">
@@ -142,6 +150,7 @@
                     <div class="form-container" style="flex: 1;">
                         <div class="col-md-9 mb-3">
                             <textarea name="peningkatan" id="peningkatan" class="form-control" placeholder="Masukkan peningkatan">{{ old('peningkatan') }}</textarea>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Input Link Peningkatan -->
@@ -149,6 +158,7 @@
                             <br>
                             <label for="link_peningkatan" class="form-label" style="font-size: medium; color: #315287">Link Peningkatan :</label>
                             <input type="url" name="link_peningkatan" id="link_peningkatan" class="form-control" placeholder="Masukkan link peningkatan" value="{{ old('link_peningkatan') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="upload-photo">
@@ -216,41 +226,36 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                // Client-side validation for required fields
-                const requiredFields = [
-                    'penetapan', 'link_penetapan',
-                    'pelaksanaan', 'link_pelaksanaan',
-                    'evaluasi', 'link_evaluasi',
-                    'pengendalian', 'link_pengendalian',
-                    'peningkatan', 'link_peningkatan'
-                ];
+                const formAction = document.getElementById('form-action').value;
                 let isValid = true;
 
-                requiredFields.forEach(field => {
-                    const input = form.querySelector(`[name="${field}"]`);
-                    let value = input.value.trim();
+                // Client-side validation for submit action
+                if (formAction === 'submit') {
+                    const requiredFields = [
+                        'penetapan', 'link_penetapan',
+                        'pelaksanaan', 'link_pelaksanaan',
+                        'evaluasi', 'link_evaluasi',
+                        'pengendalian', 'link_pengendalian',
+                        'peningkatan', 'link_peningkatan'
+                    ];
 
-                    // For TinyMCE textareas, get content from editor
-                    if (input.tagName === 'TEXTAREA' && tinymce.get(input.id)) {
-                        value = tinymce.get(input.id).getContent().trim();
-                        input.value = value; // Sync textarea value with TinyMCE content
-                    }
+                    requiredFields.forEach(field => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        let value = input.value.trim();
 
-                    if (!value) {
-                        isValid = false;
-                        input.classList.add('is-invalid');
-                        const feedback = input.nextElementSibling;
-                        if (feedback && feedback.classList.contains('invalid-feedback')) {
-                            feedback.textContent = `${field.replace('_', ' ').toUpperCase()} wajib diisi.`;
+                        // For TinyMCE textareas, get content from editor
+                        if (input.tagName === 'TEXTAREA' && tinymce.get(input.id)) {
+                            value = tinymce.get(input.id).getContent().trim();
+                            input.value = value; // Sync textarea value with TinyMCE content
                         }
-                    } else {
-                        input.classList.remove('is-invalid');
-                    }
-                });
 
-                if (!isValid) {
+
+                    });
+                }
+
+                if (formAction === 'submit' && !isValid) {
                     showAlert(
-                        'Semua field deskripsi dan link wajib diisi!',
+                        'Semua field deskripsi dan link wajib diisi untuk submit!',
                         '{{ asset('assets/icon/cross.png') }}',
                         '#993a36'
                     );
@@ -259,12 +264,6 @@
 
                 const formData = new FormData(form);
                 const csrfToken = form.querySelector('input[name="_token"]').value;
-
-                // Log data for debugging
-                for (let [key, value] of formData.entries()) {
-                    console.log(`FormData: ${key} = ${value}`);
-                }
-                console.log('Submit URL:', submitUrl);
 
                 // Send AJAX request
                 fetch(submitUrl, {
@@ -276,7 +275,6 @@
                     body: formData
                 })
                 .then(response => {
-                    console.log('Status respons:', response.status);
                     if (response.status === 302 || response.redirected) {
                         return response.text().then(() => {
                             fetch(window.location.href, { method: 'GET' })
@@ -305,7 +303,6 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Data respons:', data);
                     if (data.status) {
                         showAlert(
                             'Data Berhasil Disimpan',
@@ -313,11 +310,10 @@
                             '#315287'
                         );
                         setTimeout(() => {
-                            console.log('Redirect ke:', data.redirect);
                             window.location.href = data.redirect || '{{ route('index.admin.kriteria2') }}';
                         }, 2000);
                     } else {
-                        let errorMessage = data.message || 'Gagal menyimpan data';
+                        let errorMessage = 'Gagal menyimpan data';
                         if (data.errors) {
                             errorMessage += ': ' + Object.values(data.errors).flat().join(', ');
                         }
@@ -329,7 +325,6 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Kesalahan AJAX:');
                     showAlert(
                         'Gagal menyimpan data: ',
                         '{{ asset('assets/icon/cross.png') }}',
@@ -375,8 +370,6 @@
                 alertDiv.appendChild(messageSpan);
                 document.body.appendChild(alertDiv);
 
-                console.log('Alert ditampilkan:', message);
-
                 setTimeout(() => {
                     alertDiv.remove();
                 }, 3000);
@@ -385,7 +378,7 @@
     </script>
 
     <style>
-        .btn-blue {
+        .btn-blues {
             background-color: #315287;
             color: #fff;
             padding: 10px 20px;
@@ -397,10 +390,10 @@
             transition: background-color 0.3s ease;
             margin-right: 10px;
         }
-        .btn-blue:hover {
+        .btn-blues:hover {
             background-color: #263f6a;
         }
-        .btn-green {
+        .btn-greens {
             background-color: #2e7d32;
             color: #fff;
             padding: 10px 20px;
@@ -411,7 +404,7 @@
             font-weight: 500;
             transition: background-color 0.3s ease;
         }
-        .btn-green:hover {
+        .btn-greens:hover {
             background-color: #1b5e20;
         }
     </style>

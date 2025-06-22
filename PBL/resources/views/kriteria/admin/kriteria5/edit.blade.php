@@ -87,7 +87,7 @@
         </div>
 
         <!-- Bagian 3: Evaluasi -->
-        <div class="card" id="evaluasi-section">
+        <div class="card" id="evaluasi-section"> 
             <div class="card-header">
                 <h5>Evaluasi</h5>
             </div>
@@ -119,7 +119,7 @@
         </div>
 
         <!-- Bagian 4: Pengendalian -->
-        <div class="card" id="pendendalian-section">
+        <div class="card" id="pengendalian-section">
             <div class="card-header">
                 <h5>Pengendalian</h5>
             </div>
@@ -228,9 +228,53 @@
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
 
+                    const formAction = document.getElementById('form-action').value;
+                    let isValid = true;
+
+                    // Client-side validation for submit action
+                    if (formAction === 'submit') {
+                        const requiredFields = [
+                            'penetapan', 'link_penetapan',
+                            'pelaksanaan', 'link_pelaksanaan',
+                            'evaluasi', 'link_evaluasi',
+                            'pengendalian', 'link_pengendalian',
+                            'peningkatan', 'link_peningkatan'
+                        ];
+
+                        requiredFields.forEach(field => {
+                            const input = form.querySelector(`[name="${field}"]`);
+                            let value = input.value.trim();
+
+                            // For TinyMCE textareas, get content from editor
+                            if (input.tagName === 'TEXTAREA' && tinymce.get(input.id)) {
+                                value = tinymce.get(input.id).getContent().trim();
+                                input.value = value; // Sync textarea value with TinyMCE content
+                            }
+
+                            if (!value) {
+                                isValid = false;
+                                input.classList.add('is-invalid');
+                                const feedback = input.nextElementSibling;
+                                if (feedback && feedback.classList.contains('invalid-feedback')) {
+                                    feedback.textContent = `${field.replace('_', ' ').toUpperCase()} wajib diisi.`;
+                                }
+                            } else {
+                                input.classList.remove('is-invalid');
+                            }
+                        });
+                    }
+
+                    if (formAction === 'submit' && !isValid) {
+                        showAlert(
+                            'Semua field deskripsi dan link wajib diisi untuk submit!',
+                            '{{ asset('assets/icon/cross.png') }}',
+                            '#993a36'
+                        );
+                        return;
+                    }
+
                     const formData = new FormData(form);
                     const csrfToken = form.querySelector('input[name="_token"]').value;
-                    const action = form.querySelector('#form-action').value;
 
                     fetch(submitUrl, {
                         method: 'POST',
@@ -246,7 +290,7 @@
                                 fetch(window.location.href, { method: 'GET' })
                                     .then(res => res.text())
                                     .then(html => {
-                                        if (html.includes('Perubahan berhasil disimpan')) {
+                                        if (html.includes('Data berhasil diperbarui')) {
                                             showAlert(
                                                 'Perubahan Berhasil Disimpan',
                                                 '{{ asset('assets/icon/checkmark.png') }}',
@@ -273,7 +317,7 @@
                                 '{{ asset('assets/icon/checkmark.png') }}',
                                 '#315287'
                             );
-                            if (action === 'submit') {
+                            if (formAction === 'submit') {
                                 form.querySelectorAll('textarea, input[type="url"], input[type="file"]').forEach(el => el.disabled = true);
                             }
                             setTimeout(() => {
@@ -282,7 +326,11 @@
                         }
                     })
                     .catch(error => {
-                        console.error('Kesalahan AJAX:', error);
+                        showAlert(
+                            'Gagal menyimpan data: ' + error.message,
+                            '{{ asset('assets/icon/cross.png') }}',
+                            '#993a36'
+                        );
                     });
                 });
 
