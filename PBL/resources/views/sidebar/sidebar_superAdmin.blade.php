@@ -123,7 +123,7 @@
                 <a href="{{ route('superAdmin.kriteria.index') }}"><h5>Kriteria Configuration</h5></a>
             </div>
             <div class="menu-item">
-                <a href="#"><h5>Page Configuration</h5></a>
+                <a href="{{ route('superAdmin.page.index') }}"><h5>Page Configuration</h5></a>
             </div>
         </div>
         

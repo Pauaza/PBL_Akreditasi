@@ -1,18 +1,26 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\PageConfigController;
 
 class AuthController extends Controller
 {
+    protected $pageConfigController;
+
+    public function __construct(PageConfigController $pageConfigController)
+    {
+        $this->pageConfigController = $pageConfigController;
+    }
+
     public function login()
     {
         if (Auth::check()) {
             $username = Auth::user()->username;
 
-            // Jika username berupa admin1 sampai admin9
             if (in_array($username, ['admin1', 'admin2', 'admin3', 'admin4', 'admin5', 'admin6', 'admin7', 'admin8', 'admin9'])) {
                 return redirect('/dashboard_admin');
             }
@@ -21,16 +29,16 @@ class AuthController extends Controller
                 return redirect()->route('superAdmin.dashboard');
             }
 
-            // Jika username adalah salah satu validator
             if (in_array($username, ['kps', 'kajur', 'direktur', 'kjm'])) {
                 return redirect('/dashboard_validator');
             }
 
-            // Jika bukan keduanya, tolak akses
             return abort(403, 'Unauthorized');
         }
 
-        return view('login.login');
+        // Ambil konfigurasi dari PageConfigController melalui dependency injection
+        $pageConfig = $this->pageConfigController->getConfig();
+        return view('login.login', ['pages' => $pageConfig]);
     }
 
     public function postlogin(Request $request)
