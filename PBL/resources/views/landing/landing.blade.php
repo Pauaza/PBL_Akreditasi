@@ -6,6 +6,7 @@
     <title>Si Akred SIB</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/img/jti.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -18,8 +19,9 @@
         /* SECTION ATAS */
         .hero-bg {
             background: url('{{ asset('assets/img/bg_sec_top.png') }}') no-repeat center -50px;
-            background-size: contain;
+            background-size: cover;
             height: 100vh;
+            width: 100%;
             position: relative;
             z-index: 1;
         }
@@ -62,7 +64,7 @@
 
         /* MIRING */
         .angled-border{
-          clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
+          clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
           background:#fff;
           height:300px;
           position:relative;
@@ -89,7 +91,7 @@
             z-index: 2;
         }
         .about-image {
-          clip-path: polygon(0 9%, 100% 0, 100% 100%, 0 100%);
+          clip-path: polygon(0 18%, 100% 11%, 100% 100%, 0 100%);
           background: #315287;
           height: 500px;
           position: absolute;
@@ -128,12 +130,12 @@
       /* SECTION FITUR */
       .features-section {
           padding: 40px 20px;
-          background: #fff;
+          background: #315287;
       }
       .features-title {
           font-size: 32px;
           font-weight: 600;
-          color: #315287;
+          color: #fff;
           margin-bottom: 36px;
           text-align: center;
       }
@@ -172,7 +174,7 @@
       }
       .feature-title {
           font-size: 20px;
-          color: #315287;
+          color: #fff;
           font-weight: 600;
       }
       .feature-description {

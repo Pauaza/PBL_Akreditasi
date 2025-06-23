@@ -283,6 +283,7 @@
             padding: 15px 0;
             text-align: center;
             position: relative;
+            font-style: italic;
         }
     </style>
 </head>
